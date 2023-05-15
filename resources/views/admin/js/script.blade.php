@@ -73,4 +73,16 @@
 		}
     </script>
 
+	<!-- User Chart script-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script>
+		var ctx = document.getElementById('chart').getContext('2d');
+		var userChart = new Chart(ctx,{
+			type:'bar',
+			data:{
+				labels:{ !! json_encode($labels) !!},
+				datasets: { !!json_encode($datasets) !!}
+			},
+		});
+	</script>
 

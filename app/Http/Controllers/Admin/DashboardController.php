@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Validated;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
+use App\Models\Menu;
 
 class DashboardController extends Controller
 {
@@ -23,89 +24,75 @@ class DashboardController extends Controller
     //==========================Dashboard Admin======================//
     public function dashboard()
     {
-        return view('admin.index');
-    }
-    //=========================End Method============================//
-
-    //====================Update Admin Password========================//
-    public function update_password(Request $request)
-    {
-        if($request->isMethod('post')){
-            $data = $request->all();
-            //Check if current password is correct
-            if (Hash::check($data['current_password'], Auth::guard('web')->user()->password)) {
-                //Check if new password and confirm password are matching
-                if($data['new_password']==$data['confirm_password']){
-                    User::where('id',Auth::guard('web')->user()->id)->update(['password'=>bcrypt($data['new_password'])]);
-                    // Set success message to session
-                return redirect()->back()->with('success_message', 'Password has been updated successfully!');
-                }else{
-                      // Set error message to session
-                    return redirect()->back()->with('error_message','New password and Confirm password are not match!');
+        $menus_count = Menu::all()->count();
+        $users_count = User::where('role', '0')->count();
+        $users = User::where('role', '0')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+        $labels = [];
+        $data = [];
+        $colors = ['#EEE418','#18EE22','#EE8D18','#18EEDE','#18A3EE','#18EEB7',
+            '#8618EE','#C418EE','#EE18AD','#EE1818','#18EEBA','#EE7318'];
+        for ($i=1; $i<13; $i++) {
+            $month = date('F', mktime(0,0,0,$i,1));
+            $count = 0;
+            foreach ($users as $user) {
+                if ($user->month == $i) {
+                    $count = $user->count;
+                    break;
                 }
-            }else{
-                return redirect()->back()->with('error_message','Your current password is Incorrect!');
             }
+            array_push($labels, $month);
+            array_push($data, $count);
         }
-        return view('admin.home.update_password');
+        $datasets = [
+            [
+                'label' => 'Users',
+                'data' => $data,
+                'backgroundColor' => $colors
+            ]   
+        ];
+        return view('admin.home.dashboard', compact('menus_count', 'users_count', 'datasets', 'labels'));
     }
-    //======================== End Method =========================//
-    //=============== Check current admin password ================//
-    public function check_current_password(Request $request)
-    {
-        $data = $request->all();
-        if (Hash::check($data['current_password'], Auth::guard('web')->user()->password)) {
-        return "true";
-        } else {
-        return "false";
-        }
-    }
-    //======================== End Method ======================//
-    //=============== End Update Admin Password ================//
+    //=========================End Method============================//   
 
-    //=============== Update Admin Details ====================//
-    public function update_details(Request $request)
-    {
-        if($request->isMethod('post')){
-            $data = $request->all();
-            $rules = [
-                'admin_name' => 'required|alpha|max:255',
-                'admin_phone' => 'required|numeric',
-            ];
-            // $customMessages = [
-            //     'admin_name.required' => 'required|alpha|max:255',
-            //     'admin_name.alpha' => 'Valid Name is Required',
-            //     'admin_phone.required' => 'required|alpha|max:255',
-            //     'admin_phone.alpha' => 'Valid Name is Required',
-            // ];
-            $this->validate($request,$rules);
-            //upload admin Image
-            if($request->hasFile('admin_image')){
-            $image_tmp = $request->file('admin_image');
-            if($image_tmp->isValid()){
-                //Get image extension
-                $extension = $image_tmp->getClientOriginalExtension();
-                //Generate new image name
-                $imageName = rand(111,99999).'.'.$extension;
-                //Save image to public folder
-                $image_path = $request->file('admin_image')->storeAs('backend/images', $imageName);
-                //$image_path = (public_path('backend/images/').$imageName);
-                Image::make($image_tmp)->save($image_path);
-                }
-            }else if(!empty($data['current_image'])){
-                $imageName = $data['current_image'];
-            }else{
-                $imageName = "";
-            }
-            
-            //update admin details
-            User::where('email',Auth::guard('web')->user()->email)->update(['name'=>$data['admin_name'],'phone'=>$data['admin_phone'],'image'=> $imageName]);
-            return redirect()->back()->with('success_message', 'Admin details has been updated successfully!');
-        }
-        return view('admin.home.update_details');
-    }
-    //==================End Update Admin Details=======================//
+    //==========================User Chart======================//
+    // public function userChart()
+    // {
+    //     $users = User::where('role', '0')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+    //     ->whereYear('created_at',date('Y'))
+    //     ->groupBy('month')
+    //     ->orderBy('month')
+    //     ->get();
+    //     $labels = [];
+    //     $data = [];
+    //     $colors = ['#EEE418','#18EE22','#EE8D18','#18EEDE','#18A3EE','#18EEB7',
+    //     '#8618EE','#C418EE','#EE18AD','#EE1818','#18EEBA','#EE7318'];
+    //     for($i=1;$i<13;$i++){
+    //         $month = date('F',mktime(0,0,0,$i,1));
+    //         $count = 0;
+    //         foreach($users as $user){
+    //             if($user->month == $i){
+    //                 $count = $user->count;
+    //                 break;
+    //             }
+    //         }
+    //         array_push($labels,$month);
+    //         array_push($data,$count);
+    //     }
+    //     $datasets = [
+    //         [
+    //             'label' => 'Users',
+    //             'data' => $data,
+    //             'backgroundColor' => $colors
+    //         ]   
+    //     ];
+    //     return view('admin.home.dashboard',compact('datasets','labels'));
+        
+    // }
+    //=========================End Method============================//   
 
-    
-    
+
 }

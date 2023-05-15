@@ -105,5 +105,45 @@
           </li>
         </ul>
       </li>
+      <li class="treeview">
+        <a class="app-menu__item" href="#" data-toggle="treeview">
+          <i class="fa fa-book"></i>
+          &nbsp;&nbsp;&nbsp;
+          <span class="app-menu__label">Items</span>
+          <i class="treeview-indicator fa fa-angle-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a class="treeview-item" href="{{url('/admin/menu')}}">
+              <i class="icon fa fa-circle-o"></i> Show Items
+            </a>
+          </li>
+          <li>
+            <a class="treeview-item" href="{{url('/admin/create_menu')}}">
+              <i class="icon fa fa-circle-o"></i> Add Items
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a class="app-menu__item" href="#" data-toggle="treeview">
+          <i class="fa fa-table"></i>
+          &nbsp;&nbsp;&nbsp;
+          <span class="app-menu__label">Tables</span>
+          <i class="treeview-indicator fa fa-angle-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a class="treeview-item" href="{{url('/admin/menu')}}">
+              <i class="icon fa fa-circle-o"></i> Show Tables
+            </a>
+          </li>
+          <li>
+            <a class="treeview-item" href="{{url('/admin/create_menu')}}">
+              <i class="icon fa fa-circle-o"></i> Add Tables
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </aside>

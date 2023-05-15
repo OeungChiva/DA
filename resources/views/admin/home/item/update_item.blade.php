@@ -72,7 +72,7 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item active" href="{{url('/admin/users')}}">
+                    <a class="treeview-item" href="{{url('/admin/users')}}">
                         <i class="icon fa fa-circle-o"></i> All Users
                     </a>
                 </li>
@@ -83,8 +83,8 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview is-expanded">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
+        <li class="treeview">
+            <a class="app-menu__item " href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-file-text"></i>
                 <span class="app-menu__label">Menus</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
@@ -96,13 +96,13 @@
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item active" href="{{url('/admin/create_menu')}}">
+                    <a class="treeview-item" href="{{url('/admin/create_menu')}}">
                     <i class="icon fa fa-circle-o"></i> Add Menus
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview is-expanded">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-book"></i>
                 &nbsp;&nbsp;&nbsp;
@@ -111,7 +111,7 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/item')}}">
+                    <a class="treeview-item " href="{{url('/admin/item')}}">
                     <i class="icon fa fa-circle-o"></i> Show Items
                     </a>
                 </li>
@@ -148,12 +148,12 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Menus</h1>          
+                <h1><i class="fa fa-th-list"></i> Update Items</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Menus</li>
-                <li class="breadcrumb-item active"><a href="#">Update Menus</a></li>
+                <li class="breadcrumb-item">Items</li>
+                <li class="breadcrumb-item active"><a href="#">Update Items</a></li>
             </ul>
         </div>
         <div class="row">
@@ -163,10 +163,10 @@
                     {{-- <h3 class="tile-title">Create New User</h3>            --}}
                     <div class="row">
                         <div class="col-sm-10">
-                            <h2>Update Menu</h2>
+                            <h2>Update Item</h2>
                         </div>
                         <div class="col-sm-2">
-                            <a href="{{ route('admin.menu') }}">
+                            <a href="{{ route('admin.item') }}">
                                 <button type="button" class="btn btn-info add-new">
                                     <i class="fa fa-arrow-left"></i>
                                     Back
@@ -187,27 +187,56 @@
                             {{session('success')}}
                         </div>
                         @endif
-                        <form class="form-horizontal" method="POST" action="{{url('/admin/update_menu/'.$menu->id)}}" enctype="multipart/form-data">          
-                            @csrf <!-- to make form active -->
-                            {{-- @method('PUT') --}}
+                        <form class="form-horizontal" method="POST" action="{{url('/admin/update_item/'.$item->id)}}" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Name</label>
+                                <label class="control-label col-md-3">Title</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="menu_name" type="text" value="{{$menu->name_menu}}">
+                                    <input class="form-control" name="item_title" type="text" value="{{$item->title}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Price</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="item_price" type="float" placeholder="Enter price" value="{{$item->price}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Menu</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_menu" required="">
+                                        <option value="{{$item->menu}}" selected="">{{$item->menu}} </option>
+                                        @foreach($menu as $menu)
+                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Description</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="menu_description" type="text" value="{{$menu->description}}">
-                                    {{-- <textarea class="form-control" rows="4" type="text" name="menu_description" value="{{$menu->description}}></textarea> --}}
+                                    <input class="form-control" name="item_description" type="text" value="{{$item->description}}" placeholder="Enter Description">
                                 </div>
-                            </div>                         
+                            </div>                       
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Image</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="item_image" type="file">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3"></div>                   
+                                <div class="col-md-8">
+                                    @if($item->image != '' && file_exists(public_path().'/upload/item_images/'.$item->image))
+                                    <img src="{{ url('/upload/item_images/'.$item->image) }}" alt="" width="100" height="100">
+                                    @endif
+                                </div>
+                            </div>
                             <div class="tile-footer">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-5">
                                     </div>
-                                    <div class="col-md-6 text-center">
+                                    <div class="col-md-6">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes
                                         </button>
@@ -215,11 +244,11 @@
                                 </div>
                             </div>
                         </form>
-                    </div>                   
+                    </div>                  
                 </div>
             </div>
-            <div class="col-md-2"></div>           
-        </div>      
+            <div class="col-md-2"></div>        
+        </div>        
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 

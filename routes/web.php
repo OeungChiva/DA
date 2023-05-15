@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthUserController;
-use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ItemController;
 
 
 /*
@@ -81,9 +83,16 @@ Route::controller(AuthAdminController::class)->group(function () {
 //     Route::match(['get','post'],'/admin/update_details', [DashboardController::class, 'update_details']);
 //     Route::post('/admin/check_current_password', [DashboardController::class, 'check_current_password']);
 //     });
+//================Admin Dashboard Route=========================//
 
 Route::controller(DashboardController::class)->middleware('authadmin')->group(function () {
-    Route::get('/admin/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/admin/dashboard', 'dashboard')->name('dashboard'); 
+    //Route::get('/admin/dashboard', 'userChart')->name('admin.userChart'); 
+    });
+
+
+//================Admin Management Route=========================//
+Route::controller(AdminController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/check_current_password', 'check_current_password');
     Route::match(['get','post'],'/admin/update_password', 'update_password');
     Route::match(['get','post'],'/admin/update_details', 'update_details');  
@@ -98,7 +107,7 @@ Route::controller(UserController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_users/{id}', 'update_userPost')->name('admin.update_users.post');
     Route::get('/admin/users/{id}', 'delete')->name('admin.delete_users');   
 });
-
+//================Admin Menus Management Route=========================//
 Route::controller(MenuController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/menu', 'menu')->name('admin.menu');
     Route::get('/admin/create_menu', 'create_menu')->name('admin.create_menu');
@@ -107,6 +116,18 @@ Route::controller(MenuController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_menu/{id}', 'update_menuPost')->name('admin.update_menu.post');
     Route::get('/admin/menu/{id}', 'delete_menu')->name('admin.delete_menu');   
 });
+
+//================Admin Items Management Route=========================//
+Route::controller(ItemController::class)->middleware('authadmin')->group(function () {
+    Route::get('/admin/item', 'item')->name('admin.item');
+    Route::get('/admin/create_item', 'create_item')->name('admin.create_item');
+    Route::post('/admin/create_item', 'create_itemPost')->name('admin.create_item.post');
+    Route::get('/admin/update_item/{id}', 'update_item')->name('admin.update_item');
+    Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
+    Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');   
+});
+
+
 
     
 
