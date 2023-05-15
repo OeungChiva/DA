@@ -142,6 +142,13 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a class="app-menu__item" href="{{url('admin/reservation')}}">
+                    <i class="fa fa-table"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Reservations</span>
+                </a>
+            </li>
         </ul>
     </aside>
     <!-- Body-->

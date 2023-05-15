@@ -11,6 +11,8 @@ use Illuminate\Auth\Events\Validated;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
 use App\Models\Menu;
+use App\Models\Item;
+
 
 class DashboardController extends Controller
 {
@@ -25,6 +27,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $menus_count = Menu::all()->count();
+        $items_count = Item::all()->count();
         $users_count = User::where('role', '0')->count();
         $users = User::where('role', '0')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
             ->whereYear('created_at', date('Y'))
@@ -54,7 +57,7 @@ class DashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
-        return view('admin.home.dashboard', compact('menus_count', 'users_count', 'datasets', 'labels'));
+        return view('admin.home.dashboard', compact('menus_count','items_count', 'users_count', 'datasets', 'labels'));
     }
     //=========================End Method============================//   
 

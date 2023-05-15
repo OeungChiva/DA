@@ -102,7 +102,7 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview is-expanded">
+        <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-book"></i>
                 &nbsp;&nbsp;&nbsp;
@@ -111,7 +111,7 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item active" href="{{url('/admin/item')}}">
+                    <a class="treeview-item" href="{{url('/admin/item')}}">
                     <i class="icon fa fa-circle-o"></i> Show Items
                     </a>
                 </li>
@@ -142,8 +142,9 @@
                 </li>
             </ul>
         </li>
+   
         <li>
-            <a class="app-menu__item" href="{{url('admin/reservation')}}">
+            <a class="app-menu__item active" href="{{url('admin/reservation')}}">
                 <i class="fa fa-table"></i>
                 &nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Reservations</span>
@@ -155,12 +156,12 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Items</h1>          
+                <h1><i class="fa fa-th-list"></i> Reservations</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Items</li>
-                <li class="breadcrumb-item active"><a href="#">All Items</a></li>
+                <li class="breadcrumb-item">Reservations</li>
+                <li class="breadcrumb-item active"><a href="#">All Reservations</a></li>
             </ul>
         </div>
         <div class="row">
@@ -176,7 +177,7 @@
                     <div class="table-title">
                         <div class="row">                
                             <div class="col-sm-10">
-                                <h2>All Items</h2>
+                                <h2>All Reservations</h2>
                             </div>
                             <div class="col-sm-2">
                                 <a href="{{ route('admin.create_item') }}">
@@ -189,30 +190,25 @@
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Menu</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Created</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Guest</th>
+                            <th>Date</th>
+                            <th>Time</th>
                             <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($item as $row)
+                            @foreach($booking as $row)
                             <tr>
                                 <td>{{$count++}}</td>                              
-                                <td>{{$row->title}}</td>
-                                <td>{{$row->price}}$</td>
-                                <td>{{$row->menu}}</td>
-                                <td>{{$row->description}}</td> 
-                                <td>
-                                    <img class="" src="{{(!empty($row->image))
-                                    ? url('upload/item_images/'.$row->image):url('frontend/user_images/no_image.jpg')}}" 
-                                    width="40px" height="40px" alt="item">
-                                    
-                                </td>
-                                <td>{{$row->created_at}}</td>
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->email}}</td>
+                                <td>{{$row->phone}}</td>
+                                <td>{{$row->guest}}</td> 
+                                <td>{{$row->date}}</td>
+                                <td>{{$row->time}}</td>
                                 <td class="text-center">
                                     <a class="edit text-warning" href="{{url('/admin/update_item/'.$row->id)}}" title="Update" data-toggle="tooltip">
                                     <i class="fa fa-edit"></i>

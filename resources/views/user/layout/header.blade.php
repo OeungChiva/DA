@@ -23,7 +23,7 @@
                 <a class="nav-link" href="{{ url('/about') }}">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/book') }}">Book Table</a>
+                <a class="nav-link" href="{{ url('/booking') }}">Book Table</a>
               </li>
               <li>
                 
@@ -99,11 +99,8 @@
               </a>
               @auth
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{-- <img class="rounded-circle" src="{{(!empty($profileData->image))
-                  ? url('frontend/user_images/'.$profileData->image):url('frontend/user_images/no_image.jpg')}}" 
-                  width="30px" alt="profile"> --}}
                   @if(!empty(Auth::guard('web')->user()->image))
-                    <img class="rounded-circle p-1 bg-primary" src="{{asset('frontend/user_images/'.Auth::guard('web')->user()->image)}}" width="30px" height="30px" alt="User Image">
+                    <img class="rounded-circle" src="{{asset('frontend/user_images/'.Auth::guard('web')->user()->image)}}" width="30px" height="30px" alt="User Image">
                   @else
                       <img src="{{asset('frontend/user_images/no_image.jpg/')}}" width="30px" class="rounded-circle" alt="User Image">
                   @endif

@@ -143,6 +143,33 @@
             </li>
           </ul>
         </li>
+        <li>
+          <a class="app-menu__item" href="{{url('admin/reservation')}}">
+            <i class="fa fa-table"></i>
+            &nbsp;&nbsp;&nbsp;
+            <span class="app-menu__label">Reservations</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a class="app-menu__item" href="#" data-toggle="treeview">
+            <i class="fa fa-table"></i>
+            &nbsp;&nbsp;&nbsp;
+            <span class="app-menu__label">Orders</span>
+            <i class="treeview-indicator fa fa-angle-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a class="treeview-item" href="{{url('/admin/table')}}">
+                <i class="icon fa fa-circle-o"></i> Show Tables
+              </a>
+            </li>
+            <li>
+              <a class="treeview-item" href="{{url('/admin/create_table')}}">
+                <i class="icon fa fa-circle-o"></i> Add Tables
+              </a>
+            </li>
+          </ul>
+        </li>
     </ul>
     </aside>
     <!-- Body-->
@@ -176,8 +203,8 @@
           <div class="col-md-6 col-lg-3">
             <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
               <div class="info">
-                <h4>Uploades</h4>
-                <p><b>10</b></p>
+                <h4>Items</h4>
+                <p><b>{{ $items_count }}</b></p>
               </div>
             </div>
           </div>

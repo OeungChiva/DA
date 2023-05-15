@@ -101,9 +101,19 @@
                   </g>
                 </svg>
               </a>
+              @auth
+              <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  @if(!empty(Auth::guard('web')->user()->image))
+                    <img class="rounded-circle" src="{{asset('frontend/user_images/'.Auth::guard('web')->user()->image)}}" width="30px" height="30px" alt="User Image">
+                  @else
+                      <img src="{{asset('frontend/user_images/no_image.jpg/')}}" width="30px" class="rounded-circle" alt="User Image">
+                  @endif
+              </a>
+              @else
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
+              @endif
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>                 

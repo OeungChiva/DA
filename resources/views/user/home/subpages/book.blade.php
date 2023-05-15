@@ -101,9 +101,19 @@
                   </g>
                 </svg>
               </a>
+              @auth
+              <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  @if(!empty(Auth::guard('web')->user()->image))
+                    <img class="rounded-circle" src="{{asset('frontend/user_images/'.Auth::guard('web')->user()->image)}}" width="30px" height="30px" alt="User Image">
+                  @else
+                      <img src="{{asset('frontend/user_images/no_image.jpg/')}}" width="30px" class="rounded-circle" alt="User Image">
+                  @endif
+              </a>
+              @else
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
+              @endif
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>                 
@@ -144,18 +154,31 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+            @if(session()->has('error'))
+              <div class="alert alert-danger" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{session('error')}}
+              </div>
+            @endif
+            @if(session()->has('success'))
+              <div class="alert alert-success" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{session('success')}}
+              </div>
+            @endif
+            <form action="{{url('/booking')}}" method="POST">
+              @csrf
               <div>
-                <input type="text" class="form-control" placeholder="Your Name" />
+                <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Phone Number" />
+                <input type="text" class="form-control" name="user_phone" required='' placeholder="Phone Number" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Your Email" />
+                <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
               </div>
               <div>
-                <select class="form-control nice-select wide">
+                {{-- <select class="form-control nice-select wide">
                   <option value="" disabled selected>
                     How many persons?
                   </option>
@@ -171,13 +194,20 @@
                   <option value="">
                     5
                   </option>
-                </select>
+                </select> --}}
+                <input type="number" class="form-control" name="user_guest" required='' placeholder="How many persons? " />
               </div>
               <div>
-                <input type="date" class="form-control">
+                <input type="date"  name="user_date" required="" class="form-control">
+              </div>
+              <div>
+                <input type="time"  name="user_time" required="" class="form-control">
+              </div>
+              <div >
+                <textarea  name="user_message" id="" cols="61" rows="7" placeholder="Message"></textarea>
               </div>
               <div class="btn_box">
-                <button>
+                <button type="submit">
                   Book Now
                 </button>
               </div>

@@ -12,7 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('email')->unique();
+            $table->string('phone')->nullable();
+            $table->string('guest')->nullable();
+            $table->string('date')->nullable();
+            $table->string('time')->nullable();
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\BookingController;
+
 
 
 /*
@@ -23,13 +25,16 @@ use App\Http\Controllers\Admin\ItemController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.index');
-})->name('home');
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('home');
 //=======================================================================//
 //==============================User Route Here==========================//
 //=======================================================================//
-
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'home')->name('home');
+    
+});
 /*============= User Auth route ==================*/
 Route::controller(AuthUserController::class)->group(function () {
     Route::get('/login', 'user_login')->name('user_login');
@@ -39,12 +44,8 @@ Route::controller(AuthUserController::class)->group(function () {
     Route::post('/logout', 'user_logout')->name('user_logout');
     Route::get('/signup', 'signup')->name('signup');
 
+});
 
-});
-Route::controller(HomeController::class)->middleware('authuser')->group(function () {
-    Route::get('/home', 'home')->name('user.home');
-    
-});
 //================Profile Details Route=========================//
 Route::controller(ProfileController::class)->middleware('authuser')->group(function () {
     Route::get('/profile', 'profile')->name('user.profile');
@@ -56,7 +57,10 @@ Route::controller(ProfileController::class)->middleware('authuser')->group(funct
 Route::controller(HomeController::class)->group(function () {
     Route::get('/menu', 'menu')->name('user.menu'); 
     Route::get('/about', 'about')->name('user.about'); 
-    Route::get('/book', 'book')->name('user.book'); 
+    Route::get('/booking', 'booking')->name('user.book'); 
+    Route::post('/booking', 'bookingPost')->name('user.bookingPost'); 
+
+    
 
 });
 
@@ -76,13 +80,7 @@ Route::controller(AuthAdminController::class)->group(function () {
 });
 
 
-//================Admin Update Profile Details Route=========================//
-// Route::middleware(['authadmin'])->group(function () {
-//     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-//     Route::match(['get','post'],'/admin/update_password', [DashboardController::class, 'update_password']);
-//     Route::match(['get','post'],'/admin/update_details', [DashboardController::class, 'update_details']);
-//     Route::post('/admin/check_current_password', [DashboardController::class, 'check_current_password']);
-//     });
+
 //================Admin Dashboard Route=========================//
 
 Route::controller(DashboardController::class)->middleware('authadmin')->group(function () {
@@ -126,6 +124,11 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
     Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');   
 });
+//================Admin Items Management Route=========================//
+Route::controller(BookingController::class)->middleware('authadmin')->group(function () {
+    Route::get('/admin/reservation', 'booking')->name('admin.booking');
+});
+
 
 
 
