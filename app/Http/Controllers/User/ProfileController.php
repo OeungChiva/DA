@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
+use App\Models\Cart;
+
 
 class ProfileController extends Controller
 {
@@ -16,7 +18,9 @@ class ProfileController extends Controller
     public function profile(){
         $id = Auth::user()->id;
         $profileData = User::find($id);
-        return view('user.home.subpages.profile',compact('profileData'));
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        return view('user.home.subpages.profile',compact('profileData','count'));
     } 
     //====================End Method===============================//
     //===============Store update Profile Details==================//

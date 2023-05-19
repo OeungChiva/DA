@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  @include('user.css.style')
-  <style>
-    .hero_area {
-      background: url('frontend/images/hero-bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-      height: 100vh;
-    }
+@include('user.css.style')
+    <style>
+        .hero_area {
+            background: url('frontend/images/hero-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            height: 100vh;
+        }
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
-
     html, body {
         height: 100%;
         background-color: #152733;
@@ -19,16 +18,14 @@
 
     .form-holder{
         position: absolute;
-      top: 55%; 
-      left: 50%;
-      transform: translate(-50%, -50%);
-     
+        top: 55%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
       /* padding: 20px; */
-      border-radius: 10px;
-      width: 400px;
+        border-radius: 10px;
+        width: 400px;
       /* padding-top: 700px; */
     }
-
 
     .form-holder {
         display: flex;

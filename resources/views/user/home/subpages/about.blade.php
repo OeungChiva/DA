@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="{{ route('home') }}">
             <span>
-              Foods
+              Khmer Foods
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                 <a class="nav-link" href="{{ url('/about') }}">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/book') }}">Book Table</a>
+                <a class="nav-link" href="{{ url('/booking') }}">Book Table</a>
               </li>
             </ul>
             <div class="user_option">
@@ -47,7 +47,7 @@
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
-              <a class="cart_link" href="#">
+              <a class="cart_link" href="{{ url('/cart') }}">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
                     <g>
@@ -100,6 +100,9 @@
                   <g>
                   </g>
                 </svg>
+                @auth
+                <span class="cart_count" style="color: #ffbe33">({{$count}})</span>
+                @endif
               </a>
               @auth
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

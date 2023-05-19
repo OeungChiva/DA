@@ -43,7 +43,8 @@
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
-              <a class="cart_link" href="#">
+              
+              <a class="cart_link" href="{{ route('user.cart') }}">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
                     <g>
@@ -96,6 +97,9 @@
                   <g>
                   </g>
                 </svg>
+                @auth
+                <span class="cart_count" style="color: #ffbe33">[{{$count}}]</span>
+                @endif
               </a>
               @auth
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

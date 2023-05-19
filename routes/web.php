@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthUserController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\BookingController;
+
 
 
 
@@ -55,13 +57,25 @@ Route::controller(ProfileController::class)->middleware('authuser')->group(funct
 
 //================Subpages Route=========================//
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/menu', 'menu')->name('user.menu'); 
+    Route::get('/menu', 'menu')->name('user.menu');
     Route::get('/about', 'about')->name('user.about'); 
     Route::get('/booking', 'booking')->name('user.book'); 
     Route::post('/booking', 'bookingPost')->name('user.bookingPost'); 
 
-    
+});
+//================Cart Route=========================//
 
+Route::controller(CartController::class)->group(function () {
+    Route::post('/addcart/{id}', 'addcartPost')->name('user.addcartPost');
+    Route::get('/cart', 'cart')->name('user.cart');
+    Route::get('/cart/{id}', 'delete_cart')->name('user.delete_cart');
+    Route::patch('/update_cart', 'update_cart')->name('user.update_cart');
+});
+
+Route::controller(HomeController::class)->middleware('authuser')->group(function () {
+    //Route::get('/profile', 'profile')->name('user.profile');
+    //Route::post('/addcart', 'addcartPost')->name('user.addcartPost');
+    
 });
 
 //=======================================================================//

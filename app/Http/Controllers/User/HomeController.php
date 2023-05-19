@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Booking;
+use App\Models\Cart;
+
 
 
 
@@ -28,7 +31,9 @@ class HomeController extends Controller
         // }
         //$item = Item::paginate(6);
         $item = Item::all();
-        return view('user.index',compact('item'));
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        return view('user.index',compact('item','count'));
     }
     //================End Method==================//
 
@@ -36,21 +41,27 @@ class HomeController extends Controller
     public function menu()
     {
         $item = Item::all();
-        return view('user.home.subpages.menu',compact('item'));
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        return view('user.home.subpages.menu',compact('item','count'));
     }
     //================End Method==================//
 
     //================About==================//
     public function about()
     {
-        return view('user.home.subpages.about');
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        return view('user.home.subpages.about',compact('count'));
     }
     //================End Method==================//
 
     //================Booking==================//
     public function booking()
     {
-        return view('user.home.subpages.book');
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        return view('user.home.subpages.book',compact('count'));
     }
     //================End Method==================//
     //================BookingPost==================//
@@ -69,5 +80,5 @@ class HomeController extends Controller
         return redirect()->back()->with("success","Your Booking is confirmed!");
     }
     //================End Method==================//
-
+    
 }

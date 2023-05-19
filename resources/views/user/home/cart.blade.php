@@ -2,6 +2,17 @@
 <html>
 <head>
   @include('user.css.style')
+  <style>
+    
+    .container{
+      width: 1000px;
+    }
+    .custom-input {
+      width: 30%;
+      margin-left: 35%;
+    }
+
+  </style>
 </head>
 <body class="sub_page">
 
@@ -33,10 +44,10 @@
               <li class="nav-item ">
                 <a class="nav-link" href="{{ url('/menu') }}">Menu</a>
               </li>
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/about') }}">About</a>
               </li>
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/booking') }}">Book Table</a>
               </li>
             </ul>
@@ -47,7 +58,8 @@
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
-              <a class="cart_link" href="{{ url('/cart') }}">
+              <div  class="nav-item active">
+              <a class="cart_link " href="{{ url('/cart') }}">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
                     <g>
@@ -104,6 +116,7 @@
                 <span class="cart_count" style="color: #ffbe33">({{$count}})</span>
                 @endif
               </a>
+              </div>
               @auth
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   @if(!empty(Auth::guard('web')->user()->image))
@@ -145,97 +158,147 @@
       </div>
     </header>
     <!-- end header section -->
-    </div>
-    <!-- book section -->
-  <section class="book_section layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Book A Table
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form_container">
-            @if(session()->has('error'))
-              <div class="alert alert-danger" role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{session('error')}}
+  </div>
+  <!-- about section -->
+
+  <div class="px-4 px-lg-0">
+    <!-- For demo purpose -->
+    
+    <!-- End -->
+  
+    <div class="pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+  
+            <!-- Shopping cart table -->
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-center">
+                  <tr>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="p-2 px-3 text-uppercase">#</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="p-2 px-3 text-uppercase">Food
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Price</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Quantity</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Subtotal</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Remove</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $totalprice=0; ?>
+                  @foreach ($cart as $row)
+                  <tr data-id="{{ $row->id }}">
+                    <td class="border-0 align-middle text-center">{{$counts++}}</td>
+                    
+                    <th scope="row" class="border-0">
+                      <div class="p-2">
+                        <img src="{{url('upload/item_images/'.$row->image)}}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                        <div class="ml-3 d-inline-block align-middle">
+                          <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{$row->title}}</a></h5>
+                        </div>
+                      </div>
+                    </th>
+                    <td class="border-0 align-middle text-center">{{$row->price}}$</td>
+                    <td class="border-0 align-middle p-4 text-center ">
+                      <input type="number" min="1" name="cart_quantity" value="{{$row->quantity}}" class="form-control form-control-sm custom-input text-center quantity cart_update">
+                    </td>
+                    <td class="border-0 align-middle text-center">{{$row->price*$row->quantity}}$</td>
+
+                    
+                    <td class="border-0 align-middle text-center"><a href="{{url('/cart/'.$row->id)}}" onclick="return confirm('Are you sure?')" class="delete text-danger"><i class="fa fa-trash"></i></a></td>
+                  </tr>
+                  <?php $totalprice=$totalprice + ($row->price*$row->quantity); ?>
+                  @endforeach
+                                  
+                </tbody>
+              </table>
+            </div>
+            <!-- End -->
+            <hr class="my-3">
+            <div class="col-lg-12">
+              {{-- <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div> --}}
+              <div class="p-4">
+                
+                <ul class="list-unstyled mb-4">
+                  <li class="d-flex justify-content-between py-3 border-bottom "><h5>Subtotal</h5>
+                    <p>{{$totalprice}}$</p>
+                  </li>
+                  <li class="d-flex justify-content-between py-3 border-bottom"><h5>Tax</h5>
+                    <p>0$</p>
+                  </li>
+                  <li class="d-flex justify-content-between py-3 "><h5><strong>Total</strong></h5>
+                    <h5 class="font-weight-bold">{{$totalprice}}$</h5>
+                  </li>
+                  
+                </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
               </div>
-            @endif
-            @if(session()->has('success'))
-              <div class="alert alert-success" role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{session('success')}}
-              </div>
-            @endif
-            <form action="{{url('/booking')}}" method="POST">
-              @csrf
-              <div>
-                <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
-              </div>
-              <div>
-                <input type="text" class="form-control" name="user_phone" required='' placeholder="Phone Number" />
-              </div>
-              <div>
-                <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
-              </div>
-              <div>
-                {{-- <select class="form-control nice-select wide">
-                  <option value="" disabled selected>
-                    How many persons?
-                  </option>
-                  <option value="">
-                    2
-                  </option>
-                  <option value="">
-                    3
-                  </option>
-                  <option value="">
-                    4
-                  </option>
-                  <option value="">
-                    5
-                  </option>
-                </select> --}}
-                <input type="number" class="form-control" name="user_guest" required='' placeholder="How many persons? " />
-              </div>
-              <div>
-                <input type="date"  name="user_date" required="" class="form-control">
-              </div>
-              <div>
-                <input type="time"  name="user_time" required="" class="form-control">
-              </div>
-              <div >
-                <textarea  name="user_message" id="" cols="61" rows="7" placeholder="Message"></textarea>
-              </div>
-              <div class="btn_box">
-                <button type="submit">
-                  Book Now
-                </button>
-              </div>
-            </form>
+            </div>
+            <hr class="my-3">
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="map_container">
-            <div id="googleMap"></div>
+  
+        {{-- <div class="row py-5 p-4 bg-white rounded shadow-sm">
+          <div class="col-lg-12">
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+            <div class="p-4">
+              <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+              <div class="input-group mb-4 border rounded-pill p-2">
+                <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+                <div class="input-group-append border-0">
+                  <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+                </div>
+              </div>
+            </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
+            <div class="p-4">
+              <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
+              <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+            </div>
           </div>
-        </div>
+          
+        </div> --}}
+  
       </div>
     </div>
-  </section>
-  <!-- end book section -->
+  </div>
+ <!-- end about section -->
   @include('user.layout.footer')
   <!-- footer section -->
   @include('user.js.script')
+  <script>
+     $(".cart_update").change(function (e) {
+        e.preventDefault();
+   
+        var ele = $(this);
+   
+        $.ajax({
+            url: '{{ route('user.update_cart') }}',
+            method: "patch",
+            data: {
+                _token: '{{ csrf_token() }}', 
+                id: ele.parents("tr").attr("data-id"), 
+                quantity: ele.parents("tr").find(".quantity").val()
+            },
+            success: function (response) {
+              window.location.reload();
+            }
+        });
+    });
+  </script>
 </body>
 </html>
 
 
 
 
-  
-  
-  
-  

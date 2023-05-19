@@ -75,3 +75,9 @@
   });
 
 </script>
+
+<script>
+  function myFunction() {
+      document.getElementById("GFG").submit();
+  }
+</script>
