@@ -123,6 +123,7 @@
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>
+                <a class="dropdown-item" href="{{url('/change_password')}}"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a> 
                 <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
 
                   <form action="{{route('user_logout')}}" method="POST">

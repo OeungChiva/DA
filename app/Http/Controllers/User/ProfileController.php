@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $profileData = User::find($id);
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
-        return view('user.home.subpages.profile',compact('profileData','count'));
+        return view('user.home.profile.update_profile',compact('profileData','count'));
     } 
     //====================End Method===============================//
     //===============Store update Profile Details==================//
@@ -41,5 +41,35 @@ class ProfileController extends Controller
         return redirect()->back()->with("success","Update Profile success!");
     }
     //====================End Method===============================//
+    //====================Change Passwoed=====================//
 
+    public function changePassword()
+    {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        return view('user.home.profile.change_password',compact('profileData','count'));
+    }
+     //====================End Method===============================//
+    //====================Change Passwoed Post=====================//
+
+    public function updatePassword(Request $request)
+    {
+        # Validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+        #Match The Old Password
+        if(!Hash::check($request->old_password, auth()->user()->password)){
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+        #Update the new Password
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+        return back()->with("success", "Password changed successfully!");
+    }
+     //====================End Method===============================//
 }

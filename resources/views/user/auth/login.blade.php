@@ -33,7 +33,6 @@
     @include('user.layout.header')
     <!-- end header section -->
     <div class="form-container">
-      {{-- <h3 class="text-center">SIGN IN</h3> --}}
       <div class="card-header text-center">
         LOGIN
       </div>
