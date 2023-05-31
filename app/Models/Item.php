@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Review;
+
 
 class Item extends Model
 {
@@ -15,4 +17,9 @@ class Item extends Model
         'description',
         'image',
     ];
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'item_id');
+    }
+    
 }

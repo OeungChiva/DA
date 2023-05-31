@@ -61,6 +61,14 @@
     <script type="text/javascript" src="{{url('backend/docs/js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{url('backend/docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
+	<!-- jQuery code to sort the various columns of the table-->
+	<script>
+		$(function(){
+			$('#keywords').tablesorter(); 
+			});
+	</script>
+
+	
     <!-- Google analytics script (search user table)-->
     <script type="text/javascript">
 		if(document.location.hostname == 'pratikborsadiya.in') {
@@ -72,7 +80,7 @@
 			ga('send', 'pageview');
 		}
     </script>
-
+	
 	<!-- User Chart script-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script>

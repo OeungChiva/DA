@@ -101,7 +101,7 @@
                   </g>
                 </svg>
                 @auth
-                <span class="cart_count" style="color: #ffbe33">({{$count}})</span>
+                <span class="cart_count badge bg-warning text-white ms-1 rounded-pill">{{$count}}</span>
                 @endif
               </a>
               @auth
@@ -119,7 +119,9 @@
               @endif
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
-                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>                 
+                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>
+                <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
+
                   <form action="{{route('user_logout')}}" method="POST">
                     @csrf
                     <a class="dropdown-item" href="{{ route('user_logout') }}"
@@ -159,7 +161,7 @@
         <div class="detail-box">
           <div class="heading_container">
             <h2>
-              We Are Feane
+              We Are Khmer Foods
             </h2>
           </div>
           <p>

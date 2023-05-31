@@ -5,6 +5,13 @@ use App\Http\Controllers\User\AuthUserController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\ItemDetailController;
+use App\Http\Controllers\User\OrderHistoryController;
+use App\Http\Controllers\User\ReviewController;
+
+
+
 use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
@@ -58,6 +65,7 @@ Route::controller(ProfileController::class)->middleware('authuser')->group(funct
 //================Subpages Route=========================//
 Route::controller(HomeController::class)->group(function () {
     Route::get('/menu', 'menu')->name('user.menu');
+    Route::get('/menu/{menuId}', 'showMenuItems')->name('user.menu_items');
     Route::get('/about', 'about')->name('user.about'); 
     Route::get('/booking', 'booking')->name('user.book'); 
     Route::post('/booking', 'bookingPost')->name('user.bookingPost'); 
@@ -65,18 +73,52 @@ Route::controller(HomeController::class)->group(function () {
 });
 //================Cart Route=========================//
 
-Route::controller(CartController::class)->group(function () {
+// Route::controller(CartController::class)->group(function () {
+//     Route::post('/addcart/{id}', 'addcartPost')->name('user.addcartPost');
+//     Route::get('/cart', 'cart')->name('user.cart');
+//     Route::get('/cart/{id}', 'delete_cart')->name('user.delete_cart');
+//     Route::patch('/update_cart', 'update_cart')->name('user.update_cart');
+// });
+
+Route::controller(CartController::class)->middleware('authuser')->group(function () {
     Route::post('/addcart/{id}', 'addcartPost')->name('user.addcartPost');
     Route::get('/cart', 'cart')->name('user.cart');
     Route::get('/cart/{id}', 'delete_cart')->name('user.delete_cart');
     Route::patch('/update_cart', 'update_cart')->name('user.update_cart');
 });
-
-Route::controller(HomeController::class)->middleware('authuser')->group(function () {
-    //Route::get('/profile', 'profile')->name('user.profile');
-    //Route::post('/addcart', 'addcartPost')->name('user.addcartPost');
-    
+//================Cart Route=========================//
+Route::controller(PaymentController::class)->middleware('authuser')->group(function () {
+    Route::get('/card', 'card')->name('user.card');
+    Route::post('/card', 'cardPost')->name('user.cardPost');
+   // Route::get('/cash', 'cash')->name('user.cash');
+    Route::get('/checkout', 'checkout')->name('user.checkout');
+    Route::post('/checkout', 'checkoutPost')->name('user.checkoutPost');
 });
+
+Route::controller(ItemDetailController::class)->group(function () {
+    Route::get('/item_detail/{itemId}', 'item_detail')->name('user.item_detail');
+    Route::post('/add_cart/{id}', 'addcart')->name('user.addcart');
+
+});
+
+// Route::controller(OrderHistoryController::class)->group(function () {
+//     Route::get('/order_history', 'order_history')->name('user.order_history');
+//     Route::get('/invoice/{orderId}', 'invoice')->name('user.invoice');
+
+// });
+//================Order History and Invoice Route=========================//
+Route::controller(OrderHistoryController::class)->middleware('authuser')->group(function () {
+    Route::get('/order_history', 'order_history')->name('user.order_history');
+    Route::get('/invoice/{orderId}', 'invoice')->name('user.invoice');
+});
+
+Route::controller(ReviewController::class)->middleware('authuser')->group(function () {
+    Route::get('/review/{Orderid}', 'review')->name('user.review');
+    Route::post('/review/{Orderid}', 'reviewPost')->name('user.reviewPost');
+
+});
+
+
 
 //=======================================================================//
 //==============================End User Route Here======================//

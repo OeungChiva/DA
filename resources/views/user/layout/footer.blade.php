@@ -23,7 +23,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  oeungchiva@gmail.com
+                  khmerfoods@gmail.com
                 </span>
               </a>
             </div>

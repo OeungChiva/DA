@@ -13,6 +13,14 @@ body {
   background-color: transparent;
 }
 
+.checked, .price span {
+  color: #ffbe33; 
+}
+.item_price{
+  color: #ffbe33;
+
+}
+
 /* End Custom CSS here */
 .layout_padding {
   padding: 90px 0;

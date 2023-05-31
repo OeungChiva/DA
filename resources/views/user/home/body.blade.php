@@ -154,27 +154,31 @@
           Our Menu
         </h2>
       </div>
-
       <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Pasta</li>
-        <li data-filter=".fries">Fries</li>
+        @foreach ($menu as $row)
+        <li data-filter=".{{ $row->name_menu }}">
+          <a href="{{ route('user.menu_items', ['menuId' => $row->name_menu]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+        </li>
+        @endforeach
+        
       </ul>
-
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)
-          {{-- <form action="{{ url('/addcart','$data->id') }}" method="POST" > --}}
+          
             <form action="{{ route('user.addcartPost', ['id' => $data->id]) }}" method="POST">
             @csrf
             <div class="col-sm-6 col-lg-4 all pizza">
               <div class="box">
                 <div>
-                  <div class="img-box">
-                    <img src="upload/item_images/{{$data->image}}" width="200" height="150" alt="">
-                  </div>
+                  <a href="{{ route('user.item_detail', ['itemId' => $data->id]) }}">
+                    <div class="img-box">
+                      
+                      <img src="upload/item_images/{{$data->image}}" width="200" height="150" alt="">
+                      
+                    </div>
+                  </a>
                   <div class="detail-box">
                     <h5>
                       {{$data->title}}
@@ -183,9 +187,54 @@
                       {{$data->description}}
                     </p>
                     <div class="options">
-                      <h6>
+                      <h4 class="item_price">
                         ${{$data->price}}
-                      </h6>
+                      </h4>
+                      {{-- <div class="stars">
+                        @php
+                          $rating = $data->reviews->count() > 0 ? $data->reviews->avg('stars_rated') : 0;
+                          $fullStars = floor($rating);
+                          $halfStar = ceil($rating - $fullStars);
+                          $emptyStars = 5 - $fullStars - $halfStar;
+                        @endphp
+                        @for ($i = 0; $i < $fullStars; $i++)
+                          <span class="fa fa-star checked"></span>
+                        @endfor
+                        @if ($halfStar)
+                          <span class="fa fa-star-half-o checked"></span>
+                        @endif
+                        @for ($i = 0; $i < $emptyStars; $i++)
+                          <span class="fa fa-star"></span>
+                        @endfor
+                      </div>
+                      <div class="review-no">{{ $data->reviews->count() }} reviews</div> --}}
+                      
+                        <div class="stars-and-reviews">
+                          <div class="stars">
+                            @php
+                              $rating = $data->reviews->count() > 0 ? $data->reviews->avg('stars_rated') : 0;
+                              $fullStars = floor($rating);
+                              $halfStar = ceil($rating - $fullStars);
+                              $emptyStars = 5 - $fullStars - $halfStar;
+                            @endphp
+                            @for ($i = 0; $i < $fullStars; $i++)
+                              <span class="fa fa-star checked"></span>
+                            @endfor
+                            @if ($halfStar)
+                              <span class="fa fa-star-half-o checked"></span>
+                            @endif
+                            @for ($i = 0; $i < $emptyStars; $i++)
+                              <span class="fa fa-star"></span>
+                            @endfor
+                          </div>
+                          <div class="text-center">
+                            <span class="review-no">{{ $data->reviews->count() }} reviews</span>
+
+                          </div>
+                        </div>
+                        
+                      
+                      
                       <button type="submit" style=" background-color: transparent; border: none; "> 
                       <a href="" >
                         
@@ -261,6 +310,9 @@
     </div>
 </section>
 
+
+
+
   <!-- end food section -->
    <!-- about section -->
 
@@ -277,7 +329,7 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                We Are Feane
+                We Are Khmer Foods
               </h2>
             </div>
             <p>
@@ -307,40 +359,31 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form_container">
-                <form action="">
+                <form action="{{url('/booking')}}" method="POST">
+                  @csrf
                   <div>
-                    <input type="text" class="form-control" placeholder="Your Name" />
+                    <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
                   </div>
                   <div>
-                    <input type="text" class="form-control" placeholder="Phone Number" />
+                    <input type="text" class="form-control" name="user_phone" required='' placeholder="Phone Number" />
                   </div>
                   <div>
-                    <input type="email" class="form-control" placeholder="Your Email" />
+                    <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
                   </div>
                   <div>
-                    <select class="form-control nice-select wide">
-                      <option value="" disabled selected>
-                        How many persons?
-                      </option>
-                      <option value="">
-                        2
-                      </option>
-                      <option value="">
-                        3
-                      </option>
-                      <option value="">
-                        4
-                      </option>
-                      <option value="">
-                        5
-                      </option>
-                    </select>
+                    <input type="number" class="form-control" name="user_guest" required='' placeholder="How many persons? " />
                   </div>
                   <div>
-                    <input type="date" class="form-control">
+                    <input type="date"  name="user_date" required="" class="form-control">
                   </div>
-                  <div class="btn_box">
-                    <button>
+                  <div>
+                    <input type="time"  name="user_time" required="" class="form-control">
+                  </div>
+                  <div >
+                    <textarea  name="user_message" id="" cols="61" rows="7" placeholder="Message"></textarea>
+                  </div>
+                  <div class="btn_box text-center">
+                    <button type="submit">
                       Book Now
                     </button>
                   </div>

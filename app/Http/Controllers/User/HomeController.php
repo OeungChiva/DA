@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Booking;
 use App\Models\Cart;
+use App\Models\Menu;
+
 
 
 
@@ -24,17 +26,28 @@ class HomeController extends Controller
     //================Home==================//
     public function home()
     {
-        //$user = Auth::user();
-        //only user with role=0 can access
-        // if ($user->role != 0) {
-        //     return redirect('/login');
-        // }
-        //$item = Item::paginate(6);
+         //$item = Item::paginate(6);
         $item = Item::all();
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
-        return view('user.index',compact('item','count'));
+        $menu = Menu::all();
+        return view('user.index',compact('item','count','menu'));
     }
+
+
+    // public function home()
+    // {
+    //     if (Auth::check() && Auth::user()->role == 0) {
+    //         $item = Item::all();
+    //         $user_id = Auth::id();
+    //         $count = Cart::where('user_id', $user_id)->count();
+    //         return view('user.index', compact('item', 'count'));
+    //     } else {
+    //         // Redirect to an appropriate page or show an error message
+    //         return redirect('/')->with('error', 'You are not authorized to access this page.');
+    //     }
+    // }
+
     //================End Method==================//
 
     //================Menu==================//
@@ -43,9 +56,18 @@ class HomeController extends Controller
         $item = Item::all();
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
-        return view('user.home.subpages.menu',compact('item','count'));
+        $menu = Menu::all();
+        return view('user.home.subpages.menu',compact('item','count','menu'));
     }
     //================End Method==================//
+    public function showMenuItems($menuId)
+    {
+        $user_id = Auth::id();
+        $count = Cart::where('user_id',$user_id)->count();
+        $item = Item::where('menu', $menuId)->get();
+        $menu = Menu::all();
+        return view('user.home.subpages.menu_items', compact('count','item','menu'));
+    }
 
     //================About==================//
     public function about()

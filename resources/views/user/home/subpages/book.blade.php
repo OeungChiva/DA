@@ -101,7 +101,7 @@
                   </g>
                 </svg>
                 @auth
-                <span class="cart_count" style="color: #ffbe33">({{$count}})</span>
+                <span class="cart_count badge bg-warning text-white ms-1 rounded-pill">{{$count}}</span>
                 @endif
               </a>
               @auth
@@ -119,7 +119,9 @@
               @endif
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
-                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>                 
+                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a> 
+                <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
+
                   <form action="{{route('user_logout')}}" method="POST">
                     @csrf
                     <a class="dropdown-item" href="{{ route('user_logout') }}"
@@ -181,23 +183,6 @@
                 <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
               </div>
               <div>
-                {{-- <select class="form-control nice-select wide">
-                  <option value="" disabled selected>
-                    How many persons?
-                  </option>
-                  <option value="">
-                    2
-                  </option>
-                  <option value="">
-                    3
-                  </option>
-                  <option value="">
-                    4
-                  </option>
-                  <option value="">
-                    5
-                  </option>
-                </select> --}}
                 <input type="number" class="form-control" name="user_guest" required='' placeholder="How many persons? " />
               </div>
               <div>
@@ -209,7 +194,7 @@
               <div >
                 <textarea  name="user_message" id="" cols="61" rows="7" placeholder="Message"></textarea>
               </div>
-              <div class="btn_box">
+              <div class="btn_box text-center">
                 <button type="submit">
                   Book Now
                 </button>

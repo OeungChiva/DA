@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <base href="/public">
   @include('user.css.style')
 </head>
 <body class="sub_page">
@@ -164,22 +165,25 @@
           Our Menu
         </h2>
       </div>
-      
       <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        @foreach ($menu as $row)
-        <li data-filter=".{{ $row->name_menu }}">
-          <a href="{{ route('user.menu_items', ['menuId' => $row->name_menu]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+        <li class="{{ Request::route('menuId') ? '' : 'active' }}" data-filter="*">
+          <a href="{{ url('/menu') }}" class="menu-link {{ Request::route('menuId') ? 'text-dark' : 'text-white' }}">All</a>
         </li>
+        @foreach ($menu as $row)
+          <li class="{{ Request::route('menuId') === $row->name_menu ? 'active' : '' }}" data-filter=".{{ $row->name_menu }}">
+            <a href="{{ route('user.menu_items', ['menuId' => $row->name_menu]) }}" class="menu-link {{ Request::route('menuId') === $row->name_menu ? 'text-white' : 'text-dark' }}" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+          </li>
         @endforeach
-        
       </ul>
+      
+      
+
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)
           <form action="{{ route('user.addcartPost', ['id' => $data->id]) }}" method="POST"  >
             @csrf
-            <div class="col-sm-6 col-lg-4 all ">
+            <div class="col-sm-6 col-lg-4 all pizza">
               <div class="box">
                 <div>
                   <a href="{{ route('user.item_detail', ['itemId' => $data->id]) }}">
@@ -197,34 +201,9 @@
                       {{$data->description}}
                     </p>
                     <div class="options">
-                      <h4 class="item_price">
+                      <h6>
                         ${{$data->price}}
-                      </h4>
-                      
-                        <div class="stars-and-reviews">
-                          <div class="stars">
-                            @php
-                              $rating = $data->reviews->count() > 0 ? $data->reviews->avg('stars_rated') : 0;
-                              $fullStars = floor($rating);
-                              $halfStar = ceil($rating - $fullStars);
-                              $emptyStars = 5 - $fullStars - $halfStar;
-                            @endphp
-                            @for ($i = 0; $i < $fullStars; $i++)
-                              <span class="fa fa-star checked"></span>
-                            @endfor
-                            @if ($halfStar)
-                              <span class="fa fa-star-half-o checked"></span>
-                            @endif
-                            @for ($i = 0; $i < $emptyStars; $i++)
-                              <span class="fa fa-star"></span>
-                            @endfor
-                          </div>
-                          <div class="text-center">
-                            <span class="review-no">{{ $data->reviews->count() }} reviews</span>
-                          </div>
-                        </div>
-                        
-                      
+                      </h6>
                       
                       <button type="submit" style=" background-color: transparent; border: none; ">
                       <a href="" >
@@ -302,8 +281,6 @@
   @include('user.layout.footer')
   <!-- footer section -->
   @include('user.js.script')
-
- 
 
   
 </body>

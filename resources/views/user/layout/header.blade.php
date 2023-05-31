@@ -4,8 +4,9 @@
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="images/favicon.png" alt="">
             <span>
-              Khmer Foods
+              KhmerFoods
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +99,7 @@
                   </g>
                 </svg>
                 @auth
-                <span class="cart_count" style="color: #ffbe33">[{{$count}}]</span>
+                <span class="cart_count badge bg-warning text-white ms-1 rounded-pill">{{$count}}</span>
                 @endif
               </a>
               @auth
@@ -116,13 +117,14 @@
               @endif
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
-                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>                 
+                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a> 
+                <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
                   <form action="{{route('user_logout')}}" method="POST">
                     @csrf
                     <a class="dropdown-item" href="{{ route('user_logout') }}"
                     onclick="event.preventDefault(); this.closest('form').submit();">
                     <i class="fa fa-sign-out fa-lg"></i>
-                      Logout
+                    Logout
                     </a>
                   </form>
                 @else

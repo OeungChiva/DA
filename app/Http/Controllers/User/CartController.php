@@ -7,35 +7,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
-
+use App\Models\Item;
 
 class CartController extends Controller
 {
     //================AddcartPost==================//
     public function addcartPost(Request $request, $id)
     {
-        if(Auth::id())
-        {
+        if (Auth::id()) {
             $user_id = Auth::id();
             $item_id = $id;
-            $quantity = 1;
-            $cart = new cart;
-            $cart -> user_id = $user_id;
-            $cart -> item_id = $item_id;
-            $cart -> quantity = $quantity;
-            $cart -> save();
+            $quantity = $request->input('item_quantity');
+            // Check if the item already exists in the cart for the user
+            $existingCartItem = Cart::where('user_id', $user_id)
+                ->where('item_id', $item_id)
+                ->first();
+            if ($existingCartItem) {
+                // Item already exists in the cart, increase the quantity
+                //$existingCartItem->quantity += 1;
+                $existingCartItem->quantity += $quantity != null && is_numeric($quantity) ? $quantity : 1;
+                $existingCartItem->save();
+            } else {
+                // Item doesn't exist in the cart, create a new cart item
+                $cart = new Cart;
+                $cart->user_id = $user_id;
+                $cart->item_id = $item_id;
+                // Set the quantity based on the input value
+                $cart->quantity = $quantity != null && is_numeric($quantity) ? $quantity : 1;
+                $cart->save();
+            }
             return redirect()->back();
-        }
-        else
-        {
-        return redirect('/login');
+        } else {
+            return redirect('/login');
         }
     }
+    
     //================End Method==================//
-    //================Cart==================//
+    //================Show Cart==================//
     public function cart()
     {
-        
         if(Auth::id())
         {
             $user_id = Auth::id();
@@ -43,7 +53,6 @@ class CartController extends Controller
             $count = Cart::where('user_id',$user_id)->count();
             $cart = DB::table('carts')->where('user_id',$user_id)->join('items','carts.item_id','=','items.id')
             ->select('carts.*','items.title','items.price','items.image')->orderBy('carts.id','desc')->get();
-            //$cart = Cart::where('user_id', $id) ->join('items','carts.item_id','=','items.id')->get();
             return view('user.home.cart',compact('count','cart','counts'));
         }
         else
@@ -52,47 +61,27 @@ class CartController extends Controller
         }
     } 
     //================End Method==================//
-    //================Delete Cart==================//
 
+    //================Update Cart==================//
+    public function update_cart(Request $request)
+    {
+        $cartId = $request->id;
+        $quantity = $request->quantity;
+        // Update the cart item with the given ID using the new quantity
+        $cart = Cart::findOrFail($cartId);
+        $cart->quantity = $quantity;
+        $cart->save();
+        return response()->json(['message' => 'Cart updated successfully']);
+    }
+    //================End Method==================//
+
+    //================Delete Cart==================//
     public function delete_cart($id_cart) {
         $delete = Cart::where('id', $id_cart)->first();
         $delete->delete();
         return redirect()->back()
         ->with("success","User deleted successfully!");
     }
-    //================End Method==================//
-    
-    //================Update Cart==================//
-    // public function update_cart(Request $request, $id)
-    // {
-    //     if($request->id && $request->quantity){
-    //         $cart = session()->get('cart');
-    //         $cart[$request->id]["quantity"] = $request->quantity;
-    //         session()->put('cart', $cart);
-    //         session()->flash('success', 'Cart successfully updated!');
-    //     }
-
-
-    //     $cart = Cart::find($id);
-    //     $cart->quantity=$request->cart_quantity;
-    //     $cart->save();
-    //     return redirect()->back()
-    //     ->with("success","User updated successfully!");
-    // }
-    public function update_cart(Request $request)
-{
-    $cartId = $request->id;
-    $quantity = $request->quantity;
-
-    // Update the cart item with the given ID using the new quantity
-    $cart = Cart::findOrFail($cartId);
-    $cart->quantity = $quantity;
-    $cart->save();
-
-    // You can optionally return a response or JSON if needed
-    return response()->json(['message' => 'Cart updated successfully']);
-}
-
     //================End Method==================//
 
 }
