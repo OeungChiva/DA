@@ -17,10 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('guest')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('table_id')->nullable();
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->string('message')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
         });
     }
 

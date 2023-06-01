@@ -109,7 +109,7 @@
                   
                 </ul>
                 
-                <a href="{{url('/checkout')}}" class="btn btn-dark rounded-pill py-2 btn-block">Proceed to checkout</a>
+                <a href="{{url('/checkout')}}" class="btn btn-dark rounded-pill py-2 btn-block">Proceed to Checkout</a>
               </div>
             </div>
             <hr class="my-3">

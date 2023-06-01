@@ -88,7 +88,7 @@
                                     placeholder="Confirm New Password"> 
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-warning btn-circle btn-block">
+                            <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block">
                                 SAVE
                             </button>
                         </div>

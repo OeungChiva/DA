@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'guest',
+        'status',
+        'location',
+    ];
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }
