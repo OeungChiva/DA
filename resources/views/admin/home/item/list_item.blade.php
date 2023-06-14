@@ -44,7 +44,7 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
-        <li class="treeview ">
+        {{-- <li class="treeview ">
             <a class="app-menu__item " href="#" data-toggle="treeview">
                 <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Setting</span>
@@ -63,7 +63,7 @@
                 </li>
             
             </ul>
-        </li>
+        </li> --}}
         <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -204,7 +204,7 @@
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
                                 <td>{{$row->price}}$</td>
-                                <td>{{$row->menu}}</td>
+                                <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>
                                     <img class="" src="{{(!empty($row->image))

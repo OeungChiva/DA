@@ -6,8 +6,9 @@
 <body>
 
   <div class="hero_area">
+    
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     @include('user.layout.header')

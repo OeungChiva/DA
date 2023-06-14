@@ -2,12 +2,33 @@
 <html>
 <head>
   @include('user.css.style')
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /*** Service ***/
+    .service-item {
+        box-shadow: 0 0 45px rgba(163, 164, 159, 0.1);
+        transition: .5s;
+    }
+
+    .service-item:hover {
+        background: var(--warning);
+    }
+
+    .service-item * {
+        transition: .5s;
+    }
+
+    .service-item:hover * {
+        color: var(--light) !important;
+    }
+
+  </style>
 </head>
 <body class="sub_page">
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     {{-- @include('user.layout.header') --}}
@@ -153,27 +174,62 @@
  <section class="about_section layout_padding">
   <div class="container  ">
     <div class="row">
-      <div class="col-md-6 ">
+      <div class="col-md-5 ">
         <div class="img-box">
-          <img src="{{url('frontend/images/about-img.png')}}" alt="">
+          <img src="{{url('frontend/images/about.png')}}" alt="" width="" height="">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-7">
         <div class="detail-box">
-          <div class="heading_container">
-            <h2>
+          <div class="heading_container text-center">
+            <h3>
               We Are Khmer Foods
-            </h2>
+            </h3>
           </div>
+          <!-- Service Start -->
+          <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded pt-3">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-user-tie text-warning mb-4"></i>
+                                <h6>Master Chefs</h6>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item rounded pt-3">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-utensils text-warning mb-4"></i>
+                                <h6>Quality Food</h6>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item rounded pt-3">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-cart-plus text-warning mb-4"></i>
+                                <h6>Online Order</h6>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+          </div>
+          <!-- Service End -->
           <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-            in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-            are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-            the middle of text. All
+            Khmer Foods is a high-end restaurant which boasts a ‘Living Cambodian Cuisine’. 
+            By researching, practicing and promoting Cambodian cuisine, 
+            we aim to safeguard the nation’s food heritage for years to come.
           </p>
-          <a href="">
+          {{-- <a href="">
             Read More
-          </a>
+          </a> --}}
         </div>
       </div>
     </div>
@@ -184,6 +240,8 @@
   @include('user.layout.footer')
   <!-- footer section -->
   @include('user.js.script')
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
 

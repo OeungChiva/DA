@@ -15,6 +15,9 @@
       width: 30%;
       margin-left: 35%;
     }
+    .custom{
+      padding-top: 110px;
+    }
 
   </style>
 </head>
@@ -22,7 +25,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     @include('user.layout.header')
@@ -34,9 +37,9 @@
 
   <div class="px-4 px-lg-0">
     <div class="pb-5">
-      <div class="container">
+      <div class="container ">
         <div class="row">
-          <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+          <div class="col-lg-12 bg-white rounded shadow-sm mb-5 custom ">
   
             <!-- Shopping cart table -->
             <div class="table-responsive">
@@ -50,7 +53,7 @@
 
                     </th>
                     <th scope="col" class="border-0 bg-light">
-                      <div class="p-2 px-3 text-uppercase">Food
+                      <div class="p-2 px-3 text-uppercase">Item
                     <th scope="col" class="border-0 bg-light">
                       <div class="py-2 text-uppercase">Price</div>
                     </th>
@@ -82,7 +85,7 @@
                     </td>
                     <td class="border-0 align-middle text-center">{{$row->price*$row->quantity}}$</td>
                     
-                    <td class="border-0 align-middle text-center"><a href="{{url('/cart/'.$row->id)}}" onclick="confirmation(event)" class="delete text-danger"><i class="fa fa-trash"></i></a></td>
+                    <td class="border-0 align-middle text-center"><a href="{{url('/cart/'.$row->id)}}" onclick="confirmation(event)" class="btn btn-danger delete "><i class="fa fa-trash"></i></a></td>
                   </tr>
                   <?php $totalprice=$totalprice + ($row->price*$row->quantity); ?>
                   @endforeach
@@ -97,12 +100,12 @@
               <div class="p-4">
                 
                 <ul class="list-unstyled mb-4">
-                  <li class="d-flex justify-content-between py-3 border-bottom "><h5>Subtotal</h5>
+                  {{-- <li class="d-flex justify-content-between py-3 border-bottom "><h5>Subtotal</h5>
                     <p>{{$totalprice}}$</p>
                   </li>
                   <li class="d-flex justify-content-between py-3 border-bottom"><h5>Tax</h5>
                     <p>0$</p>
-                  </li>
+                  </li> --}}
                   <li class="d-flex justify-content-between py-3 "><h5><strong>Total</strong></h5>
                     <h5 class="font-weight-bold">{{$totalprice}}$</h5>
                   </li>
@@ -112,7 +115,7 @@
                 <a href="{{url('/checkout')}}" class="btn btn-dark rounded-pill py-2 btn-block">Proceed to Checkout</a>
               </div>
             </div>
-            <hr class="my-3">
+            {{-- <hr class="my-3"> --}}
           </div>
         </div>
       </div>

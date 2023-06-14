@@ -1,5 +1,5 @@
 <!-- offer section -->
-<section class="offer_section layout_padding-bottom">
+{{-- <section class="offer_section layout_padding-bottom">
     <div class="offer_container">
       <div class="container ">
         <div class="row">
@@ -144,7 +144,7 @@
         </div>
       </div>
     </div>
-  </section>
+</section> --}}
   <!-- end offer section -->
 <!-- food section -->
 <section class="food_section layout_padding-bottom">
@@ -158,7 +158,7 @@
         <li class="active" data-filter="*">All</li>
         @foreach ($menu as $row)
         <li data-filter=".{{ $row->name_menu }}">
-          <a href="{{ route('user.menu_items', ['menuId' => $row->name_menu]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+          <a href="{{ route('user.menu_items', ['menuId' => $row->id]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
         </li>
         @endforeach
         
@@ -183,9 +183,9 @@
                     <h5>
                       {{$data->title}}
                     </h5>
-                    <p>
+                    {{-- <p>
                       {{$data->description}}
-                    </p>
+                    </p> --}}
                     <div class="options">
                       <h4 class="item_price">
                         ${{$data->price}}
@@ -302,10 +302,8 @@
           @endforeach                            
         </div>
       </div>
-      <div class="btn-box">
-        <a href="">
-          View More
-        </a>
+      <div class="paginate-custom">
+        {!!$item->withQueryString()->links('pagination::bootstrap-5')!!}
       </div>
     </div>
 </section>
@@ -314,9 +312,9 @@
 
 
   <!-- end food section -->
-   <!-- about section -->
+  <!-- about section -->
 
- <section class="about_section layout_padding">
+{{-- <section class="about_section layout_padding">
     <div class="container  ">
 
       <div class="row">
@@ -345,62 +343,62 @@
         </div>
       </div>
     </div>
-  </section>
+</section> --}}
 
   <!-- end about section -->
-    <!-- book section -->
-    <section class="book_section layout_padding">
-        <div class="container">
-          <div class="heading_container">
-            <h2>
-              Book A Table
-            </h2>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form_container">
-                <form action="{{url('/booking')}}" method="POST">
-                  @csrf
-                  <div>
-                    <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
-                  </div>
-                  <div>
-                    <input type="text" class="form-control" name="user_phone" required='' placeholder="Phone Number" />
-                  </div>
-                  <div>
-                    <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
-                  </div>
-                  <div>
-                    <input type="number" class="form-control" name="user_guest" required='' placeholder="How many persons? " />
-                  </div>
-                  <div>
-                    <input type="date"  name="user_date" required="" class="form-control">
-                  </div>
-                  <div>
-                    <input type="time"  name="user_time" required="" class="form-control">
-                  </div>
-                  <div >
-                    <textarea  name="user_message" id="" cols="61" rows="7" placeholder="Message"></textarea>
-                  </div>
-                  <div class="btn_box text-center">
-                    <button type="submit">
-                      Book Now
-                    </button>
-                  </div>
-                </form>
+  <!-- book section -->
+  {{-- <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Book A Table
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form action="{{url('/booking')}}" method="POST">
+              @csrf
+              <div>
+                <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="map_container ">
-                <div id="googleMap"></div>
+              <div>
+                <input type="text" class="form-control" name="user_phone" required='' placeholder="Phone Number" />
               </div>
-            </div>
+              <div>
+                <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
+              </div>
+              <div>
+                <input type="number" class="form-control" name="user_guest" min="1" required='' placeholder="How many persons? " />
+              </div>
+              <div>
+                <input type="date"  name="user_date" required="" class="form-control">
+              </div>
+              <div>
+                <input type="time"  name="user_time" required="" class="form-control">
+              </div>
+              <div >
+                <textarea  name="user_message" id="" cols="61" rows="7" placeholder="Message"></textarea>
+              </div>
+              <div class="btn_box text-center">
+                <button type="submit">
+                  Book Now
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
-      <!-- end book section -->
+        <div class="col-md-6">
+          <div class="map_container ">
+            <div id="googleMap"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> --}}
+  <!-- end book section -->
 
-        <!-- client section -->
+  <!-- client section -->
 
   <section class="client_section layout_padding-bottom">
     <div class="container">

@@ -31,27 +31,30 @@
         </div>
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
-            <a href="" class="footer-logo">
+            {{-- <a href="" class="footer-logo">
               Khmer Foods
-            </a>
+            </a> --}}
+            <h2 class="footer-logo">
+              Khmer Foods
+            </h2>
             <p>
               One cannot think well, love well, sleep well, if one has not dined well.
             </p>
             <div class="footer_social">
               <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fab fa-facebook" aria-hidden="true"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fab fa-twitter" aria-hidden="true"></i>
               </a>
               <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                <i class="fab fa-linkedin" aria-hidden="true"></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fab fa-instagram" aria-hidden="true"></i>
               </a>
               <a href="">
-                <i class="fa fa-pinterest" aria-hidden="true"></i>
+                <i class="fab fa-pinterest" aria-hidden="true"></i>
               </a>
             </div>
           </div>

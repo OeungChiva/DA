@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Review;
+use App\Models\User;
+use App\Models\OrderItem;
 
 
 class Order extends Model
@@ -17,19 +18,18 @@ class Order extends Model
         'phone',
         'address',
         'user_id',
-        'item_title',
-        'quantity',
-        'price',
-        'image',
-        'item_id',
         'payment_status',
         'delivery_status',
     ];
-    //just changed
-    public function review()
+
+    public function users()
     {
-        return $this->hasOne(Review::class, 'item_id', 'item_id');
+        return $this->belongsTo(User::class);
     }
-    protected $foreignKey = 'item_id';
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
 }

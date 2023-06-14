@@ -2,12 +2,43 @@
 <html>
 <head>
   @include('user.css.style')
+  <style>
+    /*** Food Menu ***/
+    .nav-pills .nav-item .active {
+        border-bottom: 2px solid var(--warning);
+    }
+    a{
+        text-decoration: none !important;
+    }
+    .custom{
+      background-color: rgba(163, 164, 159, 0.1);
+      width: fit-content;
+      
+    }
+    .paginate-custom{
+      padding-top: 20px;
+    }
+    .page-link {
+        color: #ffbe33 !important;
+        background-color: #0c0c0c !important;
+        border: none;
+    }
+    .paginate-custom .page-item.active .page-link {
+      color: white !important;
+      background-color:  #ffbe33 !important;
+    }
+    .paginate-custom .page-item.disabled .page-link {
+        
+        color: white !important;
+        background-color:  #d7d2d2 !important;
+    }
+  </style>
 </head>
 <body class="sub_page">
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     {{-- @include('user.layout.header') --}}
@@ -165,16 +196,33 @@
           Our Menu
         </h2>
       </div>
-      
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        @foreach ($menu as $row)
-        <li data-filter=".{{ $row->name_menu }}">
-          <a href="{{ route('user.menu_items', ['menuId' => $row->name_menu]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
-        </li>
-        @endforeach
-        
-      </ul>
+      <div class="d-flex justify-content-center">
+        <ul class="filters_menu custom rounded-pill">
+          <li class="active text-warning" data-filter="*">All</li>
+          @foreach ($menu as $row)
+          <li data-filter=".{{ $row->name_menu }}">
+            <a href="{{ route('user.menu_items', ['menuId' => $row->id]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+          </li>
+          @endforeach
+          
+        </ul>
+      </div>
+      {{-- <div class="d-flex justify-content-center">
+        <ul class="filters_menu nav nav-pills d-inline-flex justify-content-center text-center border-bottom mb-5">
+          <li class="active" data-filter="*">All</li>
+          @foreach ($menu as $row)
+          <li class="nav-item" data-filter=".{{ $row->name_menu }}">
+              <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 " data-bs-toggle="pill" href="{{ route('user.menu_items', ['menuId' => $row->id]) }}" data-menu="{{ $row->name_menu }}">
+                  <i class="fa fa-coffee fa-2x text-warning"></i>
+                  <div class="ps-3">
+                      <h6 class="mt-n1 mb-0 text-dark">{{ $row->name_menu }}</h6>
+                  </div>
+              </a>
+          </li>
+          @endforeach
+          
+        </ul>
+      </div> --}}
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)
@@ -186,7 +234,7 @@
                   <a href="{{ route('user.item_detail', ['itemId' => $data->id]) }}">
                   <div class="img-box">
                     
-                    <img src="upload/item_images/{{$data->image}}" width="200" height="150" alt="">
+                    <img src="upload/item_images/{{$data->image}}" width="220" height="200" alt="">
                     
                   </div>
                   </a>
@@ -194,9 +242,9 @@
                     <h5>
                       {{$data->title}}
                     </h5>
-                    <p>
+                    {{-- <p>
                       {{$data->description}}
-                    </p>
+                    </p> --}}
                     <div class="options">
                       <h4 class="item_price">
                         ${{$data->price}}
@@ -291,11 +339,10 @@
           </form>
           @endforeach                            
         </div>
+        
       </div>
-      <div class="btn-box">
-        <a href="">
-          View More
-        </a>
+      <div class="paginate-custom">
+        {!!$item->withQueryString()->links('pagination::bootstrap-5')!!}
       </div>
     </div>
   </section>
@@ -304,7 +351,6 @@
   <!-- footer section -->
   @include('user.js.script')
 
- 
 
   
 </body>

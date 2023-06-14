@@ -3,12 +3,19 @@
 <head>
     <base href="/public">
   @include('user.css.style')
+  <style>
+    .custom{
+      background-color: rgba(163, 164, 159, 0.1);
+      width: fit-content;
+      
+    }
+  </style>
 </head>
 <body class="sub_page">
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     {{-- @include('user.layout.header') --}}
@@ -166,16 +173,20 @@
           Our Menu
         </h2>
       </div>
-      <ul class="filters_menu">
-        <li class="{{ Request::route('menuId') ? '' : 'active' }}" data-filter="*">
-          <a href="{{ url('/menu') }}" class="menu-link {{ Request::route('menuId') ? 'text-dark' : 'text-white' }}">All</a>
-        </li>
-        @foreach ($menu as $row)
-          <li class="{{ Request::route('menuId') === $row->name_menu ? 'active' : '' }}" data-filter=".{{ $row->name_menu }}">
-            <a href="{{ route('user.menu_items', ['menuId' => $row->name_menu]) }}" class="menu-link {{ Request::route('menuId') === $row->name_menu ? 'text-white' : 'text-dark' }}" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+      <div class="d-flex justify-content-center">
+        <ul class="filters_menu custom rounded-pill">
+          <li class="{{ Request::route('menuId') ? '' : 'active' }}" data-filter="*">
+            <a href="{{ url('/menu') }}" class="menu-link {{ Request::route('menuId') ? 'text-dark' : 'text-white' }}">All</a>
           </li>
-        @endforeach
-      </ul>
+          @foreach ($menu as $row)
+            <li class="{{ Request::route('menuId') === (string) $row->id ? 'active' : '' }}" data-filter=".{{ $row->id }}">
+              <a href="{{ route('user.menu_items', ['menuId' => $row->id]) }}" class="menu-link {{ Request::route('menuId') === (string) $row->id ? 'text-warning' : 'text-dark' }}" data-menu="{{ $row->id }}">{{ $row->name_menu }}</a>
+            </li>
+          @endforeach
+        </ul>
+      </div>
+
+      
       
       
 
@@ -198,13 +209,35 @@
                     <h5>
                       {{$data->title}}
                     </h5>
-                    <p>
+                    {{-- <p>
                       {{$data->description}}
-                    </p>
+                    </p> --}}
                     <div class="options">
-                      <h6>
+                      <h4 class="item_price">
                         ${{$data->price}}
-                      </h6>
+                      </h4>
+                      <div class="stars-and-reviews">
+                        <div class="stars">
+                          @php
+                            $rating = $data->reviews->count() > 0 ? $data->reviews->avg('stars_rated') : 0;
+                            $fullStars = floor($rating);
+                            $halfStar = ceil($rating - $fullStars);
+                            $emptyStars = 5 - $fullStars - $halfStar;
+                          @endphp
+                          @for ($i = 0; $i < $fullStars; $i++)
+                            <span class="fa fa-star checked"></span>
+                          @endfor
+                          @if ($halfStar)
+                            <span class="fa fa-star-half-o checked"></span>
+                          @endif
+                          @for ($i = 0; $i < $emptyStars; $i++)
+                            <span class="fa fa-star"></span>
+                          @endfor
+                        </div>
+                        <div class="text-center">
+                          <span class="review-no">{{ $data->reviews->count() }} reviews</span>
+                        </div>
+                      </div>
                       
                       <button type="submit" style=" background-color: transparent; border: none; ">
                       <a href="" >
@@ -271,10 +304,8 @@
           @endforeach                            
         </div>
       </div>
-      <div class="btn-box">
-        <a href="">
-          View More
-        </a>
+      <div style="padding-top: 20px;">
+        {!!$item->withQueryString()->links('pagination::bootstrap-5')!!}
       </div>
     </div>
   </section>

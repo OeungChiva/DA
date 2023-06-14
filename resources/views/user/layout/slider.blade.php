@@ -8,10 +8,10 @@
               <div class="col-md-7 col-lg-6 ">
                 <div class="detail-box">
                   <h1>
-                    Fast Food Restaurant
+                    Khmer Foods Restaurant
                   </h1>
                   <p>
-                    Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    Khmer Foods is a high-end restaurant which boasts a ‘Living Cambodian Cuisine’. By researching, practicing and promoting Cambodian cuisine, we aim to safeguard the nation’s food heritage for years to come.
                   </p>
                   <div class="btn-box">
                     <a href="" class="btn1">
@@ -29,10 +29,10 @@
               <div class="col-md-7 col-lg-6 ">
                 <div class="detail-box">
                   <h1>
-                    Fast Food Restaurant
+                    Khmer Foods Restaurant
                   </h1>
                   <p>
-                    Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    Khmer Foods is a high-end restaurant which boasts a ‘Living Cambodian Cuisine’. By researching, practicing and promoting Cambodian cuisine, we aim to safeguard the nation’s food heritage for years to come.
                   </p>
                   <div class="btn-box">
                     <a href="" class="btn1">
@@ -50,10 +50,10 @@
               <div class="col-md-7 col-lg-6 ">
                 <div class="detail-box">
                   <h1>
-                    Fast Food Restaurant
+                    Khmer Foods Restaurant
                   </h1>
                   <p>
-                    Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    Khmer Foods is a high-end restaurant which boasts a ‘Living Cambodian Cuisine’. By researching, practicing and promoting Cambodian cuisine, we aim to safeguard the nation’s food heritage for years to come.
                   </p>
                   <div class="btn-box">
                     <a href="" class="btn1">

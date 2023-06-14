@@ -68,7 +68,7 @@ class MenuController extends Controller
         $delete = Menu::where('id', $id_menu)->first();
         $delete->delete();
         return redirect('/admin/menu')
-        ->with("success","User deleted successfully!");
+        ->with("success","Menu deleted successfully!");
     }
 
     //==================End Method=======================//

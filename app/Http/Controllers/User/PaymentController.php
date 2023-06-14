@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\OrderItem;
 
 use App\Models\Item;
 use Illuminate\Support\Facades\Session;
@@ -25,46 +26,7 @@ use Stripe\Charge;
 
 class PaymentController extends Controller
 {
-    //================AddcartPost==================//
-
-    // public function cashPost(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $user_id = Auth::id();
-    //     $count = Cart::where('user_id',$user_id)->count();
-    //     $userid = Auth::user()->id;
-    //     // Retrieve data from the form
-    //     $order_name = $request->input('order_name');
-    //     $order_phone = $request->input('order_phone');
-    //     $order_email = $request->input('order_email');
-    //     $order_address = $request->input('order_address');
-    //     // Get cart items
-    //     $cartItems = Cart::where('user_id', $userid)->get();
-    //     foreach ($cartItems as $cartItem) {
-    //         $order = new Order;
-    //         $order->name = $order_name;
-    //         $order->email = $order_email;
-    //         $order->phone = $order_phone;
-    //         $order->address = $order_address;
-    //         $order->user_id = $userid;
-    //         // Get item data from the cart
-    //         $item = Item::find($cartItem->item_id);
-    //         $order->item_title = $item->title;
-    //         $order->price = $item->price * $cartItem->quantity;
-    //         $order->image = $item->image;
-    //         $order->item_id = $item->id;
-    //         $order->quantity = $cartItem->quantity;
-    //         $order->payment_status = 'cash on delivery';
-    //         $order->delivery_status = 'processing';
-    //         $order->save();
-    //         $cartItem->delete();
-    //     }
-    //      // Get the order data for the payment summary
-    //     $orderData = Order::where('user_id', $userid)->latest()->first();
-    //     return view('user.home.payment.payment_summary',compact('count','orderData','user'));
-        
-    // }
-    //================AddcartPost==================//
+    //================Checkout==================//
 
     public function checkout()
     {
@@ -80,7 +42,7 @@ class PaymentController extends Controller
         }
         return view('user.home.checkout',compact('count','totalPrice'));
     }
-
+    //================Checkout==================//
 
     public function checkoutPost(Request $request)
     {
@@ -100,8 +62,7 @@ class PaymentController extends Controller
 
         if ($paymentMethod === 'card_payment') {
             $user = Auth::user();
-            $count = Cart::where('user_id', $user_id)->count();
-            $userid = Auth::user()->id;
+            $userid = $user->id;
 
             // Retrieve data from the form
             $order_name = $request->input('order_name');
@@ -109,41 +70,37 @@ class PaymentController extends Controller
             $order_email = $request->input('order_email');
             $order_address = $request->input('order_address');
 
-            // Get cart items
-            $cartItems = Cart::where('user_id', $userid)->get();
             // Generate the order_id for the entire order
             $order_id = now()->format('YmdHis') . Str::random(4);
+
+            $order = new Order;
+            $order->name = $order_name;
+            $order->email = $order_email;
+            $order->phone = $order_phone;
+            $order->address = $order_address;
+            $order->user_id = $userid;
+            $order->payment_status = 'Paid';
+            $order->delivery_status = 'Order Received';
+            $order->order_id = $order_id;
+            $order->save();
+
             foreach ($cartItems as $cartItem) {
-                $order = new Order;
-                $order->name = $order_name;
-                $order->email = $order_email;
-                $order->phone = $order_phone;
-                $order->address = $order_address;
-                $order->user_id = $userid;
-
-                // Get item data from the cart
                 $item = Item::find($cartItem->item_id);
-                $order->item_title = $item->title;
-                $order->price = $item->price * $cartItem->quantity;
-                $order->image = $item->image;
-                $order->item_id = $item->id;
-                $order->quantity = $cartItem->quantity;
-                $order->payment_status = 'paid';
-                $order->delivery_status = 'processing';
-                // Generate and assign the order_id
-                $order->order_id = $order_id;
-                $order->save();
-
-                // $cartItem->delete();
+            
+                $order->orderItems()->create([
+                    'item_id' => $cartItem->item_id,
+                    'quantity' => $cartItem->quantity,
+                    'item_title' => $item->title,
+                    'price' => $item->price,
+                    'image' => $item->image
+                ]);
+                //$cartItem->delete();
             }
-
             return redirect('/card');
         } else {
-            $paymentStatus = 'cash on delivery';
-
+            $paymentStatus = 'Cash';
             $user = Auth::user();
-            $count = Cart::where('user_id', $user_id)->count();
-            $userid = Auth::user()->id;
+            $userid = $user->id;
 
             // Retrieve data from the form
             $order_name = $request->input('order_name');
@@ -151,44 +108,39 @@ class PaymentController extends Controller
             $order_email = $request->input('order_email');
             $order_address = $request->input('order_address');
 
-            // Get cart items
-            $cartItems = Cart::where('user_id', $userid)->get();
             // Generate the order_id for the entire order
             $order_id = now()->format('YmdHis') . Str::random(4);
+
+            $order = new Order;
+            $order->name = $order_name;
+            $order->email = $order_email;
+            $order->phone = $order_phone;
+            $order->address = $order_address;
+            $order->user_id = $userid;
+            $order->payment_status = $paymentStatus;
+            $order->delivery_status = 'Order Received';
+            $order->order_id = $order_id;
+            $order->save();
+
             foreach ($cartItems as $cartItem) {
-                $order = new Order;
-                $order->name = $order_name;
-                $order->email = $order_email;
-                $order->phone = $order_phone;
-                $order->address = $order_address;
-                $order->user_id = $userid;
-                // Get item data from the cart
                 $item = Item::find($cartItem->item_id);
-                $order->item_title = $item->title;
-                $order->price = $item->price * $cartItem->quantity;
-                $order->image = $item->image;
-                $order->item_id = $item->id;
-                $order->quantity = $cartItem->quantity;
-                $order->payment_status = $paymentStatus;
-                $order->delivery_status = 'processing';
-                // Generate and assign the order_id
-                $order->order_id = $order_id;
-                $order->save();
+            
+                $order->orderItems()->create([
+                    'item_id' => $cartItem->item_id,
+                    'quantity' => $cartItem->quantity,
+                    'item_title' => $item->title,
+                    'price' => $item->price,
+                    'image' => $item->image
+                ]);
                 $cartItem->delete();
-                Alert::success('Order successful!','Thanks for your order!');
             }
-           // $orderData = Order::where('user_id', $userid)->latest()->first();
-           // return view('user.home.payment.payment_summary',compact('count','orderData','user'));
+            Alert::success('Order successful!', 'Thanks for your order!');
             return redirect()->back();
-            //return back()->with('success', 'Payment successful!')->with('alert', 'success');
         }
     }
 
 
-
     //================AddcartPost==================//
-
-
 
     public function card(Request $request)
     {

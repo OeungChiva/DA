@@ -3,6 +3,7 @@
 <head>
   @include('user.css.style')
   
+  
   <style>
     
     /* .row{
@@ -253,6 +254,9 @@ p {
   }
 
 /* End of Star Rating */
+.custom{
+  padding-top: 100px;
+}
 
 
   </style>
@@ -261,7 +265,7 @@ p {
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     @include('user.layout.header')
@@ -309,9 +313,8 @@ p {
 
   <!-- about section -->
 
-    <div class="main-content">
+    {{-- <div class="main-content">
       <div class="container mt-7">
-        <!-- Table -->
           <div class="col">
             <div class="card shadow">
               <div class="card-header border-0">
@@ -352,10 +355,6 @@ p {
                           </td>
                           <td>
                             <a href="{{ route('user.review', ['Orderid' => $row->id]) }}">Review</a>
-                          <!-- Button trigger modal -->
-                            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                              Review
-                            </button> --}}
                           </td>
                           <td>{{ $row->quantity }}</td>
                           <td>{{ $row->price }}$</td>
@@ -395,7 +394,179 @@ p {
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
+
+    {{-- <div class="main-content">
+      <div class="container mt-7">
+        <!-- Table -->
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Order History</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Foods</th>
+                    <th scope="col"></th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Invoice</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php
+                  $counts = 1;
+                  @endphp
+                  @foreach ($order as $order)
+                  @foreach ($order->orderItems as $index => $item)
+                  <tr>
+                    @if ($index === 0)
+                    <td rowspan="{{ $order->orderItems->count() }}">{{ $counts++ }}</td>
+                    @endif
+                    <td>
+                      <span>
+                        <img src="{{ url('upload/item_images/'.$item->image) }}" alt="" width="50"
+                          class="img-fluid rounded shadow-sm">
+                      </span>
+                      {{ $item->orderItems->item_title }}
+                    </td>
+                    <td>
+                      <a href="{{ route('user.review', ['Orderid' => $order->id]) }}">Review</a>
+                    </td>
+                    <td>{{ $item->pivot->quantity }}</td>
+                    <td>{{ $item->pivot->price }}$</td>
+    
+                    @if ($index === 0)
+                    <td rowspan="{{ $order->items->count() }}">
+                      {{ $order->delivery_status }}
+                      <br>
+                      @if ($order->payment_status === 'paid')
+                      <span class="text-success">{{ $order->payment_status }}</span>
+                      @elseif ($order->payment_status === 'cash on delivery')
+                      <span class="text-warning">{{ $order->payment_status }}</span>
+                      @else
+                      {{ $order->payment_status }}
+                      @endif
+                    </td>
+                    @endif
+                    @if ($index === 0)
+                    <td rowspan="{{ $order->items->count() }}">{{ $order->created_at }}</td>
+                    @endif
+                    @if ($index === 0)
+                    <td rowspan="{{ $order->items->count() }}">
+                      <a href="{{ route('user.invoice', ['orderId' => $order->order_id]) }}" target="_blank">Invoice</a>
+                    </td>
+                    @endif
+    
+                  </tr>
+                  @endforeach
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> --}}
+
+    <div class="main-content">
+      <div class="container mt-7 custom">
+          <!-- Table -->
+          <div class="col">
+              <div class="card shadow">
+                  <div class="card-header border-0">
+                      <h3 class="mb-0">Order History</h3>
+                  </div>
+                  <div class="table-responsive">
+                      <table class="table align-items-center">
+                          <thead class="thead-light">
+                              <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Foods</th>
+                                  <th scope="col"></th>
+                                  <th scope="col">Quantity</th>
+                                  <th scope="col">Price</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Date</th>
+                                  <th scope="col">Invoice</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @php
+                              $counts = 1;
+                              @endphp
+                              @foreach ($order as $order)
+                                  @foreach ($order->orderItems as $index => $item)
+                                      <tr>
+                                          @if ($index === 0)
+                                              <td rowspan="{{ $order->orderItems->count() }}">{{ $counts++ }}</td>
+                                          @endif
+                                          <td>
+                                              <span>
+                                                  <img src="{{ url('upload/item_images/'.$item->items->image) }}" alt=""
+                                                      width="50" class="img-fluid rounded shadow-sm">
+                                              </span>
+                                              {{ $item->items->title }}
+                                          </td>
+                                          {{-- <td>
+                                              <a href="{{ route('user.review', ['Orderid' => $item->items->id]) }}">Review</a>
+                                          </td> --}}
+                                          <td>
+                                            <a href="{{ route('user.review', ['orderId' => $item->item_id]) }}">
+                                              <button class="btn btn-primary">
+                                                Review
+                                              </button>
+                                            </a>
+                                          </td>
+                                          <td>{{ $item->quantity }}</td>
+                                          <td>{{ $item->price }}$</td>
+  
+                                          @if ($index === 0)
+                                              <td rowspan="{{ $order->orderItems->count() }}">
+                                                  {{ $order->delivery_status }}
+                                                  <br>
+                                                  @if ($order->payment_status === 'paid')
+                                                      <span class="text-success">{{ $order->payment_status }}</span>
+                                                  @elseif ($order->payment_status === 'cash on delivery')
+                                                      <span class="text-warning">{{ $order->payment_status }}</span>
+                                                  @else
+                                                      {{ $order->payment_status }}
+                                                  @endif
+                                              </td>
+                                          @endif
+                                          @if ($index === 0)
+                                              <td rowspan="{{ $order->orderItems->count() }}">{{ $order->created_at }}</td>
+                                          @endif
+                                          @if ($index === 0)
+                                              <td rowspan="{{ $order->orderItems->count() }}">
+                                                  <a href="{{ route('user.invoice', ['orderId' => $order->id]) }}"
+                                                      target="_blank">
+                                                      
+                                                      <button class="btn btn-primary">
+                                                        <i class="fa fa-file"></i> Invoice
+                                                      </button>
+                                                      
+                                                    </a>
+                                              </td>
+                                          @endif
+  
+                                      </tr>
+                                  @endforeach
+                              @endforeach
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+    
     
   
 
@@ -407,6 +578,7 @@ p {
   @include('user.layout.footer')
   <!-- footer section -->
   @include('user.js.script')
+  
 </body>
 </html>
 

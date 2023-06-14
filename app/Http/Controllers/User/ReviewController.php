@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Item;
+use App\Models\OrderItem;
+
 
 
 
@@ -15,31 +17,45 @@ use App\Models\Item;
 class ReviewController extends Controller
 {
 
-    public function review($Orderid)
+    public function review($orderId)
     {
         $user = Auth::user();
-        $order = Order::where('user_id', $user->id)->where('id', $Orderid)->first();
         $count = 1;
+        $orderItem = OrderItem::with('items')->whereHas('orders', function ($query) use ($user, $orderId) {
+            $query->where('user_id', $user->id);
+        })->where('item_id', $orderId)->first();
+        
         // Check if the user has ordered the item
-        if (!$order) {
-            return redirect()->back()->with('error', 'You are not authorized to review this item.');
-        }
+        // if (!$orderItem) {
+        //     return redirect()->back()->with('error', 'You are not authorized to review this item.');
+        // }
 
         // Find the existing review for the user and item
-        $existingReview = Review::where('user_id', $user->id)->where('item_id', $order->item_id)->first();
+        $existingReview = Review::where('user_id', $user->id)->where('item_id', $orderItem->item_id)->first();
 
-        return view('user.home.review', compact('order','count', 'existingReview'));
+        return view('user.home.review', compact('orderItem', 'count', 'existingReview'));
     }
-    public function reviewPost(Request $request, $Orderid)
+
+    public function reviewPost(Request $request, $itemId)
     {
         $user = Auth::user();
-        $order = Order::where('user_id', $user->id)->where('id', $Orderid)->first();
+
         // Check if the user has ordered the item
-        if (!$order) {
+        $orderItem = OrderItem::where('item_id', $itemId)
+            ->whereHas('orders', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->first();
+
+        if (!$orderItem) {
             return redirect()->back()->with('error', 'You are not authorized to review this item.');
         }
+
         // Find the existing review for the user and item
-        $existingReview = Review::where('user_id', $user->id)->where('item_id', $order->item_id)->first();
+        $existingReview = Review::where('user_id', $user->id)
+            ->where('item_id', $itemId)
+            ->first();
+
         // Validate the form data
         $validatedData = $request->validate([
             'product_rating' => 'required|integer|between:1,5',
@@ -56,18 +72,17 @@ class ReviewController extends Controller
             // Create a new review
             $review = new Review();
             $review->user_id = $user->id;
-            $review->item_id = $order->item_id;
+            $review->item_id = $itemId;
             $review->stars_rated = $validatedData['product_rating'];
             $review->comment = $validatedData['comment'];
             $review->save();
             $message = 'Review submitted successfully. Thanks for your review!';
-            
-            // Fetch the updated review after creating a new one
-            $existingReview = $review;
-            // Fetch the total number of reviews for the item
-            $item = Item::find($order->item_id);
-            $numReviews = $item->reviews()->count();
+            // Update the num_review attribute of the corresponding item
+            $item = Item::find($itemId);
+            $item->num_review = $item->reviews()->count();
+            $item->save();
         }
+
         return redirect()->back()->with('success', $message);
     }
 

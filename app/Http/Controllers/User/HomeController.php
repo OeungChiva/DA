@@ -26,8 +26,8 @@ class HomeController extends Controller
     //================Home==================//
     public function home()
     {
-         //$item = Item::paginate(6);
-        $item = Item::all();
+        $item = Item::paginate(9);
+        //$item = Item::all();
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
         $menu = Menu::all();
@@ -53,7 +53,8 @@ class HomeController extends Controller
     //================Menu==================//
     public function menu()
     {
-        $item = Item::all();
+       // $item = Item::all();
+        $item = Item::paginate(9);
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
         $menu = Menu::all();
@@ -64,7 +65,8 @@ class HomeController extends Controller
     {
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
-        $item = Item::where('menu', $menuId)->get();
+        $item = Item::where('menu_id', $menuId)->paginate(9);
+        //$item = Item::paginate(9);
         $menu = Menu::all();
         return view('user.home.subpages.menu_items', compact('count','item','menu'));
     }

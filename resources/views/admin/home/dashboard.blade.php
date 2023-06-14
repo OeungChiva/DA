@@ -9,7 +9,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Data Table - Vali Admin</title>
+    <title>Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,7 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
-        <li class="treeview ">
+        {{-- <li class="treeview ">
             <a class="app-menu__item " href="#" data-toggle="treeview">
                 <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Setting</span>
@@ -64,7 +64,7 @@
                 </li>
             
             </ul>
-        </li>
+        </li> --}}
         <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -159,13 +159,13 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a class="treeview-item" href="{{url('/admin/table')}}">
-                <i class="icon fa fa-circle-o"></i> Show Tables
+              <a class="treeview-item" href="{{url('/admin/order')}}">
+                <i class="icon fa fa-circle-o"></i> Show Orders
               </a>
             </li>
             <li>
-              <a class="treeview-item" href="{{url('/admin/create_table')}}">
-                <i class="icon fa fa-circle-o"></i> Add Tables
+              <a class="treeview-item" href="{{url('/admin/create_order')}}">
+                <i class="icon fa fa-circle-o"></i> Add Orders
               </a>
             </li>
           </ul>

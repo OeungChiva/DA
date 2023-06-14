@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\OrderController;
+
 
 
 
@@ -119,8 +121,8 @@ Route::controller(OrderHistoryController::class)->middleware('authuser')->group(
 });
 
 Route::controller(ReviewController::class)->middleware('authuser')->group(function () {
-    Route::get('/review/{Orderid}', 'review')->name('user.review');
-    Route::post('/review/{Orderid}', 'reviewPost')->name('user.reviewPost');
+    Route::get('/review/{orderId}', 'review')->name('user.review');
+    Route::post('/review/{orderId}', 'reviewPost')->name('user.reviewPost');
 
 });
 
@@ -189,6 +191,21 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
 //================Admin Items Management Route=========================//
 Route::controller(BookingController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/reservation', 'booking')->name('admin.booking');
+});
+
+//================Admin Items Management Route=========================//
+Route::controller(OrderController::class)->middleware('authadmin')->group(function () {
+    Route::get('/admin/order', 'order')->name('admin.order');
+    Route::post('/admin/update-order-status', 'updateOrderStatus')->name('admin.updateOrderStatus');
+    //Route::get('/admin/invoice', 'invoice')->name('admin.invoice');
+    Route::get('/admin/invoice/{id}', 'invoice')->name('admin.invoice');
+
+
+    Route::get('/admin/order/{id}', 'delete_order')->name('admin.delete_order');   
+
+
+    Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
+
 });
 
 

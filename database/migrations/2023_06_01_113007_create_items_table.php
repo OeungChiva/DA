@@ -15,12 +15,16 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('price');
-            $table->string('menu');
+            $table->unsignedInteger('menu_id');
             $table->string('description')->nullable();
             $table->string('image');
+            $table->string('num_review')->nullable();
+            $table->string('discount')->nullable();
             $table->timestamps();
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      */

@@ -232,6 +232,9 @@
     border-color: #b0e5e3!important;
     background-color: #EEF9F9!important;
     }
+    .custom{
+        padding-top: 100px;
+    }
 
 
     
@@ -251,7 +254,7 @@
     <!-- end header section -->
 </div>
 <!-- about section -->
-<div class="container">
+<div class="container custom">
     <div id="Checkout" class="inline">
         <h4>Pay Using Card</h4>
         <div class="card-row">

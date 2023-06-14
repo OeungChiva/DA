@@ -30,13 +30,13 @@
       @else
       @php $active="" @endphp
       @endif --}}
-      <li class="treeview " >
+      {{-- <li class="treeview " >
         <a class="app-menu__item " href="#" data-toggle="treeview">
           <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
           <span class="app-menu__label">Setting</span>
           <i class="treeview-indicator fa fa-angle-right"></i>
         </a>      
-        <ul class="treeview-menu">
+        <ul class="treeview-menu"> --}}
           {{-- Session Active --}}
           {{-- @if(Session::get('page')=="update_password")
           @php $active="active" @endphp
@@ -44,12 +44,12 @@
           @php $active="" @endphp
           @endif --}}
           {{-- End Session Active --}}
-          <li>
+          {{-- <li>
             <a class="treeview-item " href="{{ url('admin/update_password') }}">
             <i class="icon fa fa-circle-o"></i> 
             Update Password
             </a>
-          </li>
+          </li> --}}
           {{-- Session Active --}}
           {{-- @if(Session::get('page')=="update_details")
           @php $active="active" @endphp
@@ -57,15 +57,15 @@
           @php $active="" @endphp
           @endif --}}
           {{-- End Session Active --}}
-          <li>
+          {{-- <li>
             <a class="treeview-item " href="{{url('admin/update_details')}}">
               <i class="icon fa fa-circle-o"></i> 
               Update Details
             </a>
           </li>
         
-        </ul>
-      </li>
+        </ul> --}}
+      {{-- </li> --}}
       <li class="treeview">
         <a class="app-menu__item" href="#" data-toggle="treeview">
           <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;

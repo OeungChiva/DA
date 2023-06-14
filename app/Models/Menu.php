@@ -12,4 +12,9 @@ class Menu extends Model
         'name_menu',
         'description',
     ];
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
 }

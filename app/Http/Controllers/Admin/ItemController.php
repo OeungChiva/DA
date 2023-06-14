@@ -11,18 +11,26 @@ use App\Models\Menu;
 class ItemController extends Controller
 {
     //==================Show All Menu=======================//
-    public function item() {
-        $item = Item::orderByDesc('id')->get();
+    // public function item() {
+    //     $item = Item::orderByDesc('id')->get();
+    //     $count = 1;
+    //     return view(
+    //         'admin.home.item.list_item',
+    //         compact(
+    //             'count',
+    //             'item'
+    //         )
+    //     );
+    // }
+    public function item()
+    {
+        $item = Item::with('menus')->orderByDesc('id')->get(); // Include the menu relationship
         $count = 1;
         return view(
             'admin.home.item.list_item',
-            compact(
-                'count',
-                'item'
-            )
+            compact('count', 'item')
         );
     }
-
     //==================End Method=======================//
     //==================Show Create Menu Form=======================//
     public function create_item() {
@@ -33,22 +41,46 @@ class ItemController extends Controller
     //==================End Method=======================//
 
     //===============Store Create Items========================//
-    public function create_itemPost(Request $request){
-        $data['title'] = $request -> item_title;
-        $data['price'] = $request -> item_price;
-        $data['menu'] = $request -> item_menu;
-        $data['description'] = $request -> item_description;  
-        if($request->file('item_image')){
-            $file = $request->file('item_image');
-            $filename = date('YdmHi').$file->getClientOriginalName();
-            $file -> move(public_path('upload/item_images'),$filename);
-            $data['image'] = $filename;
-        }              
-        Item::create($data);
-            //return redirect('/admin/users')->with('success', 'User Created !');
-        return redirect()->back()->with("success","Item Created success!");
+    // public function create_itemPost(Request $request){
+    //     $data['title'] = $request -> item_title;
+    //     $data['price'] = $request -> item_price;
+    //     $data['menu_id'] = $request -> item_menu;
+    //     $data['description'] = $request -> item_description;  
+    //     if($request->file('item_image')){
+    //         $file = $request->file('item_image');
+    //         $filename = date('YdmHi').$file->getClientOriginalName();
+    //         $file -> move(public_path('upload/item_images'),$filename);
+    //         $data['image'] = $filename;
+    //     }              
+    //     Item::create($data);
+    //         //return redirect('/admin/users')->with('success', 'User Created !');
+    //     return redirect()->back()->with("success","Item Created success!");
         
-    }        
+    // }        
+    public function create_itemPost(Request $request)
+{
+    $data['title'] = $request->item_title;
+    $data['price'] = $request->item_price;
+    $data['description'] = $request->item_description;
+
+    // Retrieve the selected menu
+    $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
+
+    if ($request->file('item_image')) {
+        $file = $request->file('item_image');
+        $filename = date('YdmHi') . $file->getClientOriginalName();
+        $file->move(public_path('upload/item_images'), $filename);
+        $data['image'] = $filename;
+    }
+
+    $data['menu_id'] = $menu->id; // Store the menu ID in the items table
+
+    Item::create($data);
+
+    return redirect()->back()->with("success", "Item Created successfully!");
+}
+
+
     //=====================End Method==========================//
     //==================Show Update Users Form=======================//
     public function update_item($id)
@@ -60,22 +92,43 @@ class ItemController extends Controller
     //=====================End Method==========================//
     //==================Store Update Item =======================//
 
+    // public function update_itemPost(Request $request, $id)
+    // {
+    //     $item = Item::find($id);
+    //     $item->title=$request->item_title;
+    //     $item->price=$request->item_price;
+    //     $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
+    //     $menu['menu_id'] = $menu->id; // Store the menu ID in the items table
+
+    //     $item->description=$request->item_description;
+    //     if($request->file('item_image')){
+    //         $file = $request->file('item_image');
+    //         $filename = date('YdmHi').$file->getClientOriginalName();
+    //         $file -> move(public_path('upload/item_images'),$filename);
+    //         $item['image'] = $filename;
+    //     }
+    //     $item->save();
+    //     return redirect()->back()->with("success","Updated Item successfully!");
+    // }
     public function update_itemPost(Request $request, $id)
-    {
-        $item = Item::find($id);
-        $item->title=$request->item_title;
-        $item->price=$request->item_price;
-        $item->menu=$request->item_menu;
-        $item->description=$request->item_description;
-        if($request->file('item_image')){
-            $file = $request->file('item_image');
-            $filename = date('YdmHi').$file->getClientOriginalName();
-            $file -> move(public_path('upload/item_images'),$filename);
-            $item['image'] = $filename;
-        }
-        $item->save();
-        return redirect()->back()->with("success","Updated Item successfully!");
+{
+    $item = Item::find($id);
+    $item->title = $request->item_title;
+    $item->price = $request->item_price;
+    $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
+    $item->menu_id = $menu->id; // Assign the menu ID to the menu_id attribute
+
+    $item->description = $request->item_description;
+    if ($request->file('item_image')) {
+        $file = $request->file('item_image');
+        $filename = date('YdmHi') . $file->getClientOriginalName();
+        $file->move(public_path('upload/item_images'), $filename);
+        $item->image = $filename;
     }
+    $item->save();
+    return redirect()->back()->with("success", "Updated Item successfully!");
+}
+
     //=====================End Method==========================//
 
 

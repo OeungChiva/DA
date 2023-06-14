@@ -7,7 +7,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     {{-- @include('user.layout.header') --}}
@@ -174,7 +174,7 @@
             @endif
             <form action="{{url('/booking')}}" method="POST">
               @csrf
-              <div>
+              {{-- <div>
                 <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
               </div>
               <div>
@@ -184,7 +184,7 @@
                 <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
               </div>
               <div>
-                <input type="number" class="form-control" name="user_guest" required='' placeholder="How many persons? " />
+                <input type="number" class="form-control" name="user_guest" min="1" required='' placeholder="How many persons? " />
               </div>
               <div>
                 <input type="date"  name="user_date" required="" class="form-control">
@@ -199,6 +199,46 @@
                 <button type="submit">
                   Book Now
                 </button>
+              </div> --}}
+              <div class="row g-3">
+                  <div class="col-md-6">
+                    <div>
+                      <input type="text" class="form-control" name="user_name" required='' placeholder="Your Name" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      <input type="email" class="form-control" name="user_email" required='' placeholder="Your Email" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      <input type="text" class="form-control" name="user_phone" required='' placeholder="Phone Number" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      <input type="number" class="form-control" name="user_guest" min="1" required='' placeholder="How many persons? " />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      <input type="date"  name="user_date" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      <input type="time"  name="user_time" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                      <div >
+                        <textarea class="form-control" name="user_message" placeholder="Special Request" style="height: 100px"></textarea>                
+                      </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+                  </div>
               </div>
             </form>
           </div>
@@ -206,11 +246,15 @@
         <div class="col-md-6">
           <div class="map_container">
             <div id="googleMap"></div>
+            {{-- <img src="frontend/images/Prohok-Ktis.jpg" alt=""> --}}
+
           </div>
         </div>
       </div>
     </div>
   </section>
+
+
   <!-- end book section -->
   @include('user.layout.footer')
   <!-- footer section -->

@@ -12,6 +12,9 @@
         width: 30%;
         margin-left: 35%;
         }
+        .custom{
+            padding-top: 100px
+        }
 
     </style>
 </head>
@@ -19,7 +22,7 @@
     
     <div class="hero_area">
         <div class="bg-box">
-            <img src="frontend/images/hero-bg.jpg" alt="">
+            <img src="frontend/images/Prohok-Ktis.jpg" alt="">
         </div>
     <!-- header section strats -->
     @include('user.layout.header')
@@ -29,7 +32,7 @@
 <div class="px-4 px-lg-0">
     <div class="pb-5">
         <div class="container">
-            <div class="row">
+            <div class="row custom">
                 <div class="col-md-8">
                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
                     @include('sweetalert::alert')

@@ -26,9 +26,9 @@
 </head>
 <body>
   <div class="hero_area">
-    {{-- <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
-    </div> --}}
+    <div class="bg-box">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
+    </div>
     <!-- header section strats -->
     @include('user.layout.header')
     <!-- end header section -->

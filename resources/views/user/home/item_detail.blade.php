@@ -23,7 +23,7 @@
 
     <div class="hero_area">
         <div class="bg-box">
-        <img src="frontend/images/hero-bg.jpg" alt="">
+        <img src="frontend/images/Prohok-Ktis.jpg" alt="">
         </div>
         <!-- header section strats -->
         @include('user.layout.header')
@@ -69,13 +69,13 @@
         </div>
     </div>
 </section> */ --}}
-<section class="py-10">
+<section class="py-10 item_detail">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="upload/item_images/{{$item->image}}" alt="..." /></div>
             <div class="col-md-6">
-                <h4 class="display-5 fw-bolder">{{ $item->title }}</h4>
-                <div class="fs-5 mb-5">
+                <h4 class=" fw-bolder">{{ $item->title }}</h4>
+                <div class="fs-5 ">
                     <h4 class="item_price"><strong>${{ $item->price }}</strong></h4>
                     <div class="stars">
                         @php
@@ -139,7 +139,7 @@
                             <div class="mb-3">
                                 <div>
                                     <span>
-                                        <img class="rounded-circle" src="{{ 'frontend/user_images/'.$review->user->image }}" alt="User Image" width="40">                     
+                                        <img class="rounded-circle" src="{{ 'frontend/user_images/'.$review->user->image }}" alt="User Image" height="30" width="30">                     
                                     </span>
                                     <span><strong>{{ $review->user->name }}</strong></span>
                                 </div>
@@ -152,6 +152,7 @@
                                     @endfor
                                 </div>
                                 <p>{{ $review->comment }}</p>
+                                {{-- <p>{{ $review->created_at }}</p> --}}
                                 
                             </div>
                         @endforeach

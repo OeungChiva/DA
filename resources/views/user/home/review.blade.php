@@ -38,6 +38,9 @@
     transform: scale(0.8);
     transition: 0.3s ease;
   }
+  .custom{
+  padding-top: 100px;
+}
 
 /* End of Star Rating */
 
@@ -49,7 +52,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="frontend/images/hero-bg.jpg" alt="">
+      <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
     @include('user.layout.header')
@@ -58,41 +61,9 @@
     <!-- end header section -->
   </div>
   <!-- about section -->
-  {{-- <div>
-    <h4>Add review for</h4>
-    <hr>
-    <div>
-        <div>
-            <img src="{{url('upload/item_images/'.$order->image)}}" alt="" width="50" class="img-fluid rounded shadow-sm">
-        </div>
-        <div>
-            <strong>{{$order->item_title}}</strong>
-        </div>
-    </div>
-  </div> --}}
-  <div class="container mb-4">
+  <div class="container mb-4 custom">
     <strong><h4 class="text-center mt-4">Add Review</h4></strong>
     <hr>
-    {{-- <div class="col-6">
-    <div class="row align-items-center">
-      <div class="col-2">
-        <img src="{{ url('upload/item_images/'.$order->image) }}" alt="" class="img-fluid rounded shadow-sm" width="300">
-      </div>
-      <div class="col-10">
-        <div class="d-flex align-items-center">
-          <strong>{{ $order->item_title }}</strong>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="col-6">
-    <div class="mt-4">
-        Your rate
-    </div>
-    <div class="mt-4">
-        Your comment
-    </div>
-    </div> --}}
     @if(session()->has('error'))
       <div class="alert alert-danger" role="alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -106,18 +77,25 @@
         {{session('success')}}
       </div>
     @endif
-    <form action="{{ route('user.reviewPost', ['Orderid' => $order->id]) }}" method="POST">
+    <form action="{{ route('user.reviewPost', ['orderId' => $orderItem->item_id]) }}" method="POST">
       @csrf
       <div class="row">
         <div class="col-6">
           <div class="row align-items-center">
+            {{-- <div class="col-5">
+              <img src="{{ url('upload/item_images/'.$order->orderItems->first()->items->image) }}" alt="" class="img-fluid rounded shadow-sm" width="500">
+            </div> --}}
             <div class="col-5">
-              <img src="{{ url('upload/item_images/'.$order->image) }}" alt="" class="img-fluid rounded shadow-sm" width="500">
-            </div>
+              <img src="{{ url('upload/item_images/'.$orderItem->items->image) }}" alt="" class="img-fluid rounded shadow-sm" width="500">
+          </div>
+          
             <div class="col-7">
+              {{-- <div class="d-flex align-items-center">
+                <strong>{{ $order->orderItems->first()->items->title }}</strong>
+              </div> --}}
               <div class="d-flex align-items-center">
-                <strong>{{ $order->item_title }}</strong>
-              </div>
+                <strong>{{ $orderItem->items->title }}</strong>
+            </div>
             </div>
           </div>
         </div>

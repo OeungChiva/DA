@@ -29,7 +29,7 @@
           </a>
         </li>
       
-        <li class="treeview is-expanded">
+        {{-- <li class="treeview is-expanded">
           <a class="app-menu__item " href="#" data-toggle="treeview">
             <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
             <span class="app-menu__label">Setting</span>
@@ -50,7 +50,7 @@
             </li>
       
           </ul>
-        </li>
+        </li> --}}
         <li class="treeview">
           <a class="app-menu__item" href="#" data-toggle="treeview">
             <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -153,10 +153,11 @@
         </ul>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 {{-- error message --}}
                 @if(Session::has('error_message'))
                 <div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -185,7 +186,7 @@
                   <div class="form-group">
                     <label for="current_password">Current Password</label>
                     <input class="form-control" id="current_password" name="current_password" 
-                        type="password" placeholder="Enter new password">
+                        type="password" placeholder="Enter current password">
                     <span id="verifyCurrentPwd"></span> 
                   </div>
                   <div class="form-group">
@@ -196,14 +197,15 @@
                     <label for="confirm_password">Confirm Password</label>
                     <input class="form-control" id="confirm_password" name="confirm_password" type="password" placeholder="Enter confirm password">
                   </div>
-                  <div class="tile-footer">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                  <div class="tile-footer text-center">
+                    <button class="btn btn-primary" type="submit">Save</button>
                   </div>
                 </form>
               </div>
               </div>
             </div>
           </div>
+          <div class="col-md-2"></div>
         </div>
       </div>
     </main>

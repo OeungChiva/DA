@@ -44,7 +44,7 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
-        <li class="treeview ">
+        {{-- <li class="treeview ">
             <a class="app-menu__item " href="#" data-toggle="treeview">
                 <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Setting</span>
@@ -63,7 +63,7 @@
                 </li>
             
             </ul>
-        </li>
+        </li> --}}
         <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -212,7 +212,7 @@
                                 <label class="control-label col-md-3">Menu</label>
                                 <div class="col-md-8">
                                     <select class="form-control" name="item_menu" required="">
-                                        <option value="{{$item->menu}}" selected="">{{$item->menu}} </option>
+                                        <option value="{{$item->menus->name_menu}}" selected="">{{$item->menus->name_menu}} </option>
                                         @foreach($menu as $menu)
                                         <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
                                         @endforeach

@@ -113,16 +113,17 @@
         </a>
         <ul class="dropdown-menu settings-menu dropdown-menu-right">
           
-          <li>
-            <a class="dropdown-item" href="{{url('admin/update_password')}}">
-              <i class="fa fa-cog fa-lg"></i> 
-              Settings
-            </a>
-          </li>
+          
           <li>
             <a class="dropdown-item" href="{{url('admin/update_details')}}">
               <i class="fa fa-user fa-lg"></i> 
               Profile
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{url('admin/update_password')}}">
+              <i class="fas fa-key"></i> &nbsp;
+              Change Password
             </a>
           </li>
           <li>

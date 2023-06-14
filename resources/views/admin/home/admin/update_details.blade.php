@@ -28,7 +28,7 @@
             <span class="app-menu__label">Dashboard</span>
           </a>
         </li>
-        <li class="treeview is-expanded">
+        {{-- <li class="treeview is-expanded">
           <a class="app-menu__item " href="#" data-toggle="treeview">
             <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
             <span class="app-menu__label">Setting</span>
@@ -48,7 +48,7 @@
               </a>
             </li>     
           </ul>
-        </li>
+        </li> --}}
         <li class="treeview">
           <a class="app-menu__item" href="#" data-toggle="treeview">
             <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -152,8 +152,6 @@
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <div class="row">
-              <div class="col-lg-6">
                 {{-- error message --}}
                 @if(Session::has('error_message'))
                 <div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -171,36 +169,38 @@
                 
                 <form method="POST" action="{{url('admin/update_details')}}" enctype="multipart/form-data">
                   @csrf
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input class="form-control" id="admin_email" type="email" value="{{Auth::guard('web')->user()->email}}" readonly="" >
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input class="form-control" id="admin_email" type="email" value="{{Auth::guard('web')->user()->email}}" readonly="" >
+                      </div>
+                      <div class="form-group">
+                        <label for="admin_name">Name</label>
+                        <input class="form-control" id="admin_name" name="admin_name" type="text" required="" value="{{Auth::guard('web')->user()->name}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="admin_phone">Phone Number</label>
+                        <input class="form-control" id="admin_phone" name="admin_phone" type="text" required="" value="{{Auth::guard('web')->user()->phone}}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="admin_image">Photo</label>
+                        <input class="form-control" id="admin_image" name="admin_image" type="file">
+                        @if(!empty(Auth::guard('web')->user()->image))
+                          <img class="" src="{{ asset('backend/images/'.Auth::guard('web')->user()->image) }}" alt="{{ Auth::guard('web')->user()->name }}" width="200px" height="200px">
+                          <a href="{{ asset('backend/images/'.Auth::guard('web')->user()->image) }}" target="_blank">View Photo</a>
+                          <input type="hidden" name="current_image" value="{{ Auth::guard('web')->user()->image }}">
+                        @endif
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="admin_name">Name</label>
-                    <input class="form-control" id="admin_name" name="admin_name" type="text" required="" value="{{Auth::guard('web')->user()->name}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="admin_phone">Phone Number</label>
-                    <input class="form-control" id="admin_phone" name="admin_phone" type="text" required="" value="{{Auth::guard('web')->user()->phone}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="admin_image">Photo</label>
-                    <input class="form-control" id="admin_image" name="admin_image" type="file">
-                    @if(!empty(Auth::guard('web')->user()->image))
-                      <img src="{{ asset('backend/images/'.Auth::guard('web')->user()->image) }}" alt="{{ Auth::guard('web')->user()->name }}" width="100px" height="100px">
-                      <a href="{{ asset('backend/images/'.Auth::guard('web')->user()->image) }}" target="_blank">View Photo</a>
-                      <input type="hidden" name="current_image" value="{{ Auth::guard('web')->user()->image }}">
-                    @endif
-                  </div>
-                  
-                  <div class="tile-footer">
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                  </div>
-                </form>
-              </div>
-              </div>
+                  <div class="tile-footer text-center">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                  </div>             
+                </form>              
             </div>
-
           </div>
         </div>
       </div>
