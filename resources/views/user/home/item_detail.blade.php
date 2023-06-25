@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/public">
-  @include('user.css.style')
-  <style>
-    
-    .row{
-      width: 90%;
-      margin-left: 5%;
-    }
-    .custom-input {
-      width: 30%;
-      margin-left: 35%;
-    }
-    .checked, .price span {
-      color: #ff9f1a; 
-    }
+    <base href="/public">
+    @include('user.css.style')
+    <style>
+        
+        .row{
+        width: 90%;
+        margin-left: 5%;
+        }
+        .custom-input {
+        width: 30%;
+        margin-left: 35%;
+        }
+        .checked, .price span {
+        color: #ff9f1a; 
+        }
 
-  </style>
+    </style>
 </head>
 <body class="sub_page">
 

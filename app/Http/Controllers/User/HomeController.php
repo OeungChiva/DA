@@ -33,21 +33,6 @@ class HomeController extends Controller
         $menu = Menu::all();
         return view('user.index',compact('item','count','menu'));
     }
-
-
-    // public function home()
-    // {
-    //     if (Auth::check() && Auth::user()->role == 0) {
-    //         $item = Item::all();
-    //         $user_id = Auth::id();
-    //         $count = Cart::where('user_id', $user_id)->count();
-    //         return view('user.index', compact('item', 'count'));
-    //     } else {
-    //         // Redirect to an appropriate page or show an error message
-    //         return redirect('/')->with('error', 'You are not authorized to access this page.');
-    //     }
-    // }
-
     //================End Method==================//
 
     //================Menu==================//
@@ -104,5 +89,22 @@ class HomeController extends Controller
         return redirect()->back()->with("success","Your Booking is confirmed!");
     }
     //================End Method==================//
+
+    //================Search Item==================//   
+    public function search(Request $request)
+    {
+        $user_id = Auth::id();
+        $count = Cart::where('user_id', $user_id)->count();
+        $menu = Menu::all();
+        $search_text = $request->search;
+        $item = Item::where('title', 'LIKE', "%$search_text%")
+            ->orWhereHas('menus', function ($query) use ($search_text) {
+                $query->where('name_menu', 'LIKE', "%$search_text%");
+            })
+            ->orWhere('menu_id', $search_text)
+            ->paginate(6);
+        return view('user.home.subpages.menu', compact('item', 'count', 'menu'));
+    }
+    
     
 }

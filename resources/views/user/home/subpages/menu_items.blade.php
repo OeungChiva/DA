@@ -49,12 +49,13 @@
               </li>
             </ul>
             <div class="user_option">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2 nav_search-input" type="search" placeholder="Search" aria-label="Search" style="display:none;">
+              <form class="form-inline" action="{{route('user.search')}}" method="GET">
+                @csrf
+                <input class="form-control mr-sm-2 nav_search-input" type="search" name="search" placeholder="Search" aria-label="Search" style="display:none;">
                 <button class="btn my-2 my-sm-0 nav_search-btn" type="button">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </form>
+              </form> 
               <a class="cart_link" href="{{ url('/cart') }}">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>

@@ -79,6 +79,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/about', 'about')->name('user.about'); 
     Route::get('/booking', 'booking')->name('user.book'); 
     Route::post('/booking', 'bookingPost')->name('user.bookingPost'); 
+    Route::get('/search', 'search')->name('user.search'); 
+
 
 });
 //================Cart Route=========================//

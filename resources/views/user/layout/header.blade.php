@@ -30,8 +30,9 @@
               </li>                      
             </ul>
             <div class="user_option">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2 nav_search-input" type="search" placeholder="Search" aria-label="Search" style="display:none;">
+              <form class="form-inline" action="{{route('user.search')}}" method="GET">
+                @csrf
+                <input class="form-control mr-sm-2 nav_search-input" type="search" name="search" placeholder="Search" aria-label="Search" style="display:none;">
                 <button class="btn my-2 my-sm-0 nav_search-btn" type="button">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
