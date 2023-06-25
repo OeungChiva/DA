@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     @include('admin.css.style')
+    <style>
+        td {
+        vertical-align: middle;
+        }
+
+    </style>
     <!-- Open Graph Meta-->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Vali Admin">
@@ -288,25 +294,39 @@
                                 <th class="text-center"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             @foreach ($orders as $order)
-                            <tr data-order-id="{{ $order->id }}">
+                            <tr  data-order-id="{{ $order->id }}">
                                 <td>{{ $loop->iteration }}</td>                                                              
                                 <td>{{ $order->name }}</td>
-                                {{-- <td>{{ $order->orderItems->sum('price') }}$</td> --}}
                                 <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
-
                                 <td>{{ $order->payment_status }}</td>
                                 <td>{{ $order->created_at }}</td> 
-                                <td>
-                                    <span id="delivery-status-{{ $order->id }}">{{ $order->delivery_status }}</span>
+                                <td class="">
+                                    
+                                        {{-- <span id="delivery-status-{{ $order->id }}">
+                                            {{ $order->delivery_status }}
+                                        </span> --}}
+
+                                        <span id="delivery-status-{{ $order->id }}">
+                                            @if ($order->delivery_status === 'Order Received')
+                                                <span class="badge badge-primary">{{ $order->delivery_status }}</span>
+                                            @elseif ($order->delivery_status === 'In-Progress')
+                                                <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
+                                            @elseif ($order->delivery_status === 'Shipped')
+                                                <span class="badge badge-warning">{{ $order->delivery_status }}</span>
+                                            @elseif ($order->delivery_status === 'Delivered')
+                                                <span class="badge badge-info">{{ $order->delivery_status }}</span>
+                                            @elseif ($order->delivery_status === 'Completed')
+                                                <span class="badge badge-success">{{ $order->delivery_status }}</span>
+                                            @else
+                                                {{ $order->payment_status }}
+                                            @endif
+                                        </span>
+
+                                    
+                                    
                                 </td>
-                                {{-- <td>
-                                    <span id="delivery-status-{{ $order->id }}" class="badge {{ getStatusBadgeClass($order->delivery_status) }}">
-                                        {{ $order->delivery_status }}
-                                    </span>
-                                </td> --}}
-                                
                                 <td>
                                     <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
                                         @foreach ($orderStatuses as $orderStatus)
@@ -326,9 +346,7 @@
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     &nbsp;
-                                    {{-- <a class="view text-success" href="{{url('/admin/invoice')}}" title="View" data-toggle="tooltip">
-                                        <i class="fa fa-eye"></i>
-                                    </a>   --}}
+                                    
                                     <a class="btn btn-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
                                     </a>
@@ -339,6 +357,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        
                     </table>
                     
                     </div>
@@ -399,6 +418,31 @@
 });
 
 </script>
+
+<script>
+    $(document).ready(function () {
+        // Update status column color when select option changes
+        $('.order-status-select').change(function () {
+            var statusBadge = $(this).closest('tr').find('.delivery-status-badge');
+            var selectedStatus = $(this).val();
+            
+            if (selectedStatus === 'Order Received') {
+                statusBadge.html('<span class="badge badge-primary">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'In-Progress') {
+                statusBadge.html('<span class="badge badge-secondary">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Shipped') {
+                statusBadge.html('<span class="badge badge-warning">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Delivered') {
+                statusBadge.html('<span class="badge badge-info">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Completed') {
+                statusBadge.html('<span class="badge badge-success">' + selectedStatus + '</span>');
+            } else {
+                statusBadge.text(selectedStatus);
+            }
+        });
+    });
+</script>
+
 
     
 

@@ -64,7 +64,7 @@
             
             </ul>
         </li> --}}
-        <li class="treeview is-expanded">
+        <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Users</span>
@@ -72,7 +72,7 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item active" href="{{url('/admin/users')}}">
+                    <a class="treeview-item" href="{{url('/admin/users')}}">
                         <i class="icon fa fa-circle-o"></i> All Users
                     </a>
                 </li>
@@ -83,15 +83,15 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
+        <li class="treeview ">
+            <a class="app-menu__item " href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-file-text"></i>
                 <span class="app-menu__label">Menus</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/menu')}}">
+                    <a class="treeview-item " href="{{url('/admin/menu')}}">
                     <i class="icon fa fa-circle-o"></i> Show Menus
                     </a>
                 </li>
@@ -122,21 +122,21 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview">
+        <li class="treeview is-expanded">
+            <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-table"></i>
                 &nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Tables</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
-                </a>
-                <ul class="treeview-menu">
+            </a>
+            <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/menu')}}">
+                    <a class="treeview-item active" href="{{url('/admin/table')}}">
                     <i class="icon fa fa-circle-o"></i> Show Tables
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/create_menu')}}">
+                    <a class="treeview-item" href="{{url('/admin/create_table')}}">
                     <i class="icon fa fa-circle-o"></i> Add Tables
                     </a>
                 </li>
@@ -175,109 +175,76 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Update Users</h1>          
+                <h1><i class="fa fa-th-list"></i> Tables</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active"><a href="#">Update Users</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active"><a href="#">All Tables</a></li>
             </ul>
         </div>
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <div class="tile">               
-                    {{-- <h3 class="tile-title">Create New User</h3>            --}}
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <h2>Update User</h2>
-                        </div>
-                        <div class="col-sm-2">
-                            <a href="{{ route('admin.users') }}">
-                                <button type="button" class="btn btn-info add-new">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
-                                </button>
-                            </a>
-                        </div>
-                    </div><br>
-                    <div class="tile-body">
-                        @if(session()->has('error'))
-                        <div class="alert alert-danger" role="alert">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{session('error')}}
-                        </div>
-                        @endif
-                        @if(session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{session('success')}}
-                        </div>
-                        @endif
-                        <form class="form-horizontal" method="POST" action="{{url('/admin/update_users/'.$user->id)}}" enctype="multipart/form-data">          
-                            @csrf <!-- to make form active -->
-                            {{-- @method('PUT') --}}
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Name</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_name" type="text" value="{{$user->name}}">
-                                </div>
+            <div class="col-md-12">
+                <div class="tile">
+                <div class="tile-body">
+                    @if(session()->has('success'))
+                    <div class="alert alert-success" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{session('success')}}
+                    </div>
+                    @endif
+                    <div class="table-title">
+                        <div class="row">                
+                            <div class="col-sm-10">
+                                <h2>All Tables</h2>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Email</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_email" type="email" value="{{$user->email}}">
-                                </div>
+                            <div class="col-sm-2">
+                                <a href="{{ route('admin.create_table') }}">
+                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New Table</button>
+                                </a>
                             </div>
-                            {{-- <div class="form-group row">
-                                <label class="control-label col-md-3">Password</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_password" type="password" placeholder="Enter password">
-                                </div>
-                            </div> --}}
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Phone</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_phone" type="text" value="{{$user->phone}}">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Address</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_address" value="{{$user->address}}">
-                                </div>
-                            </div>                           
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Image</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_image" type="file">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-3"></div>                   
-                                <div class="col-md-8">
-                                    @if($user->image != '' && file_exists(public_path().'/frontend/user_images/'.$user->image))
-                                    <img src="{{ url('/frontend/user_images/'.$user->image) }}" alt="" width="100" height="100">
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="tile-footer">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>                   
-                </div>
+                        </div><br>
+                    </div>
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead class="bg-light text-dark p-3 text-center">
+                            <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Number of guest</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($table as $row)
+                            <tr>
+                                <td>{{$count++}}</td>                              
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->guest}}</td>                             
+                                <td>{{$row->location}}</td>
+                                <td>{{$row->status}}</td>
+
+                                <td class="text-center">
+                                    <a class="btn btn-warning edit" href="{{url('/admin/update_table/'.$row->id)}}" title="Update" data-toggle="tooltip">
+                                    <i class="fa fa-edit"></i>
+                                    </a>                        
+                                    &nbsp;
+                                    <a class="btn btn-danger delete" href="{{url('/admin/table/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                    <i class="fa fa-trash "></i>
+                                    </a>
+                                    &nbsp;
+                                    <a class="btn btn-success view" title="View" data-toggle="tooltip">
+                                    <i class="fa fa-eye "></i>
+                                    </a>  
+                                </td>
+                            </tr>
+                            @endforeach() 
+                        </tbody>
+                    </table>        
+                    </div>
+                </div>                
             </div>
-            <div class="col-md-2"></div>           
-        </div>        
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 

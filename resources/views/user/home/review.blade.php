@@ -27,7 +27,7 @@
     display: none;
   }
   .rating-css input + label {
-    font-size: 60px;
+    font-size: 40px;
     text-shadow: 1px 1px 0 #8f8420;
     cursor: pointer;
   }
@@ -38,7 +38,7 @@
     transform: scale(0.8);
     transition: 0.3s ease;
   }
-  .custom{
+  .padding{
   padding-top: 100px;
 }
 
@@ -61,7 +61,7 @@
     <!-- end header section -->
   </div>
   <!-- about section -->
-  <div class="container mb-4 custom">
+  <div class="container mb-4 padding min-vh-100">
     <strong><h4 class="text-center mt-4">Add Review</h4></strong>
     <hr>
     @if(session()->has('error'))
@@ -82,21 +82,20 @@
       <div class="row">
         <div class="col-6">
           <div class="row align-items-center">
-            {{-- <div class="col-5">
-              <img src="{{ url('upload/item_images/'.$order->orderItems->first()->items->image) }}" alt="" class="img-fluid rounded shadow-sm" width="500">
-            </div> --}}
+            
             <div class="col-5">
-              <img src="{{ url('upload/item_images/'.$orderItem->items->image) }}" alt="" class="img-fluid rounded shadow-sm" width="500">
-          </div>
+              <img src="{{ url('upload/item_images/'.$orderItem->items->image) }}" alt="" class=" rounded shadow-sm" width="350">
+              <div class="mt-3 align-items-center">
+                <strong>{{ $orderItem->items->title }}</strong>
+              </div>
+            </div>
           
-            <div class="col-7">
-              {{-- <div class="d-flex align-items-center">
-                <strong>{{ $order->orderItems->first()->items->title }}</strong>
-              </div> --}}
+            {{-- <div class="col-7">
+              
               <div class="d-flex align-items-center">
                 <strong>{{ $orderItem->items->title }}</strong>
-            </div>
-            </div>
+              </div>
+            </div> --}}
           </div>
         </div>
         <div class="col-6">

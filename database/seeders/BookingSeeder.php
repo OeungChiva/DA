@@ -22,7 +22,7 @@ class BookingSeeder extends Seeder
                 'phone' => '03454356',
                 'guest' => '4',
                 'date' => '2023-05-19',
-                'address' => '17:45',
+                'time' => '17:45',
                 'created_at' => Carbon::now(),
             ],
             [
@@ -32,7 +32,7 @@ class BookingSeeder extends Seeder
                 'phone' => '034543567',
                 'guest' => '2',
                 'date' => '2023-05-19',
-                'address' => '18:45',
+                'time' => '18:45',
                 'created_at' => Carbon::now(),
             ],
             [
@@ -42,7 +42,7 @@ class BookingSeeder extends Seeder
                 'phone' => '0345435678',
                 'guest' => '5',
                 'date' => '2023-05-19',
-                'address' => '19:00',
+                'time' => '19:00',
                 'created_at' => Carbon::now(),
             ],
         ]);

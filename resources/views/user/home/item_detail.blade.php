@@ -34,42 +34,7 @@
     </div>
 <!-- about section -->
 
-<!-- Product section-->
-{{-- /* <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="upload/item_images/{{$item->image}}" alt="..." /></div>
-            <div class="col-md-6">
-                <h4 class="display-5 fw-bolder">{{ $item->title }}</h4>
-                <div class="fs-5 mb-5">
-                    <span ><strong>${{ $item->price }}</strong></span>
-                    <div class="stars ">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    </div>
-                    <span class="review-no">41 reviews</span>
-                    
-                    
-                </div>
-                <p class="lead">{{ $item->description }}</p>
-                <form action="{{url('add_cart', ['id' => $item->id])}}" method="POST">
-                    @csrf
-                <div class="d-flex">
-                    <input class="form-control text-center me-3" name="item_quantity" id="inputQuantity" type="number" min='1' value="1" style="max-width: 3rem" />
-                    <button class="btn btn-yellow bg-dark text-white flex-shrink-0" type="submit">
-                        <i class="fa fa-shopping-cart"></i>
-                        Add to cart
-                    </button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section> */ --}}
-<section class="py-10 item_detail">
+<section class="py-10 item_detail min-vh-100">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="upload/item_images/{{$item->image}}" alt="..." /></div>
@@ -85,13 +50,13 @@
                             $emptyStars = 5 - $fullStars - $halfStar;
                         @endphp
                         @for ($i = 0; $i < $fullStars; $i++)
-                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star checked"></span>
                         @endfor
                         @if ($halfStar)
-                            <span class="fa fa-star-half-o checked"></span>
+                            <span class="fas fa-star-half-alt checked"></span>
                         @endif
                         @for ($i = 0; $i < $emptyStars; $i++)
-                            <span class="fa fa-star"></span>
+                            <span class="fas fa-star"></span>
                         @endfor
                     </div>
                     <span class="review-no">{{ $item->reviews->count() }} reviews</span>

@@ -30,7 +30,6 @@ class OrderHistoryController extends Controller
     //================End Method==================//
 
      //================OrderHistory==================//
-
     public function invoice($orderId)
     {
         $user = Auth::user();

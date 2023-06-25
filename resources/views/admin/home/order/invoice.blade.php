@@ -191,7 +191,7 @@
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item">Orders</li>
-                <li class="breadcrumb-item active"><a href="#">All Orders</a></li>
+                <li class="breadcrumb-item active"><a href="#">Invoice</a></li>
             </ul>
         </div>
         <div class="container">

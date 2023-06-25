@@ -18,6 +18,8 @@
     .custom{
       padding-top: 110px;
     }
+    
+    
 
   </style>
 </head>
@@ -35,7 +37,7 @@
   </div>
   <!-- about section -->
 
-  <div class="px-4 px-lg-0">
+  <div class="px-4 px-lg-0 min-vh-100">
     <div class="pb-5">
       <div class="container ">
         <div class="row">

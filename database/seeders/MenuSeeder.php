@@ -48,3 +48,4 @@ class MenuSeeder extends Seeder
         ]);
     }
 }
+

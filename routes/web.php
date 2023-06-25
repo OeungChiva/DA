@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\TableController;
+
 
 
 
@@ -199,13 +201,19 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     Route::post('/admin/update-order-status', 'updateOrderStatus')->name('admin.updateOrderStatus');
     //Route::get('/admin/invoice', 'invoice')->name('admin.invoice');
     Route::get('/admin/invoice/{id}', 'invoice')->name('admin.invoice');
-
-
     Route::get('/admin/order/{id}', 'delete_order')->name('admin.delete_order');   
-
-
     Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
 
+});
+
+//================Admin Tables Management Route=========================//
+Route::controller(TableController::class)->middleware('authadmin')->group(function () {
+    Route::get('/admin/table', 'table')->name('admin.table');
+    Route::get('/admin/create_table', 'create_table')->name('admin.create_table');
+    Route::post('/admin/create_table', 'create_tablePost')->name('admin.create_table.post');
+    Route::get('/admin/update_table/{id}', 'update_table')->name('admin.update_table');
+    Route::post('/admin/update_table/{id}', 'update_tablePost')->name('admin.update_table.post');
+    Route::get('/admin/table/{id}', 'delete_table')->name('admin.delete_table');   
 });
 
 

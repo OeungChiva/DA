@@ -254,8 +254,9 @@ p {
   }
 
 /* End of Star Rating */
-.custom{
+.padding{
   padding-top: 100px;
+  
 }
 
 
@@ -273,209 +274,8 @@ p {
     <!-- header section strats -->
     <!-- end header section -->
   </div>
-
-<!-- Modal -->
-{{-- @foreach ($order as $index => $singleOrder)
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Rate:{{$singleOrder->item_title}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="rating-css">
-          <div class="star-icon">
-              <input type="radio" value="1" name="product_rating" checked id="rating1">
-              <label for="rating1" class="fa fa-star"></label>
-              <input type="radio" value="2" name="product_rating" id="rating2">
-              <label for="rating2" class="fa fa-star"></label>
-              <input type="radio" value="3" name="product_rating" id="rating3">
-              <label for="rating3" class="fa fa-star"></label>
-              <input type="radio" value="4" name="product_rating" id="rating4">
-              <label for="rating4" class="fa fa-star"></label>
-              <input type="radio" value="5" name="product_rating" id="rating5">
-              <label for="rating5" class="fa fa-star"></label>
-          </div>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-@endforeach --}}
-
-  <!-- about section -->
-
-    {{-- <div class="main-content">
-      <div class="container mt-7">
-          <div class="col">
-            <div class="card shadow">
-              <div class="card-header border-0">
-                <h3 class="mb-0">Order History</h3>
-              </div>
-              <div class="table-responsive">
-                <table class="table align-items-center ">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Foods</th>
-                      <th scope="col"></th>
-                      
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Invoice</th>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @php
-                      $orderGroups = $order->groupBy('created_at');
-                      $counts = 1;
-                    @endphp
-                    @foreach ($orderGroups as $orderGroup)
-                      @foreach ($orderGroup as $index => $row)
-                        <tr>
-                          @if ($index === 0)
-                            <td rowspan="{{ $orderGroup->count() }}">{{ $counts++ }}</td>
-                          @endif
-                          <td>
-                            <span>
-                              <img src="{{url('upload/item_images/'.$row->image)}}" alt="" width="50" class="img-fluid rounded shadow-sm">
-                            </span>
-                            {{ $row->item_title }}
-                          </td>
-                          <td>
-                            <a href="{{ route('user.review', ['Orderid' => $row->id]) }}">Review</a>
-                          </td>
-                          <td>{{ $row->quantity }}</td>
-                          <td>{{ $row->price }}$</td>
-                          
-                          @if ($index === 0)
-                            <td rowspan="{{ $orderGroup->count() }}">
-                              {{ $row->delivery_status }}
-                              <br>
-                              @if ($row->payment_status === 'paid')
-                                <span class="text-success">{{ $row->payment_status }}</span>
-                              @elseif ($row->payment_status === 'cash on delivery')
-                                <span class="text-warning">{{ $row->payment_status }}</span>
-                              @else
-                                {{ $row->payment_status }}
-                              @endif
-                            </td>
-                          @endif
-                          @if ($index === 0)
-                            <td rowspan="{{ $orderGroup->count() }}">{{ $row->created_at }}</td>
-                          @endif
-                          @if ($index === 0)
-                            <td rowspan="{{ $orderGroup->count() }}">
-                              <a href="{{ route('user.invoice', ['orderId' => $row->order_id]) }}" target="_blank">Invoice</a>
-                            </td>
-                          @endif
-                          
-                        </tr>
-                      @endforeach
-                    @endforeach
-                    
-                    
-                    
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
-
-    {{-- <div class="main-content">
-      <div class="container mt-7">
-        <!-- Table -->
-        <div class="col">
-          <div class="card shadow">
-            <div class="card-header border-0">
-              <h3 class="mb-0">Order History</h3>
-            </div>
-            <div class="table-responsive">
-              <table class="table align-items-center">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Foods</th>
-                    <th scope="col"></th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Invoice</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @php
-                  $counts = 1;
-                  @endphp
-                  @foreach ($order as $order)
-                  @foreach ($order->orderItems as $index => $item)
-                  <tr>
-                    @if ($index === 0)
-                    <td rowspan="{{ $order->orderItems->count() }}">{{ $counts++ }}</td>
-                    @endif
-                    <td>
-                      <span>
-                        <img src="{{ url('upload/item_images/'.$item->image) }}" alt="" width="50"
-                          class="img-fluid rounded shadow-sm">
-                      </span>
-                      {{ $item->orderItems->item_title }}
-                    </td>
-                    <td>
-                      <a href="{{ route('user.review', ['Orderid' => $order->id]) }}">Review</a>
-                    </td>
-                    <td>{{ $item->pivot->quantity }}</td>
-                    <td>{{ $item->pivot->price }}$</td>
-    
-                    @if ($index === 0)
-                    <td rowspan="{{ $order->items->count() }}">
-                      {{ $order->delivery_status }}
-                      <br>
-                      @if ($order->payment_status === 'paid')
-                      <span class="text-success">{{ $order->payment_status }}</span>
-                      @elseif ($order->payment_status === 'cash on delivery')
-                      <span class="text-warning">{{ $order->payment_status }}</span>
-                      @else
-                      {{ $order->payment_status }}
-                      @endif
-                    </td>
-                    @endif
-                    @if ($index === 0)
-                    <td rowspan="{{ $order->items->count() }}">{{ $order->created_at }}</td>
-                    @endif
-                    @if ($index === 0)
-                    <td rowspan="{{ $order->items->count() }}">
-                      <a href="{{ route('user.invoice', ['orderId' => $order->order_id]) }}" target="_blank">Invoice</a>
-                    </td>
-                    @endif
-    
-                  </tr>
-                  @endforeach
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
-
     <div class="main-content">
-      <div class="container mt-7 custom">
+      <div class="container mt-7 padding min-vh-100">
           <!-- Table -->
           <div class="col">
               <div class="card shadow">
@@ -528,12 +328,25 @@ p {
   
                                           @if ($index === 0)
                                               <td rowspan="{{ $order->orderItems->count() }}">
-                                                  {{ $order->delivery_status }}
+                                                  {{-- {{ $order->delivery_status }} --}}
+                                                  @if ($order->delivery_status === 'Order Received')
+                                                      <span class="badge badge-primary">{{ $order->delivery_status }}</span>
+                                                  @elseif ($order->delivery_status === 'In-Progress')
+                                                      <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
+                                                  @elseif ($order->delivery_status === 'Shipped')
+                                                      <span class="badge badge-warning">{{ $order->delivery_status }}</span>
+                                                  @elseif ($order->delivery_status === 'Delivered')
+                                                      <span class="badge badge-info">{{ $order->delivery_status }}</span>
+                                                  @elseif ($order->delivery_status === 'Completed')
+                                                      <span class="badge badge-success">{{ $order->delivery_status }}</span>
+                                                  @else
+                                                      {{ $order->payment_status }}
+                                                  @endif
                                                   <br>
-                                                  @if ($order->payment_status === 'paid')
-                                                      <span class="text-success">{{ $order->payment_status }}</span>
-                                                  @elseif ($order->payment_status === 'cash on delivery')
-                                                      <span class="text-warning">{{ $order->payment_status }}</span>
+                                                  @if ($order->payment_status === 'Paid')
+                                                      <span class="badge badge-success">{{ $order->payment_status }}</span>
+                                                  @elseif ($order->payment_status === 'Cash')
+                                                      <span class="badge badge-warning">{{ $order->payment_status }}</span>
                                                   @else
                                                       {{ $order->payment_status }}
                                                   @endif

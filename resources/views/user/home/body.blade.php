@@ -154,7 +154,7 @@
           Our Menu
         </h2>
       </div>
-      <ul class="filters_menu">
+      {{-- <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
         @foreach ($menu as $row)
         <li data-filter=".{{ $row->name_menu }}">
@@ -162,7 +162,18 @@
         </li>
         @endforeach
         
-      </ul>
+      </ul> --}}
+      <div class="d-flex justify-content-center">
+        <ul class="filters_menu custom rounded-pill">
+          <li class="active text-warning" data-filter="*">All</li>
+          @foreach ($menu as $row)
+          <li data-filter=".{{ $row->name_menu }}">
+            <a href="{{ route('user.menu_items', ['menuId' => $row->id]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
+          </li>
+          @endforeach
+        
+        </ul>
+      </div>
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)
@@ -221,7 +232,7 @@
                               <span class="fa fa-star checked"></span>
                             @endfor
                             @if ($halfStar)
-                              <span class="fa fa-star-half-o checked"></span>
+                              <span class="fa fa-star-half-alt checked"></span>
                             @endif
                             @for ($i = 0; $i < $emptyStars; $i++)
                               <span class="fa fa-star"></span>

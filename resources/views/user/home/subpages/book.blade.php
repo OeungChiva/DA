@@ -117,7 +117,7 @@
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
               @endif
-              <div class="dropdown-menu dropdown-menu-right" >
+              {{-- <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a> 
                 <a class="dropdown-item" href="{{url('/change_password')}}"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a> 
@@ -134,6 +134,30 @@
                 @else
                 <a class="dropdown-item" href="{{ route('user_login.post') }}">
                   <i class="fa fa-sign-in fa-lg"></i> 
+                    Login
+                </a>
+                <a class="dropdown-item" href="{{ route('register.post') }}">
+                  <i class="fa fa-user-plus"></i>
+                    Register
+                </a>
+                @endif
+              </div> --}}
+              <div class="dropdown-menu dropdown-menu-right" >
+                @auth                
+                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a> 
+                <a class="dropdown-item" href="{{url('/change_password')}}"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a> 
+                <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
+                  <form action="{{route('user_logout')}}" method="POST">
+                    @csrf
+                    <a class="dropdown-item" href="{{ route('user_logout') }}"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                    </a>
+                  </form>
+                @else
+                <a class="dropdown-item" href="{{ route('user_login.post') }}">
+                  <i class="fas fa-sign-in-alt"></i> 
                     Login
                 </a>
                 <a class="dropdown-item" href="{{ route('register.post') }}">

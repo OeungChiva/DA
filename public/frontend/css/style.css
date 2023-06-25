@@ -13,6 +13,8 @@ body {
   background-color: transparent;
 }
 
+
+
 .checked, .price span {
   color: #ffbe33; 
 }
@@ -40,6 +42,15 @@ body {
     
     color: white !important;
     background-color:  #d7d2d2 !important;
+}
+
+a{
+  text-decoration: none !important;
+}
+.custom{
+background-color: rgba(163, 164, 159, 0.1);
+width: fit-content;
+
 }
 
 /* End Custom CSS here */

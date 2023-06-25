@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Item;
+use App\Models\Cart;
 use App\Models\OrderItem;
 
 
@@ -20,7 +21,9 @@ class ReviewController extends Controller
     public function review($orderId)
     {
         $user = Auth::user();
-        $count = 1;
+        $user_id = Auth::id();
+        $count = Cart::where('user_id', $user_id)->count();
+        $counts = 1;
         $orderItem = OrderItem::with('items')->whereHas('orders', function ($query) use ($user, $orderId) {
             $query->where('user_id', $user->id);
         })->where('item_id', $orderId)->first();
@@ -33,7 +36,7 @@ class ReviewController extends Controller
         // Find the existing review for the user and item
         $existingReview = Review::where('user_id', $user->id)->where('item_id', $orderItem->item_id)->first();
 
-        return view('user.home.review', compact('orderItem', 'count', 'existingReview'));
+        return view('user.home.review', compact('orderItem', 'count', 'counts','existingReview'));
     }
 
     public function reviewPost(Request $request, $itemId)

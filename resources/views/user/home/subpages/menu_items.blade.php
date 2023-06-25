@@ -225,13 +225,13 @@
                             $emptyStars = 5 - $fullStars - $halfStar;
                           @endphp
                           @for ($i = 0; $i < $fullStars; $i++)
-                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star checked"></span>
                           @endfor
                           @if ($halfStar)
-                            <span class="fa fa-star-half-o checked"></span>
+                            <span class="fas fa-star-half-alt checked"></span>
                           @endif
                           @for ($i = 0; $i < $emptyStars; $i++)
-                            <span class="fa fa-star"></span>
+                            <span class="fas fa-star"></span>
                           @endfor
                         </div>
                         <div class="text-center">

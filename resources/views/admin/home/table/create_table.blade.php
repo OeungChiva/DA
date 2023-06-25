@@ -64,7 +64,7 @@
             
             </ul>
         </li> --}}
-        <li class="treeview is-expanded">
+        <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Users</span>
@@ -72,7 +72,7 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item active" href="{{url('/admin/users')}}">
+                    <a class="treeview-item" href="{{url('/admin/users')}}">
                         <i class="icon fa fa-circle-o"></i> All Users
                     </a>
                 </li>
@@ -83,7 +83,7 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-file-text"></i>
                 <span class="app-menu__label">Menus</span>
@@ -96,7 +96,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/create_menu')}}">
+                    <a class="treeview-item " href="{{url('/admin/create_menu')}}">
                     <i class="icon fa fa-circle-o"></i> Add Menus
                     </a>
                 </li>
@@ -122,21 +122,21 @@
                 </li>
             </ul>
         </li>
-        <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview">
+        <li class="treeview is-expanded">
+            <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-table"></i>
                 &nbsp;&nbsp;&nbsp;
                 <span class="app-menu__label">Tables</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
-                </a>
-                <ul class="treeview-menu">
+            </a>
+            <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/menu')}}">
+                    <a class="treeview-item" href="{{url('/admin/table')}}">
                     <i class="icon fa fa-circle-o"></i> Show Tables
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{url('/admin/create_menu')}}">
+                    <a class="treeview-item active" href="{{url('/admin/create_table')}}">
                     <i class="icon fa fa-circle-o"></i> Add Tables
                     </a>
                 </li>
@@ -175,12 +175,12 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Update Users</h1>          
+                <h1><i class="fa fa-th-list"></i> Create Table</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active"><a href="#">Update Users</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active"><a href="#">Create Tables</a></li>
             </ul>
         </div>
         <div class="row">
@@ -190,10 +190,10 @@
                     {{-- <h3 class="tile-title">Create New User</h3>            --}}
                     <div class="row">
                         <div class="col-sm-10">
-                            <h2>Update User</h2>
+                            <h2>Create New Table</h2>
                         </div>
                         <div class="col-sm-2">
-                            <a href="{{ route('admin.users') }}">
+                            <a href="{{ url('admin/table') }}">
                                 <button type="button" class="btn btn-info add-new">
                                     <i class="fa fa-arrow-left"></i>
                                     Back
@@ -214,60 +214,45 @@
                             {{session('success')}}
                         </div>
                         @endif
-                        <form class="form-horizontal" method="POST" action="{{url('/admin/update_users/'.$user->id)}}" enctype="multipart/form-data">          
-                            @csrf <!-- to make form active -->
-                            {{-- @method('PUT') --}}
+                        <form class="form-horizontal" method="POST" action="{{ route('admin.create_table.post') }}" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Name</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="user_name" type="text" value="{{$user->name}}">
+                                    <input class="form-control" name="table_name" type="text" placeholder="Enter name of table">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Email</label>
+                                <label class="control-label col-md-3">Number of Guest</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="user_email" type="email" value="{{$user->email}}">
+                                    <input class="form-control" name="table_guest" type="number" min="1" placeholder="Enter number of guest">
                                 </div>
                             </div>
                             {{-- <div class="form-group row">
-                                <label class="control-label col-md-3">Password</label>
+                                <label class="control-label col-md-3">Location</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="user_password" type="password" placeholder="Enter password">
+                                    <input class="form-control" name="table_location" type="text" placeholder="Enter location">
+                                    
                                 </div>
-                            </div> --}}
+                            </div>--}}
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Phone</label>
+                                <label class="control-label col-md-3">Location</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="user_phone" type="text" value="{{$user->phone}}">
+                                    <select class="form-control" name="table_location">
+                                        <option value="Inside">Inside</option>
+                                        <option value="Outside">Outside</option>
+                                        
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Address</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_address" value="{{$user->address}}">
-                                </div>
-                            </div>                           
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Image</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="user_image" type="file">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-3"></div>                   
-                                <div class="col-md-8">
-                                    @if($user->image != '' && file_exists(public_path().'/frontend/user_images/'.$user->image))
-                                    <img src="{{ url('/frontend/user_images/'.$user->image) }}" alt="" width="100" height="100">
-                                    @endif
-                                </div>
-                            </div>
+                            
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-5">
                                     </div>
                                     <div class="col-md-6">
                                         <button class="btn btn-primary" type="submit">
-                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes
+                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Create
                                         </button>
                                     </div>
                                 </div>
