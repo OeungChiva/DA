@@ -24,7 +24,6 @@ class CartController extends Controller
                 ->first();
             if ($existingCartItem) {
                 // Item already exists in the cart, increase the quantity
-                //$existingCartItem->quantity += 1;
                 $existingCartItem->quantity += $quantity != null && is_numeric($quantity) ? $quantity : 1;
                 $existingCartItem->save();
             } else {

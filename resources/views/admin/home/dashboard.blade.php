@@ -2,23 +2,15 @@
 <html lang="en">
 <head>
     @include('admin.css.style')
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Admin</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 </head>
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
@@ -38,139 +30,66 @@
             <p class="app-sidebar__user-designation">Admin</p>
             </div>
         </div>
-    <ul class="app-menu">
-        <li>
-            <a class="app-menu__item active" href="{{url('admin/dashboard')}}">
-                <i class="app-menu__icon fa fa-dashboard"></i>
-                <span class="app-menu__label">Dashboard</span>
-            </a>
-        </li>
-        {{-- <li class="treeview ">
-            <a class="app-menu__item " href="#" data-toggle="treeview">
-                <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Setting</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>  
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('admin/update_password')}}">
-                        <i class="icon fa fa-circle-o"></i> Update Password
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('admin/update_details')}}">
-                        <i class="icon fa fa-circle-o"></i> Update Details
-                    </a>
-                </li>
-            
-            </ul>
-        </li> --}}
-        <li class="treeview ">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Users</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>          
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/users')}}">
-                        <i class="icon fa fa-circle-o"></i> All Users
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_users')}}">
-                        <i class="icon fa fa-circle-o"></i> Add New User
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="treeview">
-            <a class="app-menu__item " href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-file-text"></i>
-                <span class="app-menu__label">Menus</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item " href="{{url('/admin/menu')}}">
-                    <i class="icon fa fa-circle-o"></i> Show Menus
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_menu')}}">
-                    <i class="icon fa fa-circle-o"></i> Add Menus
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="fa fa-book"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Items</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/item')}}">
-                <i class="icon fa fa-circle-o"></i> Show Items
+        <ul class="app-menu">
+          <li>
+              <a class="app-menu__item active" href="{{url('admin/dashboard')}}">
+                  <i class="app-menu__icon fa fa-dashboard"></i>
+                  <span class="app-menu__label">Dashboard</span>
               </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_menu')}}">
-                <i class="icon fa fa-circle-o"></i> Add Items
+          </li>
+          
+          
+          <li >
+              <a class="app-menu__item" href="{{url('/admin/users')}}" >
+                  <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
+                  <span class="app-menu__label">Users</span>         
               </a>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="fa fa-table"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Tables</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/table')}}">
-                <i class="icon fa fa-circle-o"></i> Show Tables
+              
+          </li>
+          <li>
+              <a class="app-menu__item " href="{{url('/admin/menu')}}" >
+                  <i class="fas fa-utensils"></i>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="app-menu__label">Menus</span>
+                  
               </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_table')}}">
-                <i class="icon fa fa-circle-o"></i> Add Tables
+              
+          </li>
+          <li >
+              <a class="app-menu__item" href="{{url('/admin/item')}}" >
+                  <i class="fas fa-hamburger"></i>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="app-menu__label">Items</span>
+                  
               </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a class="app-menu__item" href="{{url('admin/reservation')}}">
-            <i class="fa fa-table"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Reservations</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="fa fa-table"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Orders</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/order')}}">
-                <i class="icon fa fa-circle-o"></i> Show Orders
+              
+          </li>
+          <li >
+              <a class="app-menu__item " href="{{url('/admin/table')}}" >
+                  <i class="fas fa-chair"></i>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="app-menu__label">Tables</span>
+                  
               </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_order')}}">
-                <i class="icon fa fa-circle-o"></i> Add Orders
+              
+          </li>
+          <li>
+              <a class="app-menu__item " href="{{url('admin/booking')}}">
+                  <i class="fas fa-calendar-alt"></i>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="app-menu__label">Reservations</span>
               </a>
-            </li>
-          </ul>
-        </li>
-    </ul>
+          </li>
+          <li >
+              <a class="app-menu__item" href="{{url('/admin/order')}}" >
+                  <i class="fa fa-shopping-cart"></i>
+                  &nbsp;&nbsp;&nbsp;
+                  <span class="app-menu__label">Orders</span>
+                  
+              </a>
+              
+          </li>
+      </ul>
     </aside>
     <!-- Body-->
     <main class="app-content">
@@ -187,13 +106,14 @@
           <div class="col-md-6 col-lg-3">
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
               <div class="info">
-                <h4>Users</h4>
-                <p><b>{{ $users_count }}</b></p>
+                <h4>Booking</h4>
+                <p><b>{{ $bookings_count }}</b></p>
               </div>
             </div>
           </div>
+          
           <div class="col-md-6 col-lg-3">
-            <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
+            <div class="widget-small info coloured-icon"><i class="icon fas fa-utensils fa-3x"></i>
               <div class="info">
                 <h4>Menus</h4>
                 <p><b>{{ $menus_count }}</b></p>
@@ -201,7 +121,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+            <div class="widget-small warning coloured-icon"><i class="icon fas fa-hamburger fa-3x"></i>
               <div class="info">
                 <h4>Items</h4>
                 <p><b>{{ $items_count }}</b></p>
@@ -209,50 +129,44 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
+            <div class="widget-small danger coloured-icon"><i class="icon fas fa-chair fa-3x"></i>
               <div class="info">
-                <h4>Stars</h4>
-                <p><b>500</b></p>
+                <h4>Tables</h4>
+                <p><b>{{ $tables_count }}</b></p>
               </div>
             </div>
           </div>
         </div>
-      
+    
         <div class="row">
           <div class="col-md-6">
             <div class="tile">
               <h3 class="tile-title">Users Chart</h3>
               <div>
-                <canvas id="chart">
+                <canvas id="chart" style=" min-height: 200px;">
                 </canvas>
               </div>    
             </div>
           </div>
           <div class="col-md-6">
             <div class="tile">
+              <h3 class="tile-title">Orders Status Chart</h3>
+              <div>
+                <canvas id="orderStatusChart" style=" max-height: 185px;"></canvas>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5><span>Total Orders: {{ $orders_count }}</span></h5>
+                </div>
+                <div class="col-md-6">
+                  <h5><span>Total Revenue: {{ $completedOrdersTotalPrice }}$</span></h5>
+                </div>
+                
+              </div>
               
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="tile">
-              <h3 class="tile-title">Monthly Sales</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="tile">
-              <h3 class="tile-title">Support Requests</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-        
+        </div>     
       </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
@@ -267,6 +181,23 @@
         },
       });
     </script>
+    <script>
+      // Order Delivery Status Chart
+    var orderStatusData = {
+      labels: {!! json_encode($orderLabels) !!},
+      datasets: {!! json_encode($orderDataset) !!}
+    };
+
+    var orderStatusChartCtx = document.getElementById('orderStatusChart').getContext('2d');
+    var orderStatusChart = new Chart(orderStatusChartCtx, {
+      type: 'pie',
+      data: orderStatusData
+    });
+    // Order Delivery Status Chart
+
+  </script>
+    
+    
 
   </body>
   </html>

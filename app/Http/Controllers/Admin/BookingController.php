@@ -6,62 +6,82 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Table;
-
-
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
     //==================Show All Reservations=======================//
     public function booking() {
-        //$booking = Booking::all();
-        $booking = Booking::orderByDesc('id')->get();
+        $booking = Booking::with('table')->orderByDesc('id')->get();
         $count = 1;
-        return view('admin.home.reservation', compact('booking','count'));
+        return view('admin.home.booking.list_booking', compact('booking','count'));
     }
-
     //==================End Method=======================//
-
-    //==================Store Create Booking=======================//
-    public function create_booking(Request $request)
+     //==================Show Booking form=======================//
+    public function create_booking() {
+        $table = Table::where('status','Available')->get();
+        return view('admin.home.booking.create_booking', compact('table'));
+    }
+     //==================Store Create Booking =======================//
+    public function create_bookingPost(Request $request)
     {
-        // Validate and store the booking
-
-        // Check if the table has the desired number of available seats
-        $table = Table::findOrFail($request->table_id);
-        if ($table->guest == $request->guest) {
-            $table->status = 'Disable';
-            $table->save();
+        $data['name'] = $request->booking_name;
+        $data['email'] = $request->booking_email;
+        $data['phone'] = $request->booking_phone;
+        $data['guest'] = $request->booking_guest;
+        $table = Table::where('name', $request->booking_table)->firstOrFail();
+        $data['table_id'] = $table->id;
+        $data['date'] = $request->booking_date;
+        $data['time'] = $request->booking_time;
+        $data['message'] = $request->booking_message;
+        if ($request->booking_guest > $table->guest) {
+            return back()->with('error', 'Please choose a table based on the number of guests.');
         }
-
-        // Redirect or perform other actions
+        $requestDate = Carbon::parse($request->booking_date)->format('Y-m-d');
+        $existingBooking = Booking::where('table_id', $table->id)
+            ->where('date', $requestDate)
+            ->where('time', $request->booking_time)
+            ->first();
+        if ($existingBooking) {
+            return back()->with('error', 'This table is already booked for the selected date and time.');
+        }
+        Booking::create($data);
+        return redirect()->back()->with("success", "Booking created successfully!");
     }
 
-    //==================Store Update Booking=======================//
-    public function update_booking(Request $request, $id)
+    //==================Show Update Booking Form=======================//
+    public function update_booking($id)
     {
-        // Validate and update the booking
+        $booking = Booking::where('id',$id)->first();
+        
+        $table = Table::where('status','Available')->get();
+        return view('admin.home.booking.update_booking',compact('booking','table'));
+    }
 
-        // Get the original booking data
-        $originalBooking = Booking::findOrFail($id);
+    //==================Store Update Booking =======================//
 
-        // Check if the table has the desired number of available seats
-        $table = Table::findOrFail($originalBooking->table_id);
-
-        // If the number of guests is changing
-        if ($table->guest != $request->guest) {
-            // Check if the new number of guests matches any other bookings
-            $existingBooking = Booking::where('table_id', $originalBooking->table_id)
-                ->where('guest', $request->guest)
-                ->first();
-
-            if (!$existingBooking) {
-                // No other bookings with the new number of guests, update the table status
-                $table->status = 'Available';
-                $table->save();
-            }
-        }
-
-        // Redirect or perform other actions
+    public function update_bookingPost(Request $request, $id)
+    {
+        $booking = Booking::find($id);
+        $booking->name = $request->booking_name;
+        $booking->email = $request->booking_email;
+        $booking->phone = $request->booking_phone;
+        $booking->guest = $request->booking_guest;
+        $table = Table::where('name', $request->booking_table)->firstOrFail();
+        $booking->table_id = $table->id; 
+        $booking->date = $request->booking_date;
+        $booking->time = $request->booking_time;
+        $booking->message = $request->booking_message;
+        $booking->save();
+        return redirect()->back()->with("success", "Updated Booking successfully!");
+    }
+    //==================Delete Booking=======================//
+    public function delete_booking($id_booking)
+    {
+        $delete = Booking::where('id', $id_booking)->first();
+        $delete->delete();
+        return redirect('/admin/booking')
+        ->with("success","Booking deleted successfully!");
     }
 
 }

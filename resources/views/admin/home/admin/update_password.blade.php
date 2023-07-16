@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
   @include('admin.css.style')
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
@@ -23,140 +28,63 @@
       </div>
       <ul class="app-menu">
         <li>
-          <a class="app-menu__item" href="{{url('admin/dashboard')}}">
-            <i class="app-menu__icon fa fa-dashboard"></i>
-            <span class="app-menu__label">Dashboard</span>
-          </a>
+            <a class="app-menu__item" href="{{url('admin/dashboard')}}">
+                <i class="app-menu__icon fa fa-dashboard"></i>
+                <span class="app-menu__label">Dashboard</span>
+            </a>
         </li>
-      
-        {{-- <li class="treeview is-expanded">
-          <a class="app-menu__item " href="#" data-toggle="treeview">
-            <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Setting</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>  
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item active" href="{{url('admin/update_password')}}">
-                <i class="icon fa fa-circle-o"></i> 
-                Update Password
-              </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('admin/update_details')}}">
-                <i class="icon fa fa-circle-o"></i> 
-                Update Details
-              </a>
-            </li>
-      
-          </ul>
-        </li> --}}
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
-              <span class="app-menu__label">Users</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>          
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/users')}}">
-                <i class="icon fa fa-circle-o"></i> 
-                All Users
-              </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_users')}}">
-                <i class="icon fa fa-circle-o"></i> Add New User
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="app-menu__icon fa fa-file-text"></i>
-            <span class="app-menu__label">Menus</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/menu')}}">
-                <i class="icon fa fa-circle-o"></i> Show Menus
-              </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_menu')}}">
-                <i class="icon fa fa-circle-o"></i> Add Menus
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="fa fa-book"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Items</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/item')}}">
-                <i class="icon fa fa-circle-o"></i> Show Items
-              </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_item')}}">
-                <i class="icon fa fa-circle-o"></i> Add Items
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-            <i class="fa fa-table"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Tables</span>
-            <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a class="treeview-item" href="{{url('/admin/table')}}">
-                <i class="icon fa fa-circle-o"></i> Show Tables
-              </a>
-            </li>
-            <li>
-              <a class="treeview-item" href="{{url('/admin/create_table')}}">
-                <i class="icon fa fa-circle-o"></i> Add Tables
-              </a>
-            </li>
-          </ul>
+        
+        
+        <li >
+            <a class="app-menu__item" href="{{url('/admin/users')}}" >
+                <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
+                <span class="app-menu__label">Users</span>         
+            </a>
+            
         </li>
         <li>
-          <a class="app-menu__item" href="{{url('admin/reservation')}}">
-            <i class="fa fa-table"></i>
-            &nbsp;&nbsp;&nbsp;
-            <span class="app-menu__label">Reservations</span>
-          </a>
+            <a class="app-menu__item " href="{{url('/admin/menu')}}" >
+                <i class="fas fa-utensils"></i>
+                &nbsp;&nbsp;&nbsp;
+                <span class="app-menu__label">Menus</span>
+                
+            </a>
+            
         </li>
-        <li class="treeview">
-          <a class="app-menu__item" href="#" data-toggle="treeview">
-              <i class="fa fa-table"></i>
-              &nbsp;&nbsp;&nbsp;
-              <span class="app-menu__label">Orders</span>
-              <i class="treeview-indicator fa fa-angle-right"></i>
-          </a>
-          <ul class="treeview-menu">
-              <li>
-                  <a class="treeview-item" href="{{url('/admin/order')}}">
-                  <i class="icon fa fa-circle-o"></i> Show Orders
-                  </a>
-              </li>
-              <li>
-                  <a class="treeview-item" href="{{url('/admin/create_order')}}">
-                  <i class="icon fa fa-circle-o"></i> Add Orders
-                  </a>
-              </li>
-          </ul>
-      </li>
+        <li >
+            <a class="app-menu__item" href="{{url('/admin/item')}}" >
+                <i class="fas fa-hamburger"></i>
+                &nbsp;&nbsp;&nbsp;
+                <span class="app-menu__label">Items</span>
+                
+            </a>
+            
+        </li>
+        <li >
+            <a class="app-menu__item " href="{{url('/admin/table')}}" >
+                <i class="fas fa-chair"></i>
+                &nbsp;&nbsp;&nbsp;
+                <span class="app-menu__label">Tables</span>
+                
+            </a>
+            
+        </li>
+        <li>
+            <a class="app-menu__item " href="{{url('admin/booking')}}">
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp;&nbsp;&nbsp;
+                <span class="app-menu__label">Reservations</span>
+            </a>
+        </li>
+        <li >
+            <a class="app-menu__item" href="{{url('/admin/order')}}" >
+                <i class="fa fa-shopping-cart"></i>
+                &nbsp;&nbsp;&nbsp;
+                <span class="app-menu__label">Orders</span>
+                
+            </a>
+            
+        </li>
       </ul>
     </aside>
      <!-- Body-->

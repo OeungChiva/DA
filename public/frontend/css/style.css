@@ -37,6 +37,9 @@ body {
 .paginate-custom .page-item.active .page-link {
   color: white !important;
   background-color:  #ffbe33 !important;
+  display: flex;
+
+
 }
 .paginate-custom .page-item.disabled .page-link {
     
@@ -53,9 +56,69 @@ width: fit-content;
 
 }
 
+/*** Testimonial ***/
+.testimonial-carousel .owl-item .testimonial-item,
+.testimonial-carousel .owl-item.center .testimonial-item * {
+    transition: .5s;
+    /* background: var(--dark) !important;
+    color: var(--light) !important; */
+}
+
+.testimonial-carousel .owl-item.center .testimonial-item {
+    background: var(--warning) !important;
+    border-color: var(--warning) !important;
+}
+
+.testimonial-carousel .owl-item.center .testimonial-item * {
+    color: var(--light) !important;
+}
+
+.testimonial-carousel .owl-dots {
+    margin-top: 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.testimonial-carousel .owl-dot {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #f1cd15 !important;
+    border-radius: 15px;
+    transition: .5s;
+}
+
+.testimonial-carousel .owl-dot.active {
+    background: var(--warning);
+    border-color: var(--warning);
+}
+
+/*** Service ***/
+.service-item {
+  box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+  transition: .5s;
+}
+
+.service-item:hover {
+  background: var(--warning);
+}
+
+.service-item * {
+  transition: .5s;
+}
+
+.service-item:hover * {
+  color: var(--light) !important;
+}
+
+
+
 /* End Custom CSS here */
 .layout_padding {
-  padding: 150px 0;
+  padding: 100px 50px;
 }
 
 .layout_padding2 {
@@ -76,7 +139,7 @@ width: fit-content;
 
 .layout_padding-bottom {
   padding-bottom: 80px;
-  padding-top: 80px;
+  padding-top: 50px;
 
 
 }
@@ -166,9 +229,9 @@ a:focus {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
-     opacity: 1;
-     
+  object-fit: cover;
+  opacity: 1;
+  
 }
 
 .sub_page .hero_area {
@@ -198,8 +261,8 @@ a:focus {
 .header_section {
   padding: 10px 0;
   /* background-color: #0c0c0c !important; */
-  background-color: rgba(12, 12, 12, 0.9) !important;
-  z-index: 1;
+  background-color: rgba(12, 12, 12, 1) !important;
+  z-index: 9999;
   position: fixed;
   width: 100%;
   
@@ -742,13 +805,14 @@ a:focus {
 
 .book_section .heading_container {
   margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 .book_section .form_container .form-control {
   width: 100%;
   border: none;
   height: 50px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   padding-left: 25px;
   border: 1px solid #999;
   outline: none;
@@ -780,7 +844,7 @@ a:focus {
 }
 
 .book_section .form_container button {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   border: none;
   text-transform: uppercase;
   display: inline-block;

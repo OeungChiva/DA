@@ -57,12 +57,6 @@ class AdminController extends Controller
                 'admin_name' => 'required|alpha|max:255',
                 'admin_phone' => 'required|numeric',
             ];
-            // $customMessages = [
-            //     'admin_name.required' => 'required|alpha|max:255',
-            //     'admin_name.alpha' => 'Valid Name is Required',
-            //     'admin_phone.required' => 'required|alpha|max:255',
-            //     'admin_phone.alpha' => 'Valid Name is Required',
-            // ];
             $this->validate($request,$rules);
             //upload admin Image
             if($request->hasFile('admin_image')){

@@ -42,7 +42,6 @@ class ProfileController extends Controller
     }
     //====================End Method===============================//
     //====================Change Passwoed=====================//
-
     public function changePassword()
     {
         $id = Auth::user()->id;
@@ -53,7 +52,6 @@ class ProfileController extends Controller
     }
      //====================End Method===============================//
     //====================Change Passwoed Post=====================//
-
     public function updatePassword(Request $request)
     {
         # Validation

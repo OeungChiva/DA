@@ -11,26 +11,15 @@ use App\Models\Item;
 
 class ItemDetailController extends Controller
 {
-    // public function item_detail($itemId)
-    // {
-    //     $user_id = Auth::id();
-    //     $count = Cart::where('user_id', $user_id)->count();
-    //     // Fetch the item from the item database table based on $itemId
-    //     $item = Item::find($itemId);
-    //     return view('user.home.item_detail', compact('count', 'item'));
-    // }
+    //================Show Item Detail==================//
     public function item_detail($itemId)
     {
         $user_id = Auth::id();
         $count = Cart::where('user_id', $user_id)->count();
-        
         // Fetch the item from the item database table based on $itemId
         $item = Item::with('reviews')->find($itemId);
-        
         return view('user.home.item_detail', compact('count', 'item'));
     }
-
-
 
     //================AddcartPost==================//
     public function addcart(Request $request, $id)
@@ -45,7 +34,6 @@ class ItemDetailController extends Controller
                 ->first();
             if ($existingCartItem) {
                 // Item already exists in the cart, increase the quantity
-                //$existingCartItem->quantity += 1;
                 $existingCartItem->quantity += $quantity != null && is_numeric($quantity) ? $quantity : 1;
                 $existingCartItem->save();
             } else {

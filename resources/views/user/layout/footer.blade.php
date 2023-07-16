@@ -67,7 +67,7 @@
             Everyday
           </p>
           <p>
-            10.00 Am -10.00 Pm
+            9.00 Am - 10.00 Pm
           </p>
         </div>
       </div>

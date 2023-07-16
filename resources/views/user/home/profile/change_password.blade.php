@@ -46,6 +46,7 @@
         <!-- end header section -->
     </div>
     <div class="form-container mt-3">
+        <div class="card">
         <div class="card-header text-center">
         Change Password
         </div>
@@ -95,6 +96,7 @@
                     </div>
                 </form>
             </div>
+        </div>
     </div>
 
 

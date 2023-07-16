@@ -91,12 +91,12 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Orders</h1>          
+                <h1><i class="fa fa-th-list"></i> Update Orders</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item">Orders</li>
-                <li class="breadcrumb-item active"><a href="#">All Orders</a></li>
+                <li class="breadcrumb-item active"><a href="#">Update Orders</a></li>
             </ul>
         </div>
         <div class="row">
@@ -104,7 +104,7 @@
                 <div class="tile">
                     <div class="row">
                         <div class="col-sm-10">
-                            <h2>New Order</h2>
+                            <h2>Update Order</h2>
                         </div>
                         <div class="col-sm-2">
                             <a href="{{ url('admin/order') }}">
@@ -130,32 +130,32 @@
                     </div>
                     @endif
                     
-                    <form method="POST" action="{{ route('admin.create_order.post') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url('/admin/update_order/'.$order->id)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Name</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" name="order_name" type="text" placeholder="Enter name">
+                                        <input class="form-control" name="order_name" type="text" value="{{$order->name}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Email</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" name="order_email" type="text" placeholder="Enter email">
+                                        <input class="form-control" name="order_email" type="text" value="{{$order->email}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Phone</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" name="order_phone" type="text" placeholder="Enter phone">
+                                        <input class="form-control" name="order_phone" type="text" value="{{$order->phone}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Address</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" name="order_address" type="text" placeholder="Enter address">
+                                        <input class="form-control" name="order_address" type="text" value="{{$order->address}}">
                                     </div>
                                 </div>
                                 
@@ -163,20 +163,20 @@
                             <div class="col-lg-6">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Item</label>
-
                                     <div class="col-md-8">
                                         <select class="form-control" name="order_item" required="">
-                                            
-                                            @foreach($item as $item)
-                                            <option value="{{$item->title}}">{{$item->title}}</option>
+                                            <option value="{{ $order->orderItems->first()->item_title }}" selected="">{{ $order->orderItems->first()->item_title }}</option>
+                                            @foreach($items as $item)
+                                                <option value="{{ $item->title }}">{{ $item->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Quantity</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" name="order_quantity" type="number" placeholder="Enter quantity">
+                                        <input class="form-control" name="order_quantity" type="number" value="{{$order->orderItems->first()->quantity}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -184,8 +184,11 @@
                                     <div class="col-md-8">
                                         <select class="form-control" name="order_payment" required="">
                                             
-                                            <option value="Cash">Cash</option>
-                                            <option value="Paid">Paid</option>
+                                            
+                                                <option value="Cash" {{ $order->payment_status == 'Cash' ? 'selected' : '' }}>Cash</option>
+                                                <option value="Paid" {{ $order->payment_status == 'Paid' ? 'selected' : '' }}>Paid</option>
+                                                
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -194,18 +197,15 @@
                             </div>
                             <div class="tile-footer text-center">
                                 <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-fw fa-lg fa-check-circle"></i>Create
+                                    <i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                 </button>
                             </div>
-
                         </div>
                     </form>              
                 </div>
             </div>
             </div>
         </div>
-            
-
             
     </main>
     <!-- Essential javascripts for application to work-->

@@ -230,10 +230,19 @@
                       {{$data->description}}
                     </p> --}}
                     <div class="options">
-                      <h4 class="item_price">
+                      {{-- <h4 class="item_price">
                         ${{$data->price}}
-                      </h4>
-                      
+                      </h4> --}}
+                      <div >
+                        <div >
+                          <h5 class="item_price">
+                            ${{$data->price}}
+                          </h5>
+                        </div>
+                        <div class="text-center">
+                          <span> {{ $data->orderItems->count() }} sold</span>
+                        </div>
+                      </div>
                         <div class="stars-and-reviews">
                           <div class="stars">
                             @php

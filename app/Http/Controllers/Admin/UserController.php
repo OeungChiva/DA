@@ -25,7 +25,6 @@ class UserController extends Controller
                 'users'
             )
         );
-        // return view('admin.home.user');
     }
     //==================Show Create Users Form=======================//
     public function create_user() {
@@ -47,7 +46,6 @@ class UserController extends Controller
                 $data['image'] = $filename;
             }
             User::create($data);
-            //return redirect('/admin/users')->with('success', 'User Created !');
             return redirect()->back()->with("success","User Created success!");
         
     }        
@@ -58,41 +56,9 @@ class UserController extends Controller
     {
         $user = User::where('id',$id)->first();
         return view('admin.home.users.update_users',['user'=>$user]);
-
     }
     //=====================End Method==========================//
-
-
     //==================Store Update Users =======================//
-
-    // public function updatePost(Request $request, $id_user)
-    // {
-
-    //     $update_user = User::where('id', $id_user)->first();
-    //     $img_user = $update_user->user_image;
-
-    //     $update_user->name = $request->input('user_name');
-    //     $update_user->email = $request->input('user_email');
-    //     $update_user->phone = $request->input('user_phone');
-    //     $update_user->address = $request->input('user_address');
-
-    //     if ($request->hasFile('user_image')) {
-    //         $img_path = 'public/frontend/user_images/' . $img_user;
-    //         if (File::exists($img_path)) {
-    //             File::delete($img_path);
-    //         }
-    //         $destination_path = 'public/frontend/user_images/';
-    //         $image = $request->file('user_image');
-    //         $image_name = $image->getClientOriginalName();
-    //         $image->storeAs($destination_path, $image_name);
-
-    //         $update_user['user_image'] = $image_name;
-    //     }
-
-    //     $update_user->update();
-
-    //     return redirect('/admin/users')->with("success","User updated successfully!");
-    // }
     public function update_userPost(Request $request, $id)
     {
         $user = User::find($id);
@@ -110,7 +76,6 @@ class UserController extends Controller
         return redirect()->back()->with("success","Updated User successfully!");
     }
     //=====================End Method==========================//
-
 
     //==================Delete Users=======================//
     public function delete($id_user)

@@ -4,52 +4,39 @@
     <base href="/public">
   @include('user.css.style')
   <style>
-    
-    /* .row{
-      width: 90%;
-      margin-left: 5%;
-    }
-    .custom-input {
-      width: 30%;
-      margin-left: 35%;
-    } */
     /* rating */
-.rating-css div {
-    color: #ffe400;
-    font-size: 30px;
-    font-family: sans-serif;
-    font-weight: 800;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 20px 0;
-  }
-  .rating-css input {
-    display: none;
-  }
-  .rating-css input + label {
-    font-size: 40px;
-    text-shadow: 1px 1px 0 #8f8420;
-    cursor: pointer;
-  }
-  .rating-css input:checked + label ~ label {
-    color: #b4afaf;
-  }
-  .rating-css label:active {
-    transform: scale(0.8);
-    transition: 0.3s ease;
-  }
-  .padding{
-  padding-top: 100px;
-}
-
+    .rating-css div {
+        color: #ffe400;
+        font-size: 30px;
+        font-family: sans-serif;
+        font-weight: 800;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 20px 0;
+      }
+      .rating-css input {
+        display: none;
+      }
+      .rating-css input + label {
+        font-size: 40px;
+        text-shadow: 1px 1px 0 #8f8420;
+        cursor: pointer;
+      }
+      .rating-css input:checked + label ~ label {
+        color: #b4afaf;
+      }
+      .rating-css label:active {
+        transform: scale(0.8);
+        transition: 0.3s ease;
+      }
+      .padding{
+      padding-top: 100px;
+    }
 /* End of Star Rating */
-
-
 
   </style>
 </head>
 <body class="sub_page">
-
   <div class="hero_area">
     <div class="bg-box">
       <img src="frontend/images/Prohok-Ktis.jpg" alt="">
@@ -89,13 +76,6 @@
                 <strong>{{ $orderItem->items->title }}</strong>
               </div>
             </div>
-          
-            {{-- <div class="col-7">
-              
-              <div class="d-flex align-items-center">
-                <strong>{{ $orderItem->items->title }}</strong>
-              </div>
-            </div> --}}
           </div>
         </div>
         <div class="col-6">
@@ -127,17 +107,8 @@
         <button type="submit" class="btn btn-primary" id="submit">SUBMIT</button>
       </div>
     </form>
-    
   </div>
-  
-  
-  
-
-
-
-
-
- <!-- end about section -->
+<!-- end about section -->
   @include('user.layout.footer')
   <!-- footer section -->
   @include('user.js.script')

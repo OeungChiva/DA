@@ -204,12 +204,12 @@
           <img src="{{url('frontend/images/202310060639Fish-Amok.jpg')}}" alt="" width="" height="">
         </div>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-7 p-5">
         <div class="detail-box">
           <div class="heading_container text-center">
-            <h3>
+            <h2>
               We Are Khmer Foods
-            </h3>
+            </h2>
           </div>
           <!-- Service Start -->
           <div class="container-xxl py-5">

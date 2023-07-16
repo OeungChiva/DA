@@ -3,73 +3,54 @@
 <head>
     <base href="/public">
     @include('user.css.style')
-    
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> --}}
-<style>
-    
+    <style>
     .modal-body {
-    background-color: #fff;
-    border-color: #fff;
-
-}
-
-
-.close {
-    color: #000;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: #000;
-}
-
-
-.theme-color{
-
-    color: #004cb9;
-}
-hr.new1 {
-    border-top: 2px dashed #fff;
-    margin: 0.4rem 0;
-}
-
-
-.btn-primary {
-    color: #fff;
-    background-color: #004cb9;
-    border-color: #004cb9;
-    padding: 12px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius: 1px;
-    font-size: 17px;
-}
-
-
-.btn-primary:hover {
-    color: #fff;
-    background-color: #004cb9;
-    border-color: #004cb9;
-    padding: 12px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius: 1px;
-    font-size: 17px;
-}
-
+        background-color: #fff;
+        border-color: #fff;
+    }
+    .close {
+        color: #000;
+        cursor: pointer;
+    }
+    .close:hover {
+        color: #000;
+    }
+    .theme-color{
+        color: #004cb9;
+    }
+    hr.new1 {
+        border-top: 2px dashed #fff;
+        margin: 0.4rem 0;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #004cb9;
+        border-color: #004cb9;
+        padding: 12px;
+        padding-right: 30px;
+        padding-left: 30px;
+        border-radius: 1px;
+        font-size: 17px;
+    }
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #004cb9;
+        border-color: #004cb9;
+        padding: 12px;
+        padding-right: 30px;
+        padding-left: 30px;
+        border-radius: 1px;
+        font-size: 17px;
+    }
 </style>
 </head>
 <body class="sub_page">
-
 <div class="hero_area">
     <div class="bg-box">
         <img src="frontend/images/hero-bg.jpg" alt="">
     </div>
     <!-- header section strats -->
     {{-- @include('user.layout.header') --}}
-    
     <!-- header section strats -->
     <header class="header_section">
         <div class="container">
@@ -82,7 +63,6 @@ hr.new1 {
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class=""> </span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  mx-auto ">
                 <li class="nav-item ">
@@ -207,10 +187,6 @@ hr.new1 {
     <!-- end header section -->
 </div>
 <!-- about section -->
-
-{{-- <button type="button" class="btn btn-primary launch" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-info"></i> Get information
-</button> --}}
-{{-- <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"> --}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body ">
@@ -218,56 +194,31 @@ hr.new1 {
                     <a href="{{url('/')}}">
                     <i class="fa fa-close close" data-dismiss="modal"></i> 
                     </a>
-                </div>
-                
+                </div>     
                 <div class="px-4 py-5">
-
                     <h5 class="text-uppercase">{{ $orderData->name }}</h5>
-
-
-
                 <h4 class="mt-5 theme-color mb-5">Thanks for your order</h4>
-
                 <span class="theme-color">Payment Summary</span>
                 <div class="mb-3">
                     <hr class="new1">
                 </div>
-
                 <div class="d-flex justify-content-between">
                     <span class="font-weight-bold">{{ $orderData->item_title }}(Qty:{{ $orderData->quantity }})</span>
                     <span class="text-muted">${{ $orderData->price }}</span>
                 </div>
-
                 <div class="d-flex justify-content-between">
                     <small>Shipping</small>
                     <small>$0</small>
                 </div>
-
-
                 <div class="d-flex justify-content-between">
                     <small>Tax</small>
                     <small>$0</small>
-                </div>
-                
+                </div>            
                 <div class="d-flex justify-content-between mt-3">
                     <span class="font-weight-bold">Total</span>
                     <span class="font-weight-bold theme-color">${{ $orderData->price }}</span>
                 </div>  
-
-
-
-                {{-- <div class="text-center mt-5">
-
-
-                    <button class="btn btn-primary">Track your order</button>
-                    
-
-
-                </div>                    --}}
-
                 </div>
-
-
             </div>
         </div>
     </div>

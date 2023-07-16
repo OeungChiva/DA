@@ -61,7 +61,7 @@
                 
             </li>
             <li >
-                <a class="app-menu__item active" href="{{url('/admin/table')}}" >
+                <a class="app-menu__item " href="{{url('/admin/table')}}" >
                     <i class="fas fa-chair"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Tables</span>
@@ -70,7 +70,7 @@
                 
             </li>
             <li>
-                <a class="app-menu__item " href="{{url('admin/booking')}}">
+                <a class="app-menu__item active" href="{{url('admin/booking')}}">
                     <i class="fas fa-calendar-alt"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Reservations</span>
@@ -91,12 +91,12 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Create Table</h1>          
+                <h1><i class="fa fa-th-list"></i> Update Bookings</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active"><a href="#">Create Tables</a></li>
+                <li class="breadcrumb-item">Bookings</li>
+                <li class="breadcrumb-item active"><a href="#">Update Bookings</a></li>
             </ul>
         </div>
         <div class="row">
@@ -106,10 +106,10 @@
                     {{-- <h3 class="tile-title">Create New User</h3>            --}}
                     <div class="row">
                         <div class="col-sm-10">
-                            <h2>Create New Table</h2>
+                            <h2>Update Booking</h2>
                         </div>
                         <div class="col-sm-2">
-                            <a href="{{ url('admin/table') }}">
+                            <a href="{{ route('admin.booking') }}">
                                 <button type="button" class="btn btn-info add-new">
                                     <i class="fa fa-arrow-left"></i>
                                     Back
@@ -130,47 +130,63 @@
                             {{session('success')}}
                         </div>
                         @endif
-                        <form class="form-horizontal" method="POST" action="{{ route('admin.create_table.post') }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" method="POST" action="{{url('/admin/update_booking/'.$booking->id)}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Name</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="table_name" type="text" placeholder="Enter name of table">
+                                    <input class="form-control" name="booking_name" type="text" value="{{$booking->name}}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Number of Guest</label>
+                                <label class="control-label col-md-3">Email</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="table_guest" type="number" min="1" placeholder="Enter number of guest">
+                                    <input class="form-control" name="booking_email" type="email" value="{{$booking->email}}">
                                 </div>
                             </div>
-                            {{-- <div class="form-group row">
-                                <label class="control-label col-md-3">Location</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="table_location" type="text" placeholder="Enter location">
-                                    
-                                </div>
-                            </div>--}}
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Location</label>
+                                <label class="control-label col-md-3">Phone Number</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="table_location">
-                                        <option value="Inside">Inside</option>
-                                        <option value="Outside">Outside</option>
+                                    <input class="form-control" name="booking_phone" type="text" value="{{$booking->phone}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Date</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="booking_date" type="date" value="{{$booking->date}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Time</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="booking_time" type="time" value="{{$booking->time}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Guest Number</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="booking_guest" type="number" value="{{$booking->guest}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Table</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="booking_table" required="">
                                         
+                                        <option value="{{$booking->table->name}}" selected="">{{$booking->table->name}} ({{$booking->table->guest}} Guests {{$booking->table->location}}) </option>
+                                        @foreach($table as $row)
+                                        <option value="{{$row->name}}">{{$row->name}} ({{$row->guest}} Guests {{$row->location}})</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Status</label>
+                                <label class="control-label col-md-3">Message</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="table_location">
-                                        <option value="Inside">Available</option>
-                                        <option value="Outside">Unavailable</option>
-                                        
-                                    </select>
+                                    <input class="form-control" name="booking_message" type="text" value="{{$booking->message}}">
                                 </div>
-                            </div>
+                            </div>                       
                             
                             <div class="tile-footer">
                                 <div class="row">
@@ -178,16 +194,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <button class="btn btn-primary" type="submit">
-                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Create
+                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    </div>                   
+                    </div>                  
                 </div>
             </div>
-            <div class="col-md-2"></div>           
+            <div class="col-md-2"></div>        
         </div>        
     </main>
     <!-- Essential javascripts for application to work-->

@@ -71,8 +71,8 @@ class AuthUserController extends Controller
     }
     //=====================End Method======================//
 
-    public function signup()
-    {
-        return view('user.auth.signup');
-    }
+    // public function signup()
+    // {
+    //     return view('user.auth.signup');
+    // }
 }

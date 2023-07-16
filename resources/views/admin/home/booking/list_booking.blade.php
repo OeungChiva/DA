@@ -43,7 +43,7 @@
                 
             </li>
             <li>
-                <a class="app-menu__item active" href="{{url('/admin/menu')}}" >
+                <a class="app-menu__item " href="{{url('/admin/menu')}}" >
                     <i class="fas fa-utensils"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Menus</span>
@@ -70,7 +70,7 @@
                 
             </li>
             <li>
-                <a class="app-menu__item " href="{{url('admin/booking')}}">
+                <a class="app-menu__item active" href="{{url('admin/booking')}}">
                     <i class="fas fa-calendar-alt"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Reservations</span>
@@ -91,12 +91,12 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Menus</h1>          
+                <h1><i class="fa fa-th-list"></i> Reservations</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Menus</li>
-                <li class="breadcrumb-item active"><a href="#">All Menus</a></li>
+                <li class="breadcrumb-item">Reservations</li>
+                <li class="breadcrumb-item active"><a href="#">All Reservations</a></li>
             </ul>
         </div>
         <div class="row">
@@ -112,11 +112,11 @@
                     <div class="table-title">
                         <div class="row">                
                             <div class="col-sm-10">
-                                <h2>All Menus</h2>
+                                <h2>All Reservations</h2>
                             </div>
                             <div class="col-sm-2">
-                                <a href="{{ route('admin.create_menu') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                                <a href="{{ route('admin.create_booking') }}">
+                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New </button>
                                 </a>
                             </div>
                         </div><br>
@@ -126,24 +126,34 @@
                             <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Created</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Guest</th>
+                            <th>Table</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Message</th>
                             <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($menu as $row)
+                            @foreach($booking as $row)
                             <tr>
                                 <td>{{$count++}}</td>                              
-                                <td>{{$row->name_menu}}</td>
-                                <td>{{$row->description}}</td>                             
-                                <td>{{$row->created_at}}</td>
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->email}}</td>
+                                <td>{{$row->phone}}</td>
+                                <td>{{$row->guest}}</td> 
+                                <td>{{$row->table->name}} ({{$row->table->guest}} Guests )</td> 
+                                <td>{{$row->date}}</td>
+                                <td>{{$row->time}}</td>
+                                <td>{{$row->message}}</td>
                                 <td class="text-center">
-                                    <a class="badge badge-warning edit" href="{{url('/admin/update_menu/'.$row->id)}}" title="Update" data-toggle="tooltip">
+                                    <a class="badge badge-warning edit" href="{{url('/admin/update_booking/'.$row->id)}}" title="Update" data-toggle="tooltip">
                                     <i class="fa fa-edit"></i>
                                     </a>                        
                                     &nbsp;
-                                    <a class="badge badge-danger delete" href="{{url('/admin/menu/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                    <a class="badge badge-danger delete" href="{{url('/admin/booking/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                     <i class="fa fa-trash "></i>
                                     </a>
                                     {{-- &nbsp;
@@ -158,10 +168,9 @@
                     </div>
                 </div>                
             </div>
-        </div>
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
-    
+
 </body>
 </html>

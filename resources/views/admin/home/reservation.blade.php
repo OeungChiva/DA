@@ -2,17 +2,6 @@
 <html lang="en">
 <head>
     @include('admin.css.style')
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Data Table - Vali Admin</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
@@ -44,26 +33,6 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
-        {{-- <li class="treeview ">
-            <a class="app-menu__item " href="#" data-toggle="treeview">
-                <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Setting</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>  
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('admin/update_password')}}">
-                        <i class="icon fa fa-circle-o"></i> Update Password
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('admin/update_details')}}">
-                        <i class="icon fa fa-circle-o"></i> Update Details
-                    </a>
-                </li>
-            
-            </ul>
-        </li> --}}
         <li class="treeview ">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -200,7 +169,7 @@
                                 <h2>All Reservations</h2>
                             </div>
                             <div class="col-sm-2">
-                                <a href="{{ route('admin.create_item') }}">
+                                <a href="{{ route('admin.create_booking') }}">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New Item</button>
                                 </a>
                             </div>
@@ -214,6 +183,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Guest</th>
+                            <th>Table</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th class="text-center">Action</th>
@@ -227,6 +197,7 @@
                                 <td>{{$row->email}}</td>
                                 <td>{{$row->phone}}</td>
                                 <td>{{$row->guest}}</td> 
+                                <td>{{$row->table->name}} ({{$row->table->location}})</td> 
                                 <td>{{$row->date}}</td>
                                 <td>{{$row->time}}</td>
                                 <td class="text-center">
@@ -252,6 +223,6 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
-    
+
 </body>
 </html>

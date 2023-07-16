@@ -13,6 +13,8 @@ class Booking extends Model
         'email',
         'phone',
         'guest',
+        'user_id',
+        'table_id',
         'date',
         'time',
         'message',
@@ -25,6 +27,7 @@ class Booking extends Model
 
     public function table()
     {
-        return $this->belongsTo(Table::class);
+        return $this->belongsTo(Table::class, 'table_id');
     }
+
 }

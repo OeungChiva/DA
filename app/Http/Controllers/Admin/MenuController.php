@@ -19,16 +19,13 @@ class MenuController extends Controller
                 'menu'
             )
         );
-        //return view('admin.home.menu.list_menu');
     }
-
     //==================End Method=======================//
 
     //==================Show Create Menu Form=======================//
     public function create_menu() {
         return view('admin.home.menu.create_menu');
     }
-
     //==================End Method=======================//
 
     //==================Store Create Menu =======================//
@@ -42,7 +39,7 @@ class MenuController extends Controller
     }
 
     //==================End Method=======================//
-    //==================Store Create Menu =======================//
+    //==================Show Update Menu Form =======================//
 
     public function update_menu($id)
     {
@@ -61,7 +58,6 @@ class MenuController extends Controller
         return redirect()->back()->with("success","Updated Menu successfully!");
     }
     //==================End Method=======================//
-
 
     //==================Delete Menu=======================//
     public function delete_menu($id_menu) {

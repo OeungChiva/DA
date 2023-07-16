@@ -7,6 +7,9 @@
     background: #f7f7ff;
     margin-top:20px;
     } */
+    .padding{
+        padding-top: 100px;
+    }
 
   </style>
 </head>
@@ -21,7 +24,7 @@
         <!-- end header section -->
     </div>
 
-    <div class="container">
+    <div class="container padding">
             <div class="main-body">
                 <!-- Breadcrumb -->
                 {{-- <ul class="app-breadcrumb breadcrumb">

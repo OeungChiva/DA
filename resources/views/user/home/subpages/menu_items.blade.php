@@ -113,9 +113,6 @@
                 <span class="cart_count badge bg-warning text-white ms-1 rounded-pill">{{$count}}</span>
                 @endif
               </a>
-              {{-- <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a> --}}
               @auth
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   @if(!empty(Auth::guard('web')->user()->image))
@@ -134,7 +131,6 @@
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>
                 <a class="dropdown-item" href="{{url('/change_password')}}"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a> 
                 <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
-
                   <form action="{{route('user_logout')}}" method="POST">
                     @csrf
                     <a class="dropdown-item" href="{{ route('user_logout') }}"
@@ -186,11 +182,6 @@
           @endforeach
         </ul>
       </div>
-
-      
-      
-      
-
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)
@@ -214,9 +205,19 @@
                       {{$data->description}}
                     </p> --}}
                     <div class="options">
-                      <h4 class="item_price">
+                      {{-- <h4 class="item_price">
                         ${{$data->price}}
-                      </h4>
+                      </h4> --}}
+                      <div >
+                        <div >
+                          <h5 class="item_price">
+                            ${{$data->price}}
+                          </h5>
+                        </div>
+                        <div class="text-center">
+                          <span> {{ $data->orderItems->count() }} sold</span>
+                        </div>
+                      </div>
                       <div class="stars-and-reviews">
                         <div class="stars">
                           @php

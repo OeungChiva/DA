@@ -27,7 +27,6 @@ use Stripe\Charge;
 class PaymentController extends Controller
 {
     //================Checkout==================//
-
     public function checkout()
     {
         $user_id = Auth::id();
@@ -42,7 +41,7 @@ class PaymentController extends Controller
         }
         return view('user.home.checkout',compact('count','totalPrice'));
     }
-    //================Checkout==================//
+    //================CheckoutPost==================//
 
     public function checkoutPost(Request $request)
     {
@@ -50,29 +49,23 @@ class PaymentController extends Controller
         $count = Cart::where('user_id', $user_id)->count();
         $cartItems = Cart::where('user_id', $user_id)->get();
         $totalPrice = 0;
-
         foreach ($cartItems as $cartItem) {
             $item = Item::find($cartItem->item_id);
             // Calculate the total price for each item by multiplying the item's price with the quantity in the cart
             $itemTotalPrice = $item->price * $cartItem->quantity;
             $totalPrice += $itemTotalPrice;
         }
-
         $paymentMethod = $request->input('payment_method');
-
         if ($paymentMethod === 'card_payment') {
             $user = Auth::user();
             $userid = $user->id;
-
             // Retrieve data from the form
             $order_name = $request->input('order_name');
             $order_phone = $request->input('order_phone');
             $order_email = $request->input('order_email');
             $order_address = $request->input('order_address');
-
             // Generate the order_id for the entire order
             $order_id = now()->format('YmdHis') . Str::random(4);
-
             $order = new Order;
             $order->name = $order_name;
             $order->email = $order_email;
@@ -101,16 +94,13 @@ class PaymentController extends Controller
             $paymentStatus = 'Cash';
             $user = Auth::user();
             $userid = $user->id;
-
             // Retrieve data from the form
             $order_name = $request->input('order_name');
             $order_phone = $request->input('order_phone');
             $order_email = $request->input('order_email');
             $order_address = $request->input('order_address');
-
             // Generate the order_id for the entire order
             $order_id = now()->format('YmdHis') . Str::random(4);
-
             $order = new Order;
             $order->name = $order_name;
             $order->email = $order_email;
@@ -124,7 +114,6 @@ class PaymentController extends Controller
 
             foreach ($cartItems as $cartItem) {
                 $item = Item::find($cartItem->item_id);
-            
                 $order->orderItems()->create([
                     'item_id' => $cartItem->item_id,
                     'quantity' => $cartItem->quantity,
@@ -135,13 +124,12 @@ class PaymentController extends Controller
                 $cartItem->delete();
             }
             Alert::success('Order successful!', 'Thanks for your order!');
+            
             return redirect()->back();
         }
     }
 
-
-    //================AddcartPost==================//
-
+    //================Show Card Form==================//
     public function card(Request $request)
     {
         $user_id = Auth::id();
@@ -157,7 +145,7 @@ class PaymentController extends Controller
         return view('user.home.payment.card', compact('count', 'totalPrice'));
     }
 
-    //================AddcartPost==================//
+    //================Store Card==================//
     public function cardPost(Request $request)
     {
         // dd($request->all());

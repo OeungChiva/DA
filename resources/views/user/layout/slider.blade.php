@@ -14,7 +14,7 @@
                     Khmer Foods is a high-end restaurant which boasts a ‘Living Cambodian Cuisine’. By researching, practicing and promoting Cambodian cuisine, we aim to safeguard the nation’s food heritage for years to come.
                   </p>
                   <div class="btn-box">
-                    <a href="" class="btn1">
+                    <a href="{{"/menu"}}" class="btn1">
                       Order Now
                     </a>
                   </div>

@@ -2,17 +2,6 @@
 <html lang="en">
 <head>
     @include('admin.css.style')
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Data Table - Vali Admin</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
@@ -37,139 +26,66 @@
             <p class="app-sidebar__user-designation">Admin</p>
             </div>
         </div>
-    <ul class="app-menu">
-        <li>
-            <a class="app-menu__item" href="{{url('admin/dashboard')}}">
-                <i class="app-menu__icon fa fa-dashboard"></i>
-                <span class="app-menu__label">Dashboard</span>
-            </a>
-        </li>
-        {{-- <li class="treeview ">
-            <a class="app-menu__item " href="#" data-toggle="treeview">
-                <i class="fa fa-cog fa-lg"></i> &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Setting</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>  
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('admin/update_password')}}">
-                        <i class="icon fa fa-circle-o"></i> Update Password
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('admin/update_details')}}">
-                        <i class="icon fa fa-circle-o"></i> Update Details
-                    </a>
-                </li>
+        <ul class="app-menu">
+            <li>
+                <a class="app-menu__item" href="{{url('admin/dashboard')}}">
+                    <i class="app-menu__icon fa fa-dashboard"></i>
+                    <span class="app-menu__label">Dashboard</span>
+                </a>
+            </li>
             
-            </ul>
-        </li> --}}
-        <li class="treeview ">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Users</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>          
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/users')}}">
-                        <i class="icon fa fa-circle-o"></i> All Users
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_users')}}">
-                        <i class="icon fa fa-circle-o"></i> Add New User
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="treeview">
-            <a class="app-menu__item " href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-file-text"></i>
-                <span class="app-menu__label">Menus</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/menu')}}">
-                    <i class="icon fa fa-circle-o"></i> Show Menus
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_menu')}}">
-                    <i class="icon fa fa-circle-o"></i> Add Menus
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="treeview is-expanded">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="fa fa-book"></i>
-                &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Items</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item active" href="{{url('/admin/item')}}">
-                    <i class="icon fa fa-circle-o"></i> Show Items
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_item')}}">
-                    <i class="icon fa fa-circle-o"></i> Add Items
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="fa fa-table"></i>
-                &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Tables</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/table')}}">
-                    <i class="icon fa fa-circle-o"></i> Show Tables
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_table')}}">
-                    <i class="icon fa fa-circle-o"></i> Add Tables
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a class="app-menu__item" href="{{url('admin/reservation')}}">
-                <i class="fa fa-table"></i>
-                &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Reservations</span>
-            </a>
-        </li>
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="fa fa-table"></i>
-                &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Orders</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/order')}}">
-                    <i class="icon fa fa-circle-o"></i> Show Orders
-                    </a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{url('/admin/create_order')}}">
-                    <i class="icon fa fa-circle-o"></i> Add Orders
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
+            
+            <li >
+                <a class="app-menu__item" href="{{url('/admin/users')}}" >
+                    <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Users</span>         
+                </a>
+                
+            </li>
+            <li>
+                <a class="app-menu__item " href="{{url('/admin/menu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Menus</span>
+                    
+                </a>
+                
+            </li>
+            <li >
+                <a class="app-menu__item active" href="{{url('/admin/item')}}" >
+                    <i class="fas fa-hamburger"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Items</span>
+                    
+                </a>
+                
+            </li>
+            <li >
+                <a class="app-menu__item " href="{{url('/admin/table')}}" >
+                    <i class="fas fa-chair"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Tables</span>
+                    
+                </a>
+                
+            </li>
+            <li>
+                <a class="app-menu__item " href="{{url('admin/booking')}}">
+                    <i class="fas fa-calendar-alt"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Reservations</span>
+                </a>
+            </li>
+            <li >
+                <a class="app-menu__item" href="{{url('/admin/order')}}" >
+                    <i class="fa fa-shopping-cart"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Orders</span>
+                    
+                </a>
+                
+            </li>
+        </ul>
     </aside>
     <!-- Body-->
     <main class="app-content">
@@ -200,7 +116,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <a href="{{ route('admin.create_item') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New Item</button>
+                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
                                 </a>
                             </div>
                         </div><br>
@@ -234,17 +150,17 @@
                                 </td>
                                 <td>{{$row->created_at}}</td>
                                 <td class="text-center">
-                                    <a class="edit text-warning" href="{{url('/admin/update_item/'.$row->id)}}" title="Update" data-toggle="tooltip">
+                                    <a class="badge badge-warning edit" href="{{url('/admin/update_item/'.$row->id)}}" title="Update" data-toggle="tooltip">
                                     <i class="fa fa-edit"></i>
                                     </a>                        
                                     &nbsp;
-                                    <a class="delete text-danger" href="{{url('/admin/item/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                    <a class="badge badge-danger delete" href="{{url('/admin/item/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                     <i class="fa fa-trash "></i>
                                     </a>
-                                    &nbsp;
-                                    <a class="view text-success" title="View" data-toggle="tooltip">
+                                    {{-- &nbsp;
+                                    <a class="badge badge-success view" title="View" data-toggle="tooltip">
                                     <i class="fa fa-eye "></i>
-                                    </a>  
+                                    </a>   --}}
                                 </td>
                             </tr>
                             @endforeach() 

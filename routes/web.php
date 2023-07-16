@@ -10,7 +10,8 @@ use App\Http\Controllers\User\ItemDetailController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\User\ReviewController;
 
-
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View;
 
 use App\Http\Controllers\Admin\AuthAdminController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -122,6 +123,8 @@ Route::controller(ItemDetailController::class)->group(function () {
 Route::controller(OrderHistoryController::class)->middleware('authuser')->group(function () {
     Route::get('/order_history', 'order_history')->name('user.order_history');
     Route::get('/invoice/{orderId}', 'invoice')->name('user.invoice');
+    Route::get('/cancel/{id}', 'cancel')->name('user.cancel');
+
 });
 
 Route::controller(ReviewController::class)->middleware('authuser')->group(function () {
@@ -147,15 +150,12 @@ Route::controller(AuthAdminController::class)->group(function () {
     Route::get('/admin/logout', 'logout');
 });
 
-
-
 //================Admin Dashboard Route=========================//
 
 Route::controller(DashboardController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/dashboard', 'dashboard')->name('dashboard'); 
     //Route::get('/admin/dashboard', 'userChart')->name('admin.userChart'); 
     });
-
 
 //================Admin Management Route=========================//
 Route::controller(AdminController::class)->middleware('authadmin')->group(function () {
@@ -192,19 +192,29 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
     Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');   
 });
-//================Admin Items Management Route=========================//
+//================Admin Bookings Management Route=========================//
 Route::controller(BookingController::class)->middleware('authadmin')->group(function () {
-    Route::get('/admin/reservation', 'booking')->name('admin.booking');
+    Route::get('/admin/booking', 'booking')->name('admin.booking');
+    Route::get('/admin/create_booking', 'create_booking')->name('admin.create_booking');
+    Route::post('/admin/create_booking', 'create_bookingPost')->name('admin.create_booking.post');
+    Route::get('/admin/update_booking/{id}', 'update_booking')->name('admin.update_booking');
+    Route::post('/admin/update_booking/{id}', 'update_bookingPost')->name('admin.update_booking.post');
+    Route::get('/admin/booking/{id}', 'delete_booking')->name('admin.delete_booking');
+
+
 });
 
-//================Admin Items Management Route=========================//
+//================Admin Orders Management Route=========================//
 Route::controller(OrderController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/order', 'order')->name('admin.order');
+    Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
+    Route::post('/admin/create_order', 'create_orderPost')->name('admin.create_order.post');
+    Route::get('/admin/update_order/{id}', 'update_order')->name('admin.update_order');
+    Route::post('/admin/update_order/{id}', 'update_orderPost')->name('admin.update_order.post');
     Route::post('/admin/update-order-status', 'updateOrderStatus')->name('admin.updateOrderStatus');
-    //Route::get('/admin/invoice', 'invoice')->name('admin.invoice');
     Route::get('/admin/invoice/{id}', 'invoice')->name('admin.invoice');
     Route::get('/admin/order/{id}', 'delete_order')->name('admin.delete_order');   
-    Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
+    Route::get('/admin/invoice_pdf/{id}', 'invoice_pdf')->name('admin.invoice_pdf');
 
 });
 
@@ -217,8 +227,6 @@ Route::controller(TableController::class)->middleware('authadmin')->group(functi
     Route::post('/admin/update_table/{id}', 'update_tablePost')->name('admin.update_table.post');
     Route::get('/admin/table/{id}', 'delete_table')->name('admin.delete_table');   
 });
-
-
 
 
     
