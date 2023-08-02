@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Menu;
 
 class MenuController extends Controller
@@ -30,12 +31,17 @@ class MenuController extends Controller
 
     //==================Store Create Menu =======================//
     public function create_menuPost(Request $request) {
-        //return view('admin.home.users.create_users');
+        $request->validate([
+            'menu_name' => [
+                'required',
+                Rule::unique('menus', 'name_menu'),
+            ],
+            'menu_description' => 'required',
+        ]);
         $data['name_menu'] = $request -> menu_name;
         $data['description'] = $request -> menu_description;
-            Menu::create($data);
-            //return redirect('/admin/users')->with('success', 'User Created !');
-            return redirect()->back()->with("success","Menu Created success!");
+        Menu::create($data);
+        return redirect()->back()->with("success","Menu Created success!");
     }
 
     //==================End Method=======================//
@@ -51,6 +57,13 @@ class MenuController extends Controller
     //================== Store Update Menu=======================//
     public function update_menuPost(Request $request, $id)
     {
+        $request->validate([
+            'menu_name' => [
+                'required',
+                Rule::unique('menus', 'name_menu'),
+            ],
+            'menu_description' => 'required',
+        ]);
         $menu = Menu::find($id);
         $menu->name_menu=$request->menu_name;
         $menu->description=$request->menu_description;

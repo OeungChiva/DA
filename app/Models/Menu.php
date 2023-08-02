@@ -12,6 +12,13 @@ class Menu extends Model
         'name_menu',
         'description',
     ];
+    public static function rules()
+    {
+        return [
+            'name_menu' => 'required|unique:menus,name_menu',
+            'description' => 'required',
+        ];
+    }
     public function items()
     {
         return $this->hasMany(Item::class);

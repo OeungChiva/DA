@@ -133,6 +133,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Message</th>
+                            {{-- <th>Status</th> --}}
                             <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -148,6 +149,7 @@
                                 <td>{{$row->date}}</td>
                                 <td>{{$row->time}}</td>
                                 <td>{{$row->message}}</td>
+                                {{-- <td>{{$row->message}}</td> --}}
                                 <td class="text-center">
                                     <a class="badge badge-warning edit" href="{{url('/admin/update_booking/'.$row->id)}}" title="Update" data-toggle="tooltip">
                                     <i class="fa fa-edit"></i>

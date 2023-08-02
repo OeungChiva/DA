@@ -137,13 +137,18 @@
                                 <label class="control-label col-md-3">Name</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="menu_name" type="text" value="{{$menu->name_menu}}">
+                                    @error('menu_name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Description</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="menu_description" type="text" value="{{$menu->description}}">
-                                    {{-- <textarea class="form-control" rows="4" type="text" name="menu_description" value="{{$menu->description}}></textarea> --}}
+                                    @error('menu_description')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>                         
                             <div class="tile-footer">

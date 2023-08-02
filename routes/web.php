@@ -45,10 +45,12 @@ use App\Http\Controllers\Admin\TableController;
 //=======================================================================//
 //==============================User Route Here==========================//
 //=======================================================================//
+
+/*============= Home route ==================*/
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'home')->name('home');
-    
-});
+})->middleware('cache');
+
 /*============= User Auth route ==================*/
 Route::controller(AuthUserController::class)->group(function () {
     Route::get('/login', 'user_login')->name('user_login');
@@ -57,21 +59,15 @@ Route::controller(AuthUserController::class)->group(function () {
     Route::post('/register', 'registerPost')->name('register.post');
     Route::post('/logout', 'user_logout')->name('user_logout');
     Route::get('/signup', 'signup')->name('signup');
-
-});
+})->middleware('cache');
 
 //================Profile Details Route=========================//
 Route::controller(ProfileController::class)->middleware('authuser')->group(function () {
     Route::get('/profile', 'profile')->name('user.profile');
     Route::post('/profile', 'profilePost')->name('user_profile.post');
-    //Route::match(['get','post'],'/change_password', 'change_password')->name('user.change_password');
-
     Route::get('/change_password', 'changePassword')->name('user.change-password');
     Route::post('/change_password', 'updatePassword')->name('user.update-password');
-
-
-    
-});
+})->middleware('cache');
 
 //================Subpages Route=========================//
 Route::controller(HomeController::class)->group(function () {
@@ -81,24 +77,16 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/booking', 'booking')->name('user.book'); 
     Route::post('/booking', 'bookingPost')->name('user.bookingPost'); 
     Route::get('/search', 'search')->name('user.search'); 
+})->middleware('cache');
 
-
-});
 //================Cart Route=========================//
-
-// Route::controller(CartController::class)->group(function () {
-//     Route::post('/addcart/{id}', 'addcartPost')->name('user.addcartPost');
-//     Route::get('/cart', 'cart')->name('user.cart');
-//     Route::get('/cart/{id}', 'delete_cart')->name('user.delete_cart');
-//     Route::patch('/update_cart', 'update_cart')->name('user.update_cart');
-// });
-
 Route::controller(CartController::class)->middleware('authuser')->group(function () {
     Route::post('/addcart/{id}', 'addcartPost')->name('user.addcartPost');
     Route::get('/cart', 'cart')->name('user.cart');
     Route::get('/cart/{id}', 'delete_cart')->name('user.delete_cart');
     Route::patch('/update_cart', 'update_cart')->name('user.update_cart');
-});
+})->middleware('cache');
+
 //================Cart Route=========================//
 Route::controller(PaymentController::class)->middleware('authuser')->group(function () {
     Route::get('/card', 'card')->name('user.card');
@@ -106,38 +94,32 @@ Route::controller(PaymentController::class)->middleware('authuser')->group(funct
    // Route::get('/cash', 'cash')->name('user.cash');
     Route::get('/checkout', 'checkout')->name('user.checkout');
     Route::post('/checkout', 'checkoutPost')->name('user.checkoutPost');
-});
+})->middleware('cache');
 
+//================ItemDetail Route=========================//
 Route::controller(ItemDetailController::class)->group(function () {
     Route::get('/item_detail/{itemId}', 'item_detail')->name('user.item_detail');
     Route::post('/add_cart/{id}', 'addcart')->name('user.addcart');
+})->middleware('cache');
 
-});
-
-// Route::controller(OrderHistoryController::class)->group(function () {
-//     Route::get('/order_history', 'order_history')->name('user.order_history');
-//     Route::get('/invoice/{orderId}', 'invoice')->name('user.invoice');
-
-// });
 //================Order History and Invoice Route=========================//
 Route::controller(OrderHistoryController::class)->middleware('authuser')->group(function () {
     Route::get('/order_history', 'order_history')->name('user.order_history');
     Route::get('/invoice/{orderId}', 'invoice')->name('user.invoice');
     Route::get('/cancel/{id}', 'cancel')->name('user.cancel');
+})->middleware('cache');
 
-});
-
+//================Review Route=========================//
 Route::controller(ReviewController::class)->middleware('authuser')->group(function () {
     Route::get('/review/{orderId}', 'review')->name('user.review');
     Route::post('/review/{orderId}', 'reviewPost')->name('user.reviewPost');
-
-});
-
-
+})->middleware('cache');
 
 //=======================================================================//
 //==============================End User Route Here======================//
 //=======================================================================//
+
+
 
 //=======================================================================//
 //==============================Admin Route Here==========================//
@@ -148,21 +130,19 @@ Route::controller(AuthAdminController::class)->group(function () {
     Route::get('/admin', 'admin_login')->name('admin_login');
     Route::post('/admin', 'admin_loginPost')->name('admin_login.post');
     Route::get('/admin/logout', 'logout');
-});
+})->middleware('cache');
 
 //================Admin Dashboard Route=========================//
-
 Route::controller(DashboardController::class)->middleware('authadmin')->group(function () {
-    Route::get('/admin/dashboard', 'dashboard')->name('dashboard'); 
-    //Route::get('/admin/dashboard', 'userChart')->name('admin.userChart'); 
-    });
+    Route::get('/admin/dashboard', 'dashboard')->name('dashboard');  
+    })->middleware('cache');
 
 //================Admin Management Route=========================//
 Route::controller(AdminController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/check_current_password', 'check_current_password');
     Route::match(['get','post'],'/admin/update_password', 'update_password');
     Route::match(['get','post'],'/admin/update_details', 'update_details');  
-    });
+    })->middleware('cache');
 
 //================Admin Users Management Route=========================//
 Route::controller(UserController::class)->middleware('authadmin')->group(function () {
@@ -172,7 +152,8 @@ Route::controller(UserController::class)->middleware('authadmin')->group(functio
     Route::get('/admin/update_users/{id}', 'update_user')->name('admin.update_users');
     Route::post('/admin/update_users/{id}', 'update_userPost')->name('admin.update_users.post');
     Route::get('/admin/users/{id}', 'delete')->name('admin.delete_users');   
-});
+})->middleware('cache');
+
 //================Admin Menus Management Route=========================//
 Route::controller(MenuController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/menu', 'menu')->name('admin.menu');
@@ -181,7 +162,7 @@ Route::controller(MenuController::class)->middleware('authadmin')->group(functio
     Route::get('/admin/update_menu/{id}', 'update_menu')->name('admin.update_menu');
     Route::post('/admin/update_menu/{id}', 'update_menuPost')->name('admin.update_menu.post');
     Route::get('/admin/menu/{id}', 'delete_menu')->name('admin.delete_menu');   
-});
+})->middleware('cache');
 
 //================Admin Items Management Route=========================//
 Route::controller(ItemController::class)->middleware('authadmin')->group(function () {
@@ -191,7 +172,8 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::get('/admin/update_item/{id}', 'update_item')->name('admin.update_item');
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
     Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');   
-});
+})->middleware('cache');
+
 //================Admin Bookings Management Route=========================//
 Route::controller(BookingController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/booking', 'booking')->name('admin.booking');
@@ -200,9 +182,7 @@ Route::controller(BookingController::class)->middleware('authadmin')->group(func
     Route::get('/admin/update_booking/{id}', 'update_booking')->name('admin.update_booking');
     Route::post('/admin/update_booking/{id}', 'update_bookingPost')->name('admin.update_booking.post');
     Route::get('/admin/booking/{id}', 'delete_booking')->name('admin.delete_booking');
-
-
-});
+})->middleware('cache');
 
 //================Admin Orders Management Route=========================//
 Route::controller(OrderController::class)->middleware('authadmin')->group(function () {
@@ -215,8 +195,7 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     Route::get('/admin/invoice/{id}', 'invoice')->name('admin.invoice');
     Route::get('/admin/order/{id}', 'delete_order')->name('admin.delete_order');   
     Route::get('/admin/invoice_pdf/{id}', 'invoice_pdf')->name('admin.invoice_pdf');
-
-});
+})->middleware('cache');
 
 //================Admin Tables Management Route=========================//
 Route::controller(TableController::class)->middleware('authadmin')->group(function () {
@@ -226,10 +205,8 @@ Route::controller(TableController::class)->middleware('authadmin')->group(functi
     Route::get('/admin/update_table/{id}', 'update_table')->name('admin.update_table');
     Route::post('/admin/update_table/{id}', 'update_tablePost')->name('admin.update_table.post');
     Route::get('/admin/table/{id}', 'delete_table')->name('admin.delete_table');   
-});
+})->middleware('cache');
 
-
-    
 
 //=======================================================================//
 //==============================End Admin Route==========================//

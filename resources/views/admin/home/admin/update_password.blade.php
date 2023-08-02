@@ -5,6 +5,7 @@
   <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <!-- Font-icon css-->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -126,11 +127,6 @@
                     <label for="exampleInputEmail1">Email</label>
                     <input class="form-control" id="admin_email" type="email" value="{{Auth::guard('web')->user()->email}}" readonly="" >
                   </div>
-                  {{-- <div class="form-group">
-                    <label for="current_password">Current Password</label>
-                    <input class="form-control" id="current_password" name="current_password" 
-                    type="password" placeholder="Enter current password"> <span id="verifyCurrentPwd"></span> 
-                  </div> --}}
                   <div class="form-group">
                     <label for="current_password">Current Password</label>
                     <input class="form-control" id="current_password" name="current_password" 
@@ -139,11 +135,13 @@
                   </div>
                   <div class="form-group">
                     <label for="new_password">New Password</label>
-                    <input class="form-control" id="new_password" name="new_password" type="password" placeholder="Enter new password">
+                    <input class="form-control" id="new_password" name="new_password" 
+                        type="password" placeholder="Enter new password">
                   </div>
                   <div class="form-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input class="form-control" id="confirm_password" name="confirm_password" type="password" placeholder="Enter confirm password">
+                    <input class="form-control" id="confirm_password" name="confirm_password" 
+                    type="password" placeholder="Enter confirm password">
                   </div>
                   <div class="tile-footer text-center">
                     <button class="btn btn-primary" type="submit">Save</button>

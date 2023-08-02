@@ -159,7 +159,17 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Time</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="booking_time" type="time" value="{{$booking->time}}">
+                                    <select class="form-control" name="booking_time" >
+                                        <option value="09:00" {{ $booking->time == '9:00 AM' ? 'selected' : '' }}>9:00 AM</option>
+                                        <option value="10:00" {{ $booking->time == '10:00 AM' ? 'selected' : '' }}>10:00 AM</option>
+                                        <option value="11:00" {{ $booking->time == '11:00 AM' ? 'selected' : '' }}>11:00 AM</option>
+                                        <option value="12:00" {{ $booking->time == '12:00 PM' ? 'selected' : '' }}>12:00 PM</option>
+                                        <option value="13:00" {{ $booking->time == '1:00 PM' ? 'selected' : '' }}>1:00 PM</option>
+                                        <option value="17:00" {{ $booking->time == '5:00 PM' ? 'selected' : '' }}>5:00 PM</option>
+                                        <option value="18:00" {{ $booking->time == '6:00 PM' ? 'selected' : '' }}>6:00 PM</option>
+                                        <option value="19:00" {{ $booking->time == '7:00 PM' ? 'selected' : '' }}>7:00 PM</option>
+                                        <option value="20:00" {{ $booking->time == '8:00 PM' ? 'selected' : '' }}>8:00 PM</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -207,12 +207,19 @@
             <span class="amex"></span>
             <span class="discover"></span>
         </div>
-        @if(session()->has('success'))
+        {{-- @if(session()->has('success'))
             <div class="alert alert-success" role="alert">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     {{session('success')}}
             </div>
-        @endif
+        @endif --}}
+        @include('sweetalert::alert')
+                        @if(session()->has('success'))
+                            <div class="alert alert-success" role="alert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session('success')}}
+                            </div>
+                        @endif
         <form 
             role="form" 
             action="{{ route('user.cardPost') }}" 
@@ -260,6 +267,7 @@
 @include('user.js.script')
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
+
 $(function() {
 
     /*------------------------------------------

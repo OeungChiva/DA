@@ -8,7 +8,9 @@
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="{{url('backend/docs/js/plugins/chart.js')}}"></script>
 	{{-- Custom check current password --}}
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{{url('backend/docs/js/custom.js')}}"></script>
+
     <script type="text/javascript">
 		var data = {
 			labels: ["January", "February", "March", "April", "May"],

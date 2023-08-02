@@ -129,20 +129,28 @@
                             {{session('success')}}
                         </div>
                         @endif
+                        
                         <form class="form-horizontal" method="POST" action="{{ route('admin.create_menu.post') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Name</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="menu_name" type="text" placeholder="Enter name">
+                                    @error('menu_name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
+                                
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Description</label>
                                 <div class="col-md-8">
-                                    {{-- <input class="form-control" name="menu_description" type="email" placeholder="Enter email address"> --}}
                                     <textarea class="form-control" rows="4" name="menu_description" placeholder="Enter description"></textarea>
+                                    @error('menu_description')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
+                                
                             </div>                                                                                                       
                             <div class="tile-footer">
                                 <div class="row">

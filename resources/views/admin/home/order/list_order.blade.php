@@ -124,31 +124,13 @@
                                 <h2>All Orders</h2>
                             </div>
                             <div class="col-sm-2">
-                                <a href="{{ route('admin.create_order') }}">
+                                {{-- <a href="{{ route('admin.create_order') }}">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                                </a>
+                                </a> --}}
                             </div>
                         </div><br>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
-                        {{-- <div class="filter-container">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="filter-inline">
-                                        <label for="status-filter" class="mr-2">Filter by Status:
-                                        <select class="form-control form-control-sm" id="status-filter">
-                                            <option value="all">All</option>
-                                            <option value="received">Order Received</option>
-                                            <option value="progress">In-Progress</option>
-                                            <option value="shipped">Shipped</option>
-                                            <option value="delivered">Delivered</option>
-                                            <option value="completed">Completed</option>
-                                        </select>
-                                    </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
                                 <th>#</th>                          
@@ -202,9 +184,9 @@
                                     
                                 </td>
                                 <td class="text-center">
-                                    <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
+                                    {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
                                         <i class="fa fa-edit"></i>
-                                    </a>                        
+                                    </a>                         --}}
                                     &nbsp;
                                     <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                         <i class="fa fa-trash"></i>
@@ -294,7 +276,11 @@
                 statusBadge.html('<span class="badge badge-info">' + selectedStatus + '</span>');
             } else if (selectedStatus === 'Completed') {
                 statusBadge.html('<span class="badge badge-success">' + selectedStatus + '</span>');
-            } else {
+            } 
+            else if (selectedStatus === 'Canceled') {
+                statusBadge.html('<span class="badge badge-danger">' + selectedStatus + '</span>');
+            }
+            else {
                 statusBadge.text(selectedStatus);
             }
             location.reload();

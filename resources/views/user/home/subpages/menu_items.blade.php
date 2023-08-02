@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <base href="/public">
   @include('user.css.style')
   <style>
@@ -141,7 +142,7 @@
                   </form>
                 @else
                 <a class="dropdown-item" href="{{ route('user_login.post') }}">
-                  <i class="fa fa-sign-in fa-lg"></i> 
+                  <i class="fas fa-sign-in-alt"></i> 
                     Login
                 </a>
                 <a class="dropdown-item" href="{{ route('register.post') }}">
