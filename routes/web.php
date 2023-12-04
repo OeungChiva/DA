@@ -171,7 +171,9 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/create_item', 'create_itemPost')->name('admin.create_item.post');
     Route::get('/admin/update_item/{id}', 'update_item')->name('admin.update_item');
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
-    Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');   
+    Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');
+    Route::get('/admin/item', 'filter_item')->name('admin.filter_item');
+
 })->middleware('cache');
 
 //================Admin Bookings Management Route=========================//

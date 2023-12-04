@@ -123,11 +123,11 @@
                             <div class="col-sm-10">
                                 <h2>All Orders</h2>
                             </div>
-                            <div class="col-sm-2">
-                                {{-- <a href="{{ route('admin.create_order') }}">
+                            {{-- <div class="col-sm-2">
+                                <a href="{{ route('admin.create_order') }}">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                                </a> --}}
-                            </div>
+                                </a>
+                            </div> --}}
                         </div><br>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
@@ -147,7 +147,6 @@
                             @foreach ($orders as $order)
                             <tr  data-order-id="{{ $order->id }}">
                                 <td>{{$count++}}</td>   
-                                {{-- <td>{{ $loop->iteration }}</td>                                                               --}}
                                 <td>{{ $order->name }}</td>
                                 <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
                                 <td>{{ $order->payment_status }}</td>
@@ -209,12 +208,12 @@
                     </div>
                 </div>
                 
-                <div class="d-print-none">
+                {{-- <div class="d-print-none">
                     <div class="float-right">
                         <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
                     
                     </div>
-                </div>                
+                </div>                 --}}
             </div>
         </div>
             

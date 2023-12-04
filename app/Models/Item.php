@@ -23,6 +23,10 @@ class Item extends Model
         'num_review',
         'discount',
     ];
+    public $sortable = [
+        'name' => 'order',
+        'sort_when_creating' => true,
+    ];
     
     public function menus()
     {

@@ -163,7 +163,6 @@
                             <div class="col-lg-6">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Item</label>
-
                                     <div class="col-md-8">
                                         <select class="form-control" name="order_item" required="">
                                             
@@ -190,8 +189,9 @@
                                     </div>
                                 </div>
                             </div>
+                        
                             
-                            </div>
+                        </div>
                             <div class="tile-footer text-center">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fa fa-fw fa-lg fa-check-circle"></i>Create

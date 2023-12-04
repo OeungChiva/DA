@@ -9,7 +9,7 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     @include('admin.layout.sidebar')
-     <!-- Body-->
+    <!-- Body-->
     @include('admin.home.dashboard')
     {{-- JavaScript --}}
     @include('admin.js.script')

@@ -116,11 +116,37 @@
                             </div>
                             <div class="col-sm-2">
                                 <a href="{{ route('admin.create_item') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                                <button type="button" class="btn btn-info add-new">
+                                    <i class="fa fa-plus"></i> Add New
+                                </button>
                                 </a>
                             </div>
                         </div><br>
                     </div>
+                    {{-- <form class="form-inline" method="GET">
+                        <div class="form-group mb-2">
+                            <label for="filter" class="col-sm-2 col-form-label">Filter</label>
+                            <input type="text" class="form-control" id="filter" name="filter" placeholder="Name..." value="">
+                        </div>
+                        <button type="submit" class="btn btn-default mb-2">Filter</button>
+                    </form> --}}
+                    <form action="{{ route('admin.filter_item') }}" method="GET">
+                        <div class="form-group mb-2">
+                            {{-- <label for="filter" class="col-sm-2 col-form-label">Filter</label> --}}
+                            <select name="filter" id="filter">
+                                @foreach($menu as $menu)
+                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                    @endforeach
+                            </select>
+                            {{-- <select name="filter" id="filter">
+                                @foreach($item as $row)
+                                        <option value="{{$row->title}}">{{$row->title}}</option>
+                                @endforeach
+                            </select> --}}
+                        </div>
+                        <button type="submit">Filter</button>
+                        
+                    </form>
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
@@ -169,12 +195,12 @@
                     </div>
                 </div>
                 
-                <div class="d-print-none">
+                {{-- <div class="d-print-none">
                     <div class="float-right">
                         <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-                        <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>
+                        
                     </div>
-                </div>                
+                </div>                 --}}
             </div>
 
             

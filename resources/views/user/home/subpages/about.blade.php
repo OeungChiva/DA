@@ -139,31 +139,6 @@
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
               @endif
-              {{-- <div class="dropdown-menu dropdown-menu-right" >
-                @auth                
-                <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a>
-                <a class="dropdown-item" href="{{url('/change_password')}}"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a> 
-                <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
-
-                  <form action="{{route('user_logout')}}" method="POST">
-                    @csrf
-                    <a class="dropdown-item" href="{{ route('user_logout') }}"
-                    onclick="event.preventDefault(); this.closest('form').submit();">
-                    <i class="fa fa-sign-out fa-lg"></i>
-                      Logout
-                    </a>
-                  </form>
-                @else
-                <a class="dropdown-item" href="{{ route('user_login.post') }}">
-                  <i class="fa fa-sign-in fa-lg"></i> 
-                    Login
-                </a>
-                <a class="dropdown-item" href="{{ route('register.post') }}">
-                  <i class="fa fa-user-plus"></i>
-                    Register
-                </a>
-                @endif
-              </div> --}}
               <div class="dropdown-menu dropdown-menu-right" >
                 @auth                
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a> 
@@ -198,6 +173,11 @@
   <!-- about section -->
  <section class="about_section layout_padding">
   <div class="container  ">
+    <div class="text-center mt-3">
+      <h1>
+        We Are Khmer Foods
+      </h1>
+    </div>
     <div class="row">
       <div class="col-md-5 ">
         <div class="img-box">
@@ -206,18 +186,14 @@
       </div>
       <div class="col-md-7 p-5">
         <div class="detail-box">
-          <div class="heading_container text-center">
-            <h2>
-              We Are Khmer Foods
-            </h2>
-          </div>
+          
           <!-- Service Start -->
-          <div class="container-xxl py-5">
+          <div class="container-xxl py-3">
             <div class="container">
                 <div class="row g-4">
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded pt-3">
-                            <div class="p-4">
+                            <div class="p-4 text-center">
                                 <i class="fa fa-3x fa-user-tie text-warning mb-4"></i>
                                 <h6>Master Chefs</h6>
                                 
@@ -226,7 +202,7 @@
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="service-item rounded pt-3">
-                            <div class="p-4">
+                            <div class="p-4 text-center">
                                 <i class="fa fa-3x fa-utensils text-warning mb-4"></i>
                                 <h6>Quality Food</h6>
                                 
@@ -235,7 +211,7 @@
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="service-item rounded pt-3">
-                            <div class="p-4">
+                            <div class="p-4 text-center">
                                 <i class="fa fa-3x fa-cart-plus text-warning mb-4"></i>
                                 <h6>Online Order</h6>
                                 
@@ -252,9 +228,97 @@
             By researching, practicing and promoting Cambodian cuisine, 
             we aim to safeguard the nation’s food heritage for years to come.
           </p>
-          {{-- <a href="">
-            Read More
-          </a> --}}
+        </div>
+      </div>
+    </div>
+
+    <div class=" text-center">
+      <h1>
+        Our Venue
+      </h1>
+    </div>
+    <div class="row">
+      <div class="col-md-5 ">
+        <div class="img-box">
+          <img src="{{url('frontend/images/resto.jpeg')}}" alt="" width="" height="">
+        </div>
+
+      </div>
+      <div class="col-md-7 p-5">
+        <div class="detail-box">
+          <p>
+            AS WELL AS EXQUISITE CAMBODIAN CUISINE, KHMER FOODS RESTAURANT OFFERS A SOPHISTICATED AND ELEGANT SETTING. <br>
+            Overlooking the Siem Reap River, diners are treated to a delightful ambiance with a stunning garden, 
+            water pond and area for apsara dance performances. 
+            The beautiful interiors are inspired by the temples of Angkor boasting high ceilings, 
+            grey stone and a sense of space. Cambodian art and handicrafts feature throughout, embracing the local culture.
+            The new restaurant will feature a dining area, bar and lounge downstairs with private dining rooms.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class=" text-center">
+      <h1>
+        Our Chefs
+      </h1>
+    </div>
+    <div class="row">
+      <div class="col-md-5 ">
+        <div class="img-box">
+          <img src="{{url('frontend/images/luumeng1.jpg')}}" alt="" width="" height="350">
+        </div>
+      </div>
+      <div class="col-md-7 p-5">
+        <div class="detail-box">
+          
+          <p>
+            MASTER CHEF <br>
+            Luu Meng <br>
+            Luu Meng is Cambodia’s only Master Chef. 
+            He is constantly experimenting with flavours and textures and 
+            digging out his country’s culinary secrets to be shared in the Khmer Foods kitchen.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 ">
+        <div class="img-box">
+          <img src="{{url('frontend/images/hong.jpg')}}" alt="" width="" height="350">
+        </div>
+      </div>
+      <div class="col-md-7 p-5">
+        <div class="detail-box">
+          
+          <p>
+            EXECUTIVE CHEF <br>
+            Luu Hong <br>
+            Luu Hong is the younger brother of Master Chef Luu Meng. 
+            Together they have adapted recipes of old to the palates of today, 
+            and put Cambodian cuisine back on the food map.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 ">
+        <div class="img-box">
+          <img src="{{url('frontend/images/Chea-Srey-Pov.jpeg')}}" alt="" width="" height="350">
+        </div>
+      </div>
+      <div class="col-md-7 p-5">
+        <div class="detail-box">
+          
+          <p>
+            SOUS CHEF <br>
+            Chea Srey Pov <br>
+            Sous Chef Chea Srey Pov has a lot of passion in Cambodian cuisine. 
+            She strives to bring her exceptional culinary skills and a love of 
+            Cambodian cuisine to the Khmer Foods team in Phnom Penh.
+          </p>
+          
         </div>
       </div>
     </div>

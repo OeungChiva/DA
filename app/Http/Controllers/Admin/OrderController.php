@@ -69,6 +69,8 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Order created successfully!');
         
     }
+    
+    
     //==================Show Update Order Form=======================//
     public function update_order($id)
     {
